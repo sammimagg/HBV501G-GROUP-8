@@ -9,6 +9,8 @@ public class Group8Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Group8Application.class, args);
+
+        System.out.println("Getum við frekar notað Python?");
     }
 
 }
