@@ -11,6 +11,7 @@ public class Group8Application {
         SpringApplication.run(Group8Application.class, args);
 
         System.out.println("Getum við frekar notað Python?");
+        System.out.println("Er DeadTime ekki hellað nafn?");
     }
 
 }
