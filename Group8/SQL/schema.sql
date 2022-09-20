@@ -1,14 +1,14 @@
-CREATE TABLE IF NOT EXISTS Employees(
+CREATE TABLE IF NOT EXISTS Employees (
     SSN varchar(10) primary key,
     firstName varchar(128),
     lastName varchar(128) not null,
     company varchar(32) not null,
     jobTitle varchar(128) not null,
-    salary double,
-    phoneNumber varchar(128) not null,
-);
+    salary FLOAT,
+    phoneNumber varchar(128) not null
+    );
 
-CREATE TABLE IF NOT EXISTS Overview(
+CREATE TABLE IF NOT EXISTS Overview (
     SSN varchar(10) primary key,
     clockIn TIMESTAMP NOT NULL,
     clockOut TIMESTAMP,
