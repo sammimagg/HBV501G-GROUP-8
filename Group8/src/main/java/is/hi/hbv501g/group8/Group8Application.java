@@ -6,9 +6,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 @RestController
@@ -33,9 +39,17 @@ public class Group8Application implements CommandLineRunner {
         // prufa insert
         String testInsertSQL = "INSERT INTO Employees (SSN, lastName, company, jobtitle, phonenumber) " +
                 "VALUES ('2911963149', 'Vilhjálmsson', 'Háskóli Íslands', 'Student', '7918151')";
-        jdbcTemplate.update(testInsertSQL);
+        //jdbcTemplate.update(testInsertSQL);
 
         // Prufa select
+        String testSelectSQL = "SELECT * FROM Employees";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(testSelectSQL);
 
+        for ( Map row : rows ) {
+            String res = (String) row.get("SSN") + " ";
+            res += row.get("lastName") + " ";
+
+            System.out.println(res);
+        }
     }
 }
