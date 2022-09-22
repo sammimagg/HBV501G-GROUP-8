@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS Employees (
 CREATE TABLE IF NOT EXISTS Transactions (
     ID SERIAL PRIMARY KEY,
     SSN varchar(10),
-    clockIn TIMESTAMP WITH TIME ZONE,
-    clockOut TIMESTAMP WITH TIME ZONE,
+    clock_in TIMESTAMP WITH TIME ZONE,
+    clock_out TIMESTAMP WITH TIME ZONE,
     finished BOOLEAN
 );
 
