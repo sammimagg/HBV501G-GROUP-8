@@ -20,5 +20,15 @@
     <input type="text" name="ssn" id="ssn" th:value="*{SSN}" />
     <input type="submit" value="KLUKK"/>
 </form>
+
+<p id="test"></p>
+<script>
+    var params = new window.URLSearchParams(window.location.search);
+    if(params.get('message')!=null) {
+        let name = params.get('message')
+        let string = "Hello," + name + "!";
+        document.getElementById("test").innerHTML=string;
+    }
+</script>
 </body>
 </html>
