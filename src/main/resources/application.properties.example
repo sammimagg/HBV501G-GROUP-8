@@ -1,0 +1,4 @@
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+! Breyta þarf username og password fyrir keyrslu
+spring.datasource.username=postgres
+spring.datasource.password=
