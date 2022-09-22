@@ -26,11 +26,13 @@ public class Group8Application implements CommandLineRunner {
         System.out.println("lalalal");
     }
 
-    @GetMapping("/hello")
+    /*@GetMapping("/hello")
     public String hello(@RequestParam(value="name", defaultValue = "ekkert-input") String name) {
         System.out.println("Keyrist!");
         return String.format(("Hello %s!"), name);
     }
+    */
+
 
     @Override
     public void run(String... args) throws Exception {

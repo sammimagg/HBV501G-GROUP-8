@@ -1,0 +1,13 @@
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+</head>
+<body>
+<h2>Inn stimplaðu</h2>
+<form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
+    <input type="text" name="ssn" id="ssn" th:value="*{SSN}" />
+    <input type="submit" value="KLUKK"/>
+</form>
+</body>
+</html>

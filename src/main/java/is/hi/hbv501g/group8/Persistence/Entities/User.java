@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+    @Id // Primary Key
     private String SSN;
     private String username;
     private String password;
@@ -19,7 +20,6 @@ public class User {
         this.SSN = ssn;
     }
 
-    @Id // Primary Key
     public String getSSN() {
         return SSN;
     }

@@ -8,10 +8,11 @@ CREATE TABLE IF NOT EXISTS Employees (
     phoneNumber varchar(128) not null
 );
 
-CREATE TABLE IF NOT EXISTS Overview (
-    SSN varchar(10) primary key,
-    clockIn TIMESTAMP NOT NULL,
-    clockOut TIMESTAMP,
+CREATE TABLE IF NOT EXISTS Transactions (
+    ID SERIAL PRIMARY KEY,
+    SSN varchar(10),
+    clockIn TIMESTAMP WITH TIME ZONE,
+    clockOut TIMESTAMP WITH TIME ZONE,
     finished BOOLEAN
 );
 
