@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 
@@ -45,7 +47,7 @@ public class TransactionController {
      * @return redirect
      */
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public String transactionPOST(Transaction transaction, BindingResult result, Model model){
+    public String transactionPOST(Transaction transaction, RedirectAttributes redirectAttributes, BindingResult result, Model model){
         if(result.hasErrors()){
             return "redirect:/";
         }
@@ -54,6 +56,8 @@ public class TransactionController {
             transaction.setClockIn(LocalDateTime.now());
             transaction.setFinished(false);
             transactionService.save(transaction);
+            redirectAttributes.addAttribute("message", "success clock");
+            return "redirect:/";
         } else {
             exists.setClockOut(LocalDateTime.now());
             exists.setFinished(true);
