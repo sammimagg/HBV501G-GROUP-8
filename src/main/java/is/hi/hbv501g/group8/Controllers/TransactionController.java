@@ -1,7 +1,10 @@
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
+import is.hi.hbv501g.group8.Persistence.Entities.User;
+import is.hi.hbv501g.group8.Persistence.Repositories.UserRepository;
 import is.hi.hbv501g.group8.Services.TransactionService;
+import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +20,12 @@ import java.time.LocalDateTime;
 public class TransactionController {
 
     TransactionService transactionService;
+    UserService userService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService) {
+    public TransactionController(TransactionService transactionService, UserService userService) {
         this.transactionService = transactionService;
+        this.userService = userService;
     }
 
     @RequestMapping(value="/", method = RequestMethod.GET)
@@ -56,7 +61,9 @@ public class TransactionController {
             transaction.setClockIn(LocalDateTime.now());
             transaction.setFinished(false);
             transactionService.save(transaction);
-            redirectAttributes.addAttribute("message", "success clock");
+            User temp = userService.findBySSN(transaction.getSSN());
+            // Breyta í Employees.getName() seinna meir.
+            redirectAttributes.addAttribute("message", temp.getUsername());
             return "redirect:/";
         } else {
             exists.setClockOut(LocalDateTime.now());

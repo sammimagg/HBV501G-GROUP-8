@@ -19,6 +19,11 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public User findBySSN(String ssn){
+        return userRepository.findBySSN(ssn);
+    }
+
+    @Override
     public User save(User user) {
         return userRepository.save(user);
     }
