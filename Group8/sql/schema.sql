@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Employees (
     jobTitle varchar(128) not null,
     salary FLOAT,
     phoneNumber varchar(128) not null
-    );
+);
 
 CREATE TABLE IF NOT EXISTS Overview (
     SSN varchar(10) primary key,
