@@ -1,9 +1,20 @@
-<html xmlns:th="https://thymeleaf.org">
+
+<!DOCTYPE html>
+<html lang="is" xmlns:th="https://thymeleaf.org">
+<link th:href="@{/css/clock.css}" rel="stylesheet"/>
 <head>
+
     <meta charset="UTF-8">
     <title>Clock</title>
+
+
 </head>
 <body>
+<div class="message">
+    <p >
+        Þú hefur stimplað þig inn.
+    </p>
+</div>
 <h2>Inn stimplaðu</h2>
 <form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
     <input type="text" name="ssn" id="ssn" th:value="*{SSN}" />
