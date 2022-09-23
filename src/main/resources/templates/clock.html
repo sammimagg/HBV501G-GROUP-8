@@ -15,19 +15,19 @@
         Þú hefur stimplað þig inn.
     </p>
 </div>
+<div class="klukka">
 <h2>Inn stimplaðu</h2>
 <form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
     <input type="text" name="ssn" id="ssn" th:value="*{SSN}" />
     <input type="submit" value="KLUKK"/>
 </form>
-
 <p id="test"></p>
+</div>
 <script>
     var params = new window.URLSearchParams(window.location.search);
     if(params.get('message')!=null) {
         let name = params.get('message')
-        let string = "Hello," + name + "!";
-        document.getElementById("test").innerHTML=string;
+        document.getElementById("test").innerHTML=name;
     }
 </script>
 </body>

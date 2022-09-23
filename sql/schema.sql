@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS Employees (
     SSN varchar(10) primary key,
-    firstName varchar(128),
-    lastName varchar(128) not null,
+    first_name varchar(128),
+    last_name varchar(128) not null,
     company varchar(32) not null,
-    jobTitle varchar(128) not null,
+    job_title varchar(128) not null,
     salary FLOAT,
-    phoneNumber varchar(128) not null
+    phone_number varchar(128) not null
 );
 
 CREATE TABLE IF NOT EXISTS Transactions (
@@ -18,18 +18,18 @@ CREATE TABLE IF NOT EXISTS Transactions (
 
 CREATE TABLE IF NOT EXISTS Companies (
     SSN varchar(10) primary key,
-    companyName varchar(32) NOT NULL,
-    companyAddress varchar(128) NOT NULL,
-    companyManager varchar(128) NOT NULL,
-    phoneNumber varchar(128)
+    company_name varchar(32) NOT NULL,
+    company_address varchar(128) NOT NULL,
+    company_manager varchar(128) NOT NULL,
+    phone_number varchar(128)
 );
 
 CREATE TABLE IF NOT EXISTS Users (
     SSN varchar(10) PRIMARY KEY,
-    accountType INTEGER,
-    userName varchar(255) NOT NULL,
+    account_type INTEGER,
+    username varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
-    constraint valid_type check (accountType < 9)
+    constraint valid_type check (account_type < 9)
 );
 
 /*INSERT INTO users (username, password) VALUES ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');*/
