@@ -4,6 +4,7 @@ import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Persistence.Repositories.UserRepository;
 import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.List;
 public class UserServiceImplementation implements UserService {
 
     private UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImplementation(UserRepository userRepository) {
+    public UserServiceImplementation(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User save(User user) {
+        user.setPassword(passwordEncoder.encode((user.getPassword())));
         return userRepository.save(user);
     }
 
@@ -50,7 +54,13 @@ public class UserServiceImplementation implements UserService {
     public User login(User user) {
         User foundUser = findByUsername(user.getUsername());
         if(foundUser != null) {
+            /*
             if(foundUser.getPassword().equals(user.getPassword())){
+                return foundUser;
+            }
+            https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html#%3Cinit%3E()
+             */
+            if (passwordEncoder.matches(user.getPassword(), foundUser.getPassword())){
                 return foundUser;
             }
         }
