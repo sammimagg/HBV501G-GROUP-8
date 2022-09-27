@@ -85,6 +85,10 @@ public class TransactionController {
 
         return "redirect:/";
     }
+    @RequestMapping("/")
+    public String transaction(Model model){
+
+    }
 
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session) {
