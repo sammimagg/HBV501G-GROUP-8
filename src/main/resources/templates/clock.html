@@ -1,37 +1,34 @@
 
 <!DOCTYPE html>
 <html lang="is" xmlns:th="https://thymeleaf.org">
-<link th:href="@{/css/clock.css}" rel="stylesheet"/>
-<head>
-
-    <meta charset="UTF-8">
-    <title>Clock</title>
-
-
-</head>
-<body>
-<div class="message">
-    <p >
-        Þú hefur stimplað þig inn.
-    </p>
-</div>
-<div class="klukka">
-<h2>Inn stimplaðu</h2>
-<form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
-    <input type="text" name="ssn" id="ssn" th:value="*{SSN}" />
-    <input type="submit" value="KLUKK"/>
-</form>
-<p id="test"></p>
-</div>
-<div class="loginTakki">
-    <input type="submit" value="Login"/>
-</div>
-<script>
-    var params = new window.URLSearchParams(window.location.search);
-    if(params.get('message')!=null) {
-        let name = params.get('message')
-        document.getElementById("test").innerHTML=name;
-    }
-</script>
-</body>
+    <link th:href="@{/css/clock.css}" rel="stylesheet"/>
+    <head>
+        <meta charset="UTF-8">
+        <title>Clock</title>
+    </head>
+    <body>
+        <div class="message">
+            <p>
+                Þú hefur stimplað þig inn.
+            </p>
+        </div>
+        <div class="klukka">
+        <h2>Inn stimplaðu</h2>
+        <form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
+            <input type="text" name="ssn" id="ssn" th:value="*{SSN}" />
+            <input type="submit" value="KLUKK"/>
+        </form>
+        <p id="test"></p>
+        </div>
+        <div class="loginTakki">
+            <input type="submit" value="Login"/>
+        </div>
+        <script>
+            var params = new window.URLSearchParams(window.location.search);
+            if(params.get('message')!=null) {
+                let name = params.get('message')
+                document.getElementById("test").innerHTML=name;
+            }
+        </script>
+    </body>
 </html>
