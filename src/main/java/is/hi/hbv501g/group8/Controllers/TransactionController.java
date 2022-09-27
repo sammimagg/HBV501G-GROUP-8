@@ -91,7 +91,11 @@ public class TransactionController {
     }
 
     @RequestMapping(value="/list", method = RequestMethod.GET)
-    public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session) {
+    public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session, User user) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser!=null) {
+            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        }
         return "listview";
     }
 
@@ -106,6 +110,7 @@ public class TransactionController {
             System.out.println("22");
         }
         model.addAttribute("transactions", allTransactions);
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         return "listview";
     }
 
