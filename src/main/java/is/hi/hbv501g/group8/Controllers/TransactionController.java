@@ -55,7 +55,8 @@ public class TransactionController {
      */
     @RequestMapping(value="/", method = RequestMethod.POST)
     public String transactionPOST(Transaction transaction, RedirectAttributes redirectAttributes, BindingResult result, Model model){
-        if(result.hasErrors()){
+        if(result.hasErrors()) {
+
             return "redirect:/";
         }
         Transaction exists = transactionService.findBySSNAndFinished(transaction.getSSN(), false);
