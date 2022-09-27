@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<head>
+<head th:switch="${username}">
   <meta charset="UTF-8">
-  <title>Library System</title>
+  <title th:case="null">Log in to see worked hours</title>
+  <title th:case="*" th:text="${username}"></title>
 </head>
 <body>
 
 <div>
   <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
+    <label>From</label>
     <input type="date" name="startDate" id="startDate" th:field="*{date1}" />
+    <label>To</label>
     <input type="date" name="endDate" id="endDate" th:field="*{date2}" />
     <input type="submit" value="KLUKK"/>
   </form>
@@ -34,6 +37,10 @@
     </table>
   </div>
 </div>
-
 </body>
+
+<script>
+  document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);
+  document.getElementById('endDate').value = new Date().toISOString().substring(0, 10);
+</script>
 </html>
