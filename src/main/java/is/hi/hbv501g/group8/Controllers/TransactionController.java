@@ -1,5 +1,6 @@
 package is.hi.hbv501g.group8.Controllers;
 
+import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
 import is.hi.hbv501g.group8.Persistence.Entities.Employee;
 import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
@@ -16,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TransactionController {
@@ -78,6 +83,25 @@ public class TransactionController {
         }
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value="/list", method = RequestMethod.GET)
+    public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session) {
+        return "listview";
+    }
+
+    @RequestMapping(value="/list", method = RequestMethod.POST)
+    public String TransactionsPOST(Model model, User user, DateHelper dateHelper, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null ) return "redirect:/login";
+        System.out.println(dateHelper.getDate1());
+        List<Transaction> allTransactions = transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay());
+        System.out.println(sessionUser.getSSN());
+        for ( Transaction row : allTransactions) {
+            System.out.println("22");
+        }
+        model.addAttribute("transactions", allTransactions);
+        return "listview";
     }
 
 }

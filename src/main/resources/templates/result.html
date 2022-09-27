@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Library System</title>
+</head>
+<body>
+
+<div>
+  <form action="#" th:action="@{/list}" th:object="${transaction}"  method="post">
+    <input type="date" name="startDate" id="startDate" th:value="*{clockIn}" />
+    <input type="date" name="endDate" id="endDate" th:value="*{clockOut" />
+    <input type="submit" value="KLUKK"/>
+  </form>
+</div>
+
+<div th:switch="${transactions}">
+  <h2 th:case="null">No Books yet!</h2>
+  <div th:case="*">
+    <h2>Books</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Rating</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.title}"></td>
+        <td th:text="${transaction.description}"></td>
+        <td th:text="${transactoin.rating}"></td>
+        <td><a th:href="@{/delete/{id}(id=${transaction.ID})}">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p><a href="/addbook">Add a new book</a></p>
+</div>
+
+</body>
+</html>

@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class TransactionServiceImplementation implements TransactionService {
     private TransactionRepository transactionRepository;
+
     @Autowired
     public TransactionServiceImplementation(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
@@ -46,5 +48,10 @@ public class TransactionServiceImplementation implements TransactionService {
     @Override
     public Transaction findBySSNAndFinished(String ssn, boolean finished) {
         return transactionRepository.findBySSNAndFinished(ssn, finished);
+    }
+
+    @Override
+    public List<Transaction> findAllBySSNAndClockInBetween(String ssn, LocalDateTime startDate, LocalDateTime endDate) {
+        return transactionRepository.findAllBySSNAndClockInBetween(ssn, startDate, endDate);
     }
 }

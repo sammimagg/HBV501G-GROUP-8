@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Library System</title>
+</head>
+<body>
+
+<div>
+  <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
+    <input type="date" name="startDate" id="startDate" th:field="*{date1}" />
+    <input type="date" name="endDate" id="endDate" th:field="*{date2}" />
+    <input type="submit" value="KLUKK"/>
+  </form>
+</div>
+
+<div th:switch="${transactions}">
+  <h2 th:case="null">No transactions found!</h2>
+  <div th:case="*">
+    <h2>Transaction</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Clocked In</th>
+        <th>Clocked Out</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.clockIn}"></td>
+        <td th:text="${transaction.clockOut}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>
