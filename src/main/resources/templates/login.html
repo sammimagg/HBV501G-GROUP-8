@@ -5,9 +5,10 @@
 </head>
 <body>
 <h2>Login to your account</h2>
+<!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
 <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
-    <input type="text" name="username" id="username" th:field="*{username}"/>
-    <input type="text" name="password" id="password" th:value="*{password}"/>
+    <input type="text" name="username" id="username" th:field="*{username}"/>  <!--suppress HtmlUnknownAttribute -->
+    <input type="text" name="password" id="password" th:value="*{password}"/> <!--suppress HtmlUnknownAttribute -->
     <input type="submit" value="Login"/>
 </form>
 </body>

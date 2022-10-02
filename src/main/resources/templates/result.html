@@ -7,16 +7,22 @@
 <body>
 
 <div>
-  <form action="#" th:action="@{/list}" th:object="${transaction}"  method="post">
-    <input type="date" name="startDate" id="startDate" th:value="*{clockIn}" />
-    <input type="date" name="endDate" id="endDate" th:value="*{clockOut" />
+  <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+    <form action="#" th:action="@{/list}" th:object="${transaction}"  method="post">
+    <!--suppress HtmlUnknownAttribute -->
+      <input type="date" name="startDate" id="startDate" th:value="*{clockIn}" />
+    <!--suppress HtmlUnknownAttribute -->
+        <input type="date" name="endDate" id="endDate" th:value="*{clockOut" />
     <input type="submit" value="KLUKK"/>
   </form>
 </div>
 
+<!--suppress HtmlUnknownAttribute -->
 <div th:switch="${transactions}">
-  <h2 th:case="null">No Books yet!</h2>
-  <div th:case="*">
+  <!--suppress HtmlUnknownAttribute -->
+    <h2 th:case="null">No Books yet!</h2>
+  <!--suppress HtmlUnknownAttribute -->
+    <div th:case="*">
     <h2>Books</h2>
     <table>
       <thead>
@@ -28,11 +34,16 @@
       </tr>
       </thead>
       <tbody>
+      <!--suppress HtmlUnknownAttribute -->
       <tr th:each="transaction : ${transactions}">
-        <td th:text="${transaction.title}"></td>
-        <td th:text="${transaction.description}"></td>
+        <!--suppress HtmlUnknownAttribute -->
+          <td th:text="${transaction.title}"></td>
+        <!--suppress HtmlUnknownAttribute -->
+          <td th:text="${transaction.descri<!--suppress HtmlUnknownAttribute -->
+ption}"></td>
         <td th:text="${transactoin.rating}"></td>
-        <td><a th:href="@{/delete/{id}(id=${transaction.ID})}">Delete</a></td>
+        <td><!--suppress HtmlUnknownAttribute -->
+            <a th:href="@{/delete/{id}(id=${transaction.ID})}">Delete</a></td>
       </tr>
       </tbody>
     </table>

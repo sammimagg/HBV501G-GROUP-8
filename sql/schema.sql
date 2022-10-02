@@ -16,6 +16,10 @@ CREATE TABLE IF NOT EXISTS Transactions (
     finished BOOLEAN
 );
 
+CREATE TABLE IF NOT EXISTS TransactionsReviews (
+    ID SERIAL REFERENCES Transactions(ID)
+);
+
 CREATE TABLE IF NOT EXISTS Companies (
     SSN varchar(10) primary key,
     company_name varchar(32) NOT NULL,

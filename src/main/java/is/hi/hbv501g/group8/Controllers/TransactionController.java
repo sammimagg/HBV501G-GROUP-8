@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,5 +114,12 @@ public class TransactionController {
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         return "listview";
     }
+    @RequestMapping(value="/request-review/{id}", method = RequestMethod.GET)
+    public String requestReview(@PathVariable("id") long id, Model model){
+        Transaction transactionToMarkForReview = transactionService.findByID(id);
+        //bookService.delete(bookToDelete);
+        return "redirect:/list";
+    }
+    // <td><a th:href="@{/request-review/{id}(id=${transaction.ID})}">Delete</a></td>
 
 }

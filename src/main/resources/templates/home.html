@@ -7,8 +7,11 @@
     </head>
     <body>
 
+        <!--suppress HtmlUnknownAttribute -->
         <div th:switch="${books}">
+            <!--suppress HtmlUnknownAttribute -->
             <h2 th:case="null">No Books yet!</h2>
+            <!--suppress HtmlUnknownAttribute -->
             <div th:case="*">
                 <h2>Books</h2>
                 <table>
@@ -21,11 +24,16 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <!--suppress HtmlUnknownAttribute -->
                     <tr th:each="book : ${books}">
+                        <!--suppress HtmlUnknownAttribute -->
                         <td th:text="${book.title}"></td>
+                        <!--suppress HtmlUnknownAttribute -->
                         <td th:text="${book.description}"></td>
+                        <!--suppress HtmlUnknownAttribute -->
                         <td th:text="${book.rating}"></td>
-                        <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td>
+                        <td><!--suppress HtmlUnknownAttribute -->
+                            <a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
