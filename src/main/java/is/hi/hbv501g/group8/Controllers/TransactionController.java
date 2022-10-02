@@ -85,10 +85,10 @@ public class TransactionController {
 
         return "redirect:/";
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
-=======
->>>>>>> 18f00f49c5372d2dcf43e12e3ed18c35f6cff7f3
+//=======
+//>>>>>>> 18f00f49c5372d2dcf43e12e3ed18c35f6cff7f3
 
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session, User user) {
