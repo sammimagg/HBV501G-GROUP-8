@@ -1,3 +1,12 @@
+/**
+ * Employee
+ *
+ * Description:
+ *
+ * @author kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ */
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;
@@ -18,23 +27,45 @@ public class Employee {
     public void Employee() {
 
     }
-
+    /**
+     * Description:
+     *
+     * @return SSN
+     */
     public String getSSN() {
         return SSN;
     }
-
+    /**
+     * Description:
+     *
+     * @param SSN ssn of a employee
+     */
     public void setSSN(String SSN) {
         this.SSN = SSN;
     }
 
+    /**
+     * Description:
+     *
+     * @return firstName
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Description: Setter for first name of a employee
+     * @param firstName First name of a employee
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Description: Getter for last name of a employee
+     *
+     * @return lastName
+     */
     public String getLastName() {
         return lastName;
     }

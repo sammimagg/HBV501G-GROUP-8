@@ -1,3 +1,12 @@
+/**
+ * Transaction Controller
+ *
+ * Description:
+ *
+ * @author kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ */
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
@@ -30,14 +39,27 @@ public class TransactionController {
     TransactionService transactionService;
     EmployeeService employeeService;
 
+    /**
+     * Vantar lýsingu..
+     *
+     * @param transactionService
+     * @param employeeService
+     */
     @Autowired
     public TransactionController(TransactionService transactionService, EmployeeService employeeService) {
         this.transactionService = transactionService;
         this.employeeService = employeeService;
     }
 
+    /**
+     * Vantar lýsingu..
+     *
+     * @param transaction
+     * @return
+     */
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String transactionGET(Transaction transaction) {
+
         return "clock";
     }
 
@@ -71,26 +93,30 @@ public class TransactionController {
             redirectAttributes.addAttribute("message", "Þú vinna ekki hafa");
             return "redirect:/";
         }
-        if(exists == null){
+        if(exists == null) {
             transaction.setClockIn(LocalDateTime.now());
             transaction.setFinished(false);
             transactionService.save(transaction);
             redirectAttributes.addAttribute("message", "Velkomin/n, "+temp.getFirstName()+"!");
             return "redirect:/";
-        } else {
+        }
+        else {
             exists.setClockOut(LocalDateTime.now());
             exists.setFinished(true);
             redirectAttributes.addAttribute("message", "Takk fyrir daginn, "+temp.getFirstName()+"!");
             transactionService.save(exists);
         }
-
         return "redirect:/";
     }
-//<<<<<<< HEAD
-
-//=======
-//>>>>>>> 18f00f49c5372d2dcf43e12e3ed18c35f6cff7f3
-
+    /**
+     * Vantar lýsingu..
+     *
+     * @param model
+     * @param dateHelper
+     * @param session
+     * @param user
+     * @return listview
+     */
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -100,6 +126,15 @@ public class TransactionController {
         return "listview";
     }
 
+    /**
+     * Vantar lýsingu..
+     *
+     * @param model
+     * @param user
+     * @param dateHelper
+     * @param session
+     * @return listview
+     */
     @RequestMapping(value="/list", method = RequestMethod.POST)
     public String TransactionsPOST(Model model, User user, DateHelper dateHelper, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -114,6 +149,14 @@ public class TransactionController {
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         return "listview";
     }
+
+    /**
+     * Vantar lýsingu..
+     *
+     * @param id
+     * @param model
+     * @return redirect:/list
+     */
     @RequestMapping(value="/request-review/{id}", method = RequestMethod.GET)
     public String requestReview(@PathVariable("id") long id, Model model){
         Transaction transactionToMarkForReview = transactionService.findByID(id);

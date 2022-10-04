@@ -1,3 +1,12 @@
+/**
+ * User Controller
+ *
+ * Description:
+ *
+ * @author kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ */
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.User;
@@ -15,33 +24,68 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     UserService userService;
 
+    /**
+     * Vantar lýsingu..
+     *
+     * @param userService
+     */
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * Vantar lýsingu
+     *
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signupGET(User user){
         return "signup";
     }
 
+    /**
+     * Vantar lýsingu..
+     *
+     * @param user
+     * @param result
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupPOST(User user, BindingResult result, Model model){
-        if(result.hasErrors()){
+        if(result.hasErrors()) {
             return "redirect:/signup";
         }
         User exists = userService.findByUsername(user.getUsername());
-        if(exists == null){
+        if(exists == null) {
             userService.save(user);
         }
         return "redirect:/";
     }
 
+    /**
+     * Vantar lýsingu..
+     *
+     * @param user
+     * @return login
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGET(User user){
+    public String loginGET(User user) {
         return "login";
     }
 
+    /**
+     * Vantar lýsingu..
+     *
+     * @param user
+     * @param result
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
@@ -55,11 +99,17 @@ public class UserController {
         }
         return "redirect:/";
     }
-
+    /**
+    * Vantar lýsingu..
+     *
+     * @param session
+     * @param model
+     * @return redirect
+    */
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public String loggedinGET(HttpSession session, Model model){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if(sessionUser  != null){
+        if(sessionUser  != null) {
             model.addAttribute("LoggedInUser", sessionUser);
             return "loggedInUser";
         }
