@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
 </head>
 <body>
 <h2>Login to your account</h2>
@@ -11,5 +12,7 @@
     <input type="text" name="password" id="password" th:value="*{password}"/> <!--suppress HtmlUnknownAttribute -->
     <input type="submit" value="Login"/>
 </form>
+
+    <div id="login-form" class="yfirKassi"></div>
 </body>
 </html>
