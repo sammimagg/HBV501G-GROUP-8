@@ -10,7 +10,7 @@ public class User {
     private String SSN;
     private String username;
     private String password;
-    private int accounttype;
+    private int accountType;
 
     public void User() {
 
@@ -41,10 +41,10 @@ public class User {
     }
 
     public int getAccounttype() {
-        return accounttype;
+        return accountType;
     }
 
     public void setAccounttype(int accountType) {
-        this.accounttype = accountType;
+        this.accountType = accountType;
     }
 }
