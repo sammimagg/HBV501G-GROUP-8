@@ -11,13 +11,24 @@ CREATE TABLE IF NOT EXISTS Employees (
 CREATE TABLE IF NOT EXISTS Transactions (
     ID SERIAL PRIMARY KEY,
     SSN varchar(10),
+    status VARCHAR(50),
     clock_in TIMESTAMP WITH TIME ZONE,
     clock_out TIMESTAMP WITH TIME ZONE,
+    -- Calculates work duration
+    duration INTERVAL GENERATED ALWAYS AS ( clock_out - clock_in ) STORED,
     finished BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS TransactionsReviews (
-    ID SERIAL REFERENCES Transactions(ID)
+    ID SERIAL PRIMARY KEY REFERENCES Transactions(ID),
+    status VARCHAR(50),
+    original_clock_in TIMESTAMP WITH TIME ZONE,
+    original_clocked_out TIMESTAMP WITH TIME ZONE,
+    changed_clock_in TIMESTAMP WITH TIME ZONE,
+    changed_clock_out TIMESTAMP WITH TIME ZONE,
+    original_duration INTERVAL,
+    changed_duration INTERVAL GENERATED ALWAYS AS ( changed_clock_out - changed_clock_in ) STORED,
+    duration_deviation INTERVAL GENERATED ALWAYS AS ( changed_duration - original_duration ) STORED
 );
 
 CREATE TABLE IF NOT EXISTS Companies (

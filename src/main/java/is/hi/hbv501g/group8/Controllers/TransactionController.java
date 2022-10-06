@@ -59,7 +59,6 @@ public class TransactionController {
      */
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String transactionGET(Transaction transaction) {
-
         return "clock";
     }
 

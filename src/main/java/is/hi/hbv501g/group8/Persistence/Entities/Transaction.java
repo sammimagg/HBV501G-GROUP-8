@@ -19,6 +19,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
     private String SSN;
+    private String status;
     private LocalDateTime clockIn;
     private LocalDateTime clockOut;
     private boolean finished;
