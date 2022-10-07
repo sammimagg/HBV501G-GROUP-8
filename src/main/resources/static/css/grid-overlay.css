@@ -1,6 +1,6 @@
 :root {
     --offset: 10px;
-    --max_width: 1450px;
+    //--max_width: 1450px;
     --columns: 12;
     --gutter: 30px;
     --color: hsla(204, 75%, 75%, 0.25);
@@ -33,7 +33,7 @@ html::before {
     margin-left: auto;
 
     width: calc(100% - (2 * var(--offset)));
-    max-width: var(--max_width);
+
     min-height: 100vh;
     background-image: var(--background-columns);
     background-size: var(--background-width) 100%;

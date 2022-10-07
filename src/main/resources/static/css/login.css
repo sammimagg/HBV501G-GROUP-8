@@ -6,6 +6,9 @@
     top: 177px;
 
     background: RED;
-    mix-blend-mode: multiply;
     box-shadow: 0px 0px 50px 25px rgba(0, 0, 0, 0.25);
 }
+body{
+    background: linear-gradient(90deg, #1AEAB6 42.66666666666%, white 0);
+}
+

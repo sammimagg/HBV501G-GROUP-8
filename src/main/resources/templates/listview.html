@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<!--suppress HtmlUnknownAttribute -->
-<head th:switch="${username}">
-  <meta charset="UTF-8">
   <!--suppress HtmlUnknownAttribute -->
-  <title th:case="null">Log in to see worked hours</title>
-  <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
-  <title th:case="*" th:text="${username}"></title>
-  <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
-  <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
-</head>
-<body>
+  <head th:switch="${username}">
+    <meta charset="UTF-8">
+    <!--suppress HtmlUnknownAttribute -->
+    <title th:case="null">Log in to see worked hours</title>
+    <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+    <title th:case="*" th:text="${username}"></title>
+    <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+  </head>
+  <body>
+  <main class="grid">
+    <div class="row">
+      <div th:replace="~{fragments/menu :: menu}"></div>
+      <div class="col col-9">
+        <div>
+          <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+          <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
+            <label>From</label>
+            <input type="date" name="startDate" id="startDate" th:field="*{date1}" />
+            <label>To</label>
+            <input type="date" name="endDate" id="endDate" th:field="*{date2}" />
+            <input type="submit" value="KLUKK"/>
+            <input type="submit" value="Request-review"/>
+          </form>
+        </div>
 
-<div>
-  <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
-  <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
-    <label>From</label>
-    <input type="date" name="startDate" id="startDate" th:field="*{date1}" />
-    <label>To</label>
-    <input type="date" name="endDate" id="endDate" th:field="*{date2}" />
-    <input type="submit" value="KLUKK"/>
-    <input type="submit" value="Request-review"/>
-  </form>
-</div>
-
-<!--suppress HtmlUnknownAttribute -->
-<div th:switch="${transactions}">
-  <!--suppress HtmlUnknownAttribute -->
-  <h2 th:case="null">No transactions found!</h2>
-  <!--suppress HtmlUnknownAttribute -->
-  <div th:case="*">
-    <h2>Transaction</h2>
-    <table>
-      <thead>
-      <tr>
-        <th>Clocked In</th>
-        <th>Clocked Out</th>
-      </tr>
-      </thead>
-      <!--suppress HtmlUnknownAttribute -->
-      <tbody>
-      <tr th:each="transaction : ${transactions}">
         <!--suppress HtmlUnknownAttribute -->
-        <td th:text="${transaction.clockIn}"></td>
-        <!--suppress HtmlUnknownAttribute -->
-        <td th:text="${transaction.clockOut}"></td>
-        <!-- <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td> -->
-        <td><a th:href="@{/request-review/{id}(id=${transaction.ID})}">Delete</a></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-</body>
+        <div th:switch="${transactions}">
+          <!--suppress HtmlUnknownAttribute -->
+          <h2 th:case="null">No transactions found!</h2>
+          <!--suppress HtmlUnknownAttribute -->
+          <div th:case="*">
+            <h2>Transaction</h2>
+            <table>
+              <thead>
+              <tr>
+                <th>Clocked In</th>
+                <th>Clocked Out</th>
+              </tr>
+              </thead>
+              <!--suppress HtmlUnknownAttribute -->
+              <tbody>
+              <tr th:each="transaction : ${transactions}">
+                <!--suppress HtmlUnknownAttribute -->
+                <td th:text="${transaction.clockIn}"></td>
+                <!--suppress HtmlUnknownAttribute -->
+                <td th:text="${transaction.clockOut}"></td>
+                <!-- <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td> -->
+                <td><a th:href="@{/request-review/{id}(id=${transaction.ID})}">Delete</a></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-<script>
-  document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);
-  document.getElementById('endDate').value = new Date().toISOString().substring(0, 10);
-</script>
+  </body>
+
+  <script>
+    document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);
+    document.getElementById('endDate').value = new Date().toISOString().substring(0, 10);
+  </script>
 </html>
