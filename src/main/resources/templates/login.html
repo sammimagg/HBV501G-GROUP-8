@@ -10,7 +10,8 @@
 <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
     <div class="grid">
         <div class="row">
-            <div class="col offset-col-3 col-6 yfirKassi">
+            <div class="col offset-col-3 col-6">
+                <div class="yfirKassi">
                 <h1>kukur</h1>
                 <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
                     <input type="text" name="username" id="username" th:field="*{username}"/>  <!--suppress HtmlUnknownAttribute -->
@@ -19,6 +20,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 
 </body>
