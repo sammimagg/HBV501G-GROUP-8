@@ -25,10 +25,7 @@ CREATE TABLE IF NOT EXISTS TransactionsReviews (
     original_clock_in TIMESTAMP WITH TIME ZONE,
     original_clocked_out TIMESTAMP WITH TIME ZONE,
     changed_clock_in TIMESTAMP WITH TIME ZONE,
-    changed_clock_out TIMESTAMP WITH TIME ZONE,
-    original_duration INTERVAL,
-    changed_duration INTERVAL GENERATED ALWAYS AS ( changed_clock_out - changed_clock_in ) STORED,
-    duration_deviation INTERVAL GENERATED ALWAYS AS ( changed_duration - original_duration ) STORED
+    changed_clock_out TIMESTAMP WITH TIME ZONE
 );
 
 CREATE TABLE IF NOT EXISTS Companies (
