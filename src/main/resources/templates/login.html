@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
     <link th:href="@{/css/login.css}" rel="stylesheet"/>
 </head>
@@ -12,7 +13,7 @@
         <div class="row">
             <div class="col offset-col-3 col-6">
                 <div class="yfirKassi">
-                <h1>kukur</h1>
+                <h1>Test</h1>
                 <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
                     <input type="text" name="username" id="username" th:field="*{username}"/>  <!--suppress HtmlUnknownAttribute -->
                     <input type="text" name="password" id="password" th:value="*{password}"/> <!--suppress HtmlUnknownAttribute -->

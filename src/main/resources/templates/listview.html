@@ -7,6 +7,8 @@
   <title th:case="null">Log in to see worked hours</title>
   <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
   <title th:case="*" th:text="${username}"></title>
+  <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
+  <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
 </head>
 <body>
 
