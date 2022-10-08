@@ -1,13 +1,12 @@
 .grid {
     margin: 0 auto;
-    //max-width: 1450px;
     overflow: hidden; }
 
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-left: -15px;
-    margin-right: -15px; }
+    margin-left: -5px;
+    margin-right: -5px; }
 
 .col {
     padding-left: 15px;
@@ -207,7 +206,7 @@ nav {
 
 
 }
-.account-logged-in{
+.account-logged-in {
     text-align: center;
 }
 
@@ -262,76 +261,94 @@ li p{
 }
 /*      Icons               */
 .icon-real-time-insights-grey {
-    background-image: url(img/time-and-attendance-grey.svg);
+    background-image: url(icon/time-and-attendance-grey.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-real-time-insights-green {
-    background-image: url(img/real-time-insights-green.svg);
+    background-image: url(icon/real-time-insights-green.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-employees-grey {
-    background-image: url(img/employees-grey.svg);
+    background-image: url(icon/employees-grey.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-employees-green  {
-    background-image: url(img/employees-green.svg);
+    background-image: url(icon/employees-green.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-time-and-attendance-grey {
-    background-image: url(img/time-and-attendance-grey.svg);
+    background-image: url(icon/time-and-attendance-grey.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-time-and-attendance-green  {
-    background-image: url(img/time-and-attendance-green.svg);
+    background-image: url(icon/time-and-attendance-green.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-request-reviews-grey {
-    background-image: url(img/request-review-grey.svg);
+    background-image: url(icon/request-review-grey.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-request-reviews-green {
-    background-image: url(img/request-review-green.svg);
+    background-image: url(icon/request-review-green.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-setting-grey {
-    background-image: url(img/settings-grey.svg);
+    background-image: url(icon/settings-grey.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-setting-green {
-    background-image: url(img/settings-green.svg);
+    background-image: url(icon/settings-green.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
+.icon-cloud-login-white {
+    background-image: url(icon/cloud-login.svg);
+    background-repeat:no-repeat;
+    height: 25em;
+}
+.font-white{
+    color: white;
+}
+.login-h1{
+    padding-top: 2em;
+}
 
+.center{
+    text-align: center;
+}
+h1 {
+    font-size: 35px;
+    font-weight: 400;
+}
 /*-------------------------*/
 
 body {
@@ -340,6 +357,15 @@ body {
     font-style: normal;
     font-weight: 500;
 }
+.flex-container{
+    display: flex;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
 @media (max-width: 500px) {
     body {
         padding-left: 0px;

@@ -1,40 +1,43 @@
 <html xmlns:th="https://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
-    <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
-    <link th:href="@{/css/login.css}" rel="stylesheet"/>
-</head>
-<body>
-<h2>Login to your account</h2>
-<!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
-<div class="row">
-    <div class="  col col-5">
-        <div class="background-color">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
+        <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+        <link th:href="@{/css/login.css}" rel="stylesheet"/>
+    </head>
+    <body>
+        <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+        <div class="grid">
+            <div class="row">
+                <div class="col offset-col-2 col-8">
+                    <div class=" login-kassi">
+                        <div class="flex-container">
+                            <div class="login-box-left flex-container column">
+                                <div class="login-h1 font-white center">
+                                    <h1>DeadTime</h1>
+                                </div>
+                                <div class="cloud-login-white">
+                                    <svg class="icon-cloud-login-white"/>
+                                </div>
+                            </div>
+                            <div class="flex-column column">
+                                <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
+                                    <p>Username</p>
+                                    <input class="username-kassi" type="text" name="username" id="username" th:field="*{username}"/>  <!--suppress HtmlUnknownAttribute -->
+                                    <p>Password</p>
+                                    <input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/> <!--suppress HtmlUnknownAttribute -->
+                                    <a href="#"><p>forgot password?</p></a>
+                                    <input class="submit-kassi" type="submit" value="Log In"/>
+                                    <input class="register-kassi" type="button" value="Register Account"> <!--HÉR ÞARF GERA FYRIR REGISTER -->
+                                </form>
+                            </div>
+                        </div>
 
-        </div>
-    </div>
-</div>
-    <div class="grid background">
-
-        <div class="row">
-            <div class="col offset-col-2 col-8 margin-yfirkassi">
-                <div class="skuggiYfirkassi">
-                <div class="yfirKassi">
-                <h1>Test</h1>
-                    <div class="col offset-col-6 col-8 login-kassi">
-                        <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
-                            <input class="username-kassi" type="text" name="username" id="username" th:field="*{username}"/>  <!--suppress HtmlUnknownAttribute -->
-                            <input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/> <!--suppress HtmlUnknownAttribute -->
-                            <input class="submit-kassi" type="submit" value="Login"/>
-                            <input class="register-kassi" type="submit"> <!--HÉR ÞARF GERA FYRIR REGISTER -->
-                        </form>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
