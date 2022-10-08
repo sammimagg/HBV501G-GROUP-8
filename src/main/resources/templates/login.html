@@ -23,18 +23,18 @@
                 <div class="skuggiYfirkassi">
                 <div class="yfirKassi">
                 <h1>Test</h1>
-                <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
-                    <input type="text" name="username" id="username" th:field="*{username}"/>  <!--suppress HtmlUnknownAttribute -->
-                    <input type="text" name="password" id="password" th:value="*{password}"/> <!--suppress HtmlUnknownAttribute -->
-                    <input type="submit" value="Login"/>
-                </form>
-                    <div class="Mint-green">
-
+                    <div class="col offset-col-6 col-8 login-kassi">
+                        <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
+                            <input class="username-kassi" type="text" name="username" id="username" th:field="*{username}"/>  <!--suppress HtmlUnknownAttribute -->
+                            <input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/> <!--suppress HtmlUnknownAttribute -->
+                            <input class="submit-kassi" type="submit" value="Login"/>
+                            <input class="register-kassi" type="submit"> <!--HÉR ÞARF GERA FYRIR REGISTER -->
+                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 </html>
