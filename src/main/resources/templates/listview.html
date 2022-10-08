@@ -49,7 +49,16 @@
                 <!--suppress HtmlUnknownAttribute -->
                 <td th:text="${transaction.clockOut}"></td>
                 <!-- <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td> -->
-                <td><a th:href="@{/request-review/{id}(id=${transaction.ID})}">Delete</a></td>
+                <!--<td><a th:href="@{/request-review/{id, clockIn, clockOut}(id=${transaction.ID, transaction.clockIn,
+                transaction.clockOut})}">Delete</a></td> -->
+
+                <!-- Í VINNSLU
+                  Breyta í input, skipta upp LocalDateTime í Date og Time fyrir framsetningu, setja fram í input hlut
+                  Post request svo ekki get beðni
+                  skoða seinna xoo
+
+                -->
+
               </tr>
               </tbody>
             </table>

@@ -9,12 +9,10 @@
  */
 package is.hi.hbv501g.group8.Controllers;
 
-import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
-import is.hi.hbv501g.group8.Persistence.Entities.Employee;
-import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
-import is.hi.hbv501g.group8.Persistence.Entities.User;
+import is.hi.hbv501g.group8.Persistence.Entities.*;
 import is.hi.hbv501g.group8.Persistence.Repositories.UserRepository;
 import is.hi.hbv501g.group8.Services.EmployeeService;
+import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,17 +36,21 @@ public class TransactionController {
 
     TransactionService transactionService;
     EmployeeService employeeService;
+    TransactionReviewService transactionReviewService;
 
     /**
      * Vantar lýsingu..
      *
      * @param transactionService
      * @param employeeService
+     * @param transactionReviewService
      */
     @Autowired
-    public TransactionController(TransactionService transactionService, EmployeeService employeeService) {
+    public TransactionController(TransactionService transactionService, EmployeeService employeeService,
+                                 TransactionReviewService transactionReviewService) {
         this.transactionService = transactionService;
         this.employeeService = employeeService;
+        this.transactionReviewService = transactionReviewService;
     }
 
     /**
@@ -157,9 +159,22 @@ public class TransactionController {
      * @return redirect:/list
      */
     @RequestMapping(value="/request-review/{id}", method = RequestMethod.GET)
-    public String requestReview(@PathVariable("id") long id, Model model){
+    public String requestReview(@PathVariable("id") long id, Model model, Transaction transaction){
         Transaction transactionToMarkForReview = transactionService.findByID(id);
+        TransactionReview newReview = new TransactionReview();
+
+        // Insert information!
+        newReview.setID(transactionToMarkForReview.getID());
+        newReview.setSSN(transactionToMarkForReview.getSSN());
+        newReview.setOriginalClockIn(transactionToMarkForReview.getClockIn());
+        newReview.setOriginalClockedOut(transactionToMarkForReview.getClockOut());
+        newReview.setChangedClockIn(transaction.getClockIn());
+        newReview.setChangedClockOut(transaction.getClockOut());
+
         //bookService.delete(bookToDelete);
+
+        transactionReviewService.save(newReview);
+
         return "redirect:/list";
     }
     // <td><a th:href="@{/request-review/{id}(id=${transaction.ID})}">Delete</a></td>

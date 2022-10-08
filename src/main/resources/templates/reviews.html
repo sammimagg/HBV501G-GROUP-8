@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main class="grid">
+  <div class="row">
+    <div th:replace="~{fragments/menu :: menu}"></div>
+
+
+      <!--suppress HtmlUnknownAttribute -->
+      <div th:switch="${transactions}">
+        <!--suppress HtmlUnknownAttribute -->
+        <h2 th:case="null">No transactions need review!</h2>
+        <!--suppress HtmlUnknownAttribute -->
+        <div th:case="*">
+          <h2>Transaction</h2>
+          <table>
+            <thead>
+            <tr>
+              <th>Clocked In</th>
+              <th>Clocked Out</th>
+            </tr>
+            </thead>
+            <!--suppress HtmlUnknownAttribute -->
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+              <!--suppress HtmlUnknownAttribute -->
+              <td th:text="${transaction.clockIn}"></td>
+              <!--suppress HtmlUnknownAttribute -->
+              <td th:text="${transaction.clockOut}"></td>
+              <!-- <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td> -->
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

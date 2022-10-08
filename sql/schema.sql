@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS TransactionReviews;
+DROP TABLE IF EXISTS Transactions;
+DROP TABLE IF EXISTS Employees;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Companies;
+
 CREATE TABLE IF NOT EXISTS Employees (
     SSN varchar(10) primary key,
     first_name varchar(128),
@@ -19,8 +25,9 @@ CREATE TABLE IF NOT EXISTS Transactions (
     finished BOOLEAN
 );
 
-CREATE TABLE IF NOT EXISTS TransactionsReviews (
+CREATE TABLE IF NOT EXISTS TransactionReviews (
     ID SERIAL PRIMARY KEY REFERENCES Transactions(ID),
+    SSN VARCHAR(10),
     status VARCHAR(50),
     original_clock_in TIMESTAMP WITH TIME ZONE,
     original_clocked_out TIMESTAMP WITH TIME ZONE,
