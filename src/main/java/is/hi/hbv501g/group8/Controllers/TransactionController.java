@@ -28,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -144,7 +146,12 @@ public class TransactionController {
         List<Transaction> allTransactions = transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay());
         System.out.println(sessionUser.getSSN());
         for ( Transaction row : allTransactions) {
-            System.out.println("22");
+            row.setClockInDate(row.getClockIn().toLocalDate());
+            row.setClockInTime(LocalTime.from(row.getClockIn()).truncatedTo(ChronoUnit.MINUTES));
+            if(row.getClockOut() != null) {
+                row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
+            }
+            System.out.println(row.getClockInTime());
         }
         model.addAttribute("transactions", allTransactions);
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");

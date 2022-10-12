@@ -11,6 +11,8 @@ package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "transactions")
@@ -23,6 +25,11 @@ public class Transaction {
     private LocalDateTime clockIn;
     private LocalDateTime clockOut;
     private boolean finished;
+
+    @Transient
+    private LocalDate clockInDate;
+    @Transient
+    private LocalTime clockInTime, clockOutTime;
 
     public Transaction() {
 
@@ -115,5 +122,41 @@ public class Transaction {
      */
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public void setSSN(String SSN) {
+        this.SSN = SSN;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDate getClockInDate() {
+        return clockInDate;
+    }
+
+    public void setClockInDate(LocalDate clockInDate) {
+        this.clockInDate = clockInDate;
+    }
+
+    public LocalTime getClockInTime() {
+        return clockInTime;
+    }
+
+    public void setClockInTime(LocalTime clockInTime) {
+        this.clockInTime = clockInTime;
+    }
+
+    public LocalTime getClockOutTime() {
+        return clockOutTime;
+    }
+
+    public void setClockOutTime(LocalTime clockOutTime) {
+        this.clockOutTime = clockOutTime;
     }
 }

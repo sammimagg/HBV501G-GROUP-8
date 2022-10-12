@@ -37,6 +37,7 @@
             <table>
               <thead>
               <tr>
+                <th>Date</th>
                 <th>Clocked In</th>
                 <th>Clocked Out</th>
               </tr>
@@ -45,9 +46,11 @@
               <tbody>
               <tr th:each="transaction : ${transactions}">
                 <!--suppress HtmlUnknownAttribute -->
-                <td th:text="${transaction.clockIn}"></td>
+                <td th:text="${transaction.clockInDate}"></td>
                 <!--suppress HtmlUnknownAttribute -->
-                <td th:text="${transaction.clockOut}"></td>
+                <td th:text="${transaction.clockInTime}"></td>
+                <!--suppress HtmlUnknownAttribute -->
+                <td th:text="${transaction.clockOutTime}"></td>
                 <!-- <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td> -->
                 <!--<td><a th:href="@{/request-review/{id, clockIn, clockOut}(id=${transaction.ID, transaction.clockIn,
                 transaction.clockOut})}">Delete</a></td> -->
