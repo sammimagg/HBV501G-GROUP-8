@@ -10,6 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+    <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
   </head>
   <body>
   <main class="grid">
@@ -38,9 +39,13 @@
             <table>
               <thead>
               <tr>
-                <th>Date</th>
-                <th>Clocked In</th>
-                <th>Clocked Out</th>
+                <th class="employee-transaction-list-date">Date</th>
+                <th class="employee-transaction-list-clock-in">Clock-in</th>
+                <th class="employee-transaction-list-clcok-out">Clock-out</th>
+                <th class="employee-transaction-list-work-time">Work Time</th>
+                <th class="employee-transaction-list-status">Status</th>
+                <th class="employee-transaction-list-comment"></th>
+                <th class="employee-transaction-list-request-review"></th>
               </tr>
               </thead>
               <!--suppress HtmlUnknownAttribute -->

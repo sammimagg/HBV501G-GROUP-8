@@ -1,0 +1,21 @@
+.employee-transaction-list-date {
+    min-width: 100px;
+}
+.employee-transaction-list-clock-in {
+    min-width: 100px;
+}
+.employee-transaction-list-clcok-out {
+    min-width: 100px;
+}
+.employee-transaction-list-work-time {
+    min-width: 100px;
+}
+.employee-transaction-list-status {
+    min-width: 100px;
+}
+.employee-transaction-list-comment {
+    min-width: 100px;
+}
+.employee-transaction-list-request-review {
+    min-width: 100px;
+}

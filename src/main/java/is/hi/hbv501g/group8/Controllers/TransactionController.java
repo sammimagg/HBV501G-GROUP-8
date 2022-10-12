@@ -41,7 +41,7 @@ public class TransactionController {
     TransactionReviewService transactionReviewService;
 
     /**
-     * Vantar lýsingu..
+     * {@link java.lang.reflect.Constructor} for TransactionController
      *
      * @param transactionService
      * @param employeeService
@@ -56,8 +56,8 @@ public class TransactionController {
     }
 
     /**
-     * Vantar lýsingu..
-     *
+     * Vantar lýsingu.. asdasdasd a
+     * HÆHÆÆÆÆÆÆÆÆÆÆÆÆ asdasdsdads
      * @param transaction
      * @return
      */
@@ -150,6 +150,7 @@ public class TransactionController {
             row.setClockInTime(LocalTime.from(row.getClockIn()).truncatedTo(ChronoUnit.MINUTES));
             if(row.getClockOut() != null) {
                 row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
+                row.setWorkedTime(ChronoUnit.SECONDS.between(row.getClockIn(), row.getClockOut()));
             }
             System.out.println(row.getClockInTime());
         }

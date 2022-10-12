@@ -29,97 +29,97 @@ public class Transaction {
     @Transient
     private LocalDate clockInDate;
     @Transient
-    private LocalTime clockInTime, clockOutTime;
+    private LocalTime clockInTime, clockOutTime, workedTime;
 
     public Transaction() {
 
     }
 
     /**
-     * Description: Getter for ID of a transaction
-     *
-     * @return ID of a transaction
-     */
+    * Description: Getter for ID of a transaction
+    *
+    * @return ID of a transaction
+    */
     public long getID() {
         return ID;
     }
 
     /**
-     * Description: Setter for ID of a transaction
-     *
-     * @param ID of a transaction
-     */
+    * Description: Setter for ID of a transaction
+    *
+    * @param ID of a transaction
+    */
     public void setID(long ID) {
         this.ID = ID;
     }
 
     /**
-     * Description: Getter for SSN in a transaction
-     *
-     * @return SSN of current transaction.
-     */
+    * Description: Getter for SSN in a transaction
+    *
+    * @return SSN of current transaction.
+    */
     public String getSSN() {
         return SSN;
     }
 
     /**
-     * Description: Setter for SSN of a transaction
-     *
-     * @param ssn for the transaction.
-     */
+    * Description: Setter for SSN of a transaction
+    *
+    * @param ssn for the transaction.
+    */
     public void setSsn(String ssn) {
         this.SSN = ssn;
     }
 
     /**
-     * Description: Getter for time and date of Clock in
-     *
-     * @return Time and date of a transaction.
-     */
+    * Description: Getter for time and date of Clock in
+    *
+    * @return Time and date of a transaction.
+    */
     public LocalDateTime getClockIn() {
         return clockIn;
     }
     /**
-     * Description: Setter for time and date of Clock in.
-     *
-     * @param clockIn Current time and date of Clock in
-     */
+    * Description: Setter for time and date of Clock in.
+    *
+    * @param clockIn Current time and date of Clock in
+    */
     public void setClockIn(LocalDateTime clockIn) {
         this.clockIn = clockIn;
     }
     /**
-     * Description: Getter for time and date of Clock out.
-     *
-     * @return time and date of clock out
-     */
+    * Description: Getter for time and date of Clock out.
+    *
+    * @return time and date of clock out
+    */
     public LocalDateTime getClockOut() {
         return clockOut;
     }
 
     /**
-     * Description: Setter for time and date of Clock put
-     *
-     * @param clockOut current time and date of a clock out.
-     */
+    * Description: Setter for time and date of Clock put
+    *
+    * @param clockOut current time and date of a clock out.
+    */
     public void setClockOut(LocalDateTime clockOut) {
         this.clockOut = clockOut;
     }
 
     /**
-     * Description: Help function to tell if transaction is finnished.
-     *
-     * @return If Clock-in and Clock-out is not null then it's true.
-     * Else false
-     */
+    * Description: Help function to tell if transaction is finnished.
+    *
+    * @return If Clock-in and Clock-out is not null then it's true.
+    * Else false
+    */
     public boolean isFinished() {
         return finished;
     }
 
     /**
-     * Description:
-     *
-     * @param finished
-     */
+    * Description:
+    *
+    * @param finished
+    */
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
@@ -158,5 +158,13 @@ public class Transaction {
 
     public void setClockOutTime(LocalTime clockOutTime) {
         this.clockOutTime = clockOutTime;
+    }
+
+    public LocalTime getWorkedTime() {
+        return workedTime;
+    }
+
+    public void setWorkedTime(LocalTime workedTime) {
+        this.workedTime = workedTime;
     }
 }
