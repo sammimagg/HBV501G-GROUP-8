@@ -33,6 +33,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
+
 @Controller
 public class TransactionController {
 
@@ -150,7 +152,10 @@ public class TransactionController {
             row.setClockInTime(LocalTime.from(row.getClockIn()).truncatedTo(ChronoUnit.MINUTES));
             if(row.getClockOut() != null) {
                 row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
-                row.setWorkedTime(ChronoUnit.SECONDS.between(row.getClockIn(), row.getClockOut()));
+                // Gæti þurft að vera:
+                // row.setWorkedTime(LocalTime.ofSecondOfDay(SECONDS.between(row.getClockIn(), row.getClockOut())).truncatedTo(ChronoUnit.MINUTES));
+                row.setWorkedTime(LocalTime.ofSecondOfDay(SECONDS.between(row.getClockIn(), row.getClockOut())));
+                System.out.println(row.getWorkedTime());
             }
             System.out.println(row.getClockInTime());
         }
