@@ -22,8 +22,6 @@ public class Group8Application implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(Group8Application.class, args);
-        System.out.println("Er DeadTime ekki hellað nafn?");
-        System.out.println("lalalal");
     }
 
     /*@GetMapping("/hello")
@@ -49,7 +47,6 @@ public class Group8Application implements CommandLineRunner {
             String res = (String) row.get("SSN") + " ";
             res += row.get("lastName") + " ";
 
-            System.out.println(res);
         }
     }
 }

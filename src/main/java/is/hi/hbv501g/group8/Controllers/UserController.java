@@ -9,6 +9,7 @@
  */
 package is.hi.hbv501g.group8.Controllers;
 
+import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -116,5 +117,7 @@ public class UserController {
         }
         return "redirect:/";
     }
+
+
 
 }

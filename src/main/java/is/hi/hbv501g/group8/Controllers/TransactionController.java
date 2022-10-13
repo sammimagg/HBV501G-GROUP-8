@@ -147,11 +147,9 @@ public class TransactionController {
             return "redirect:/login";
         }
         else {
-
-           // String fullName = employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName();
-            System.out.println(employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
-            //model.addAttribute("LoggedInUser",fullName);
-
+            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
         }
         System.out.println(dateHelper.getDate1());
         List<Transaction> allTransactions = transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay());
@@ -204,9 +202,6 @@ public class TransactionController {
         }
         else {
 
-            // String fullName = employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName();
-            System.out.println(employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
-            //model.addAttribute("LoggedInUser",fullName);
 
         }
 
