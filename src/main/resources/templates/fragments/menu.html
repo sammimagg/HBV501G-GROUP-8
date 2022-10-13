@@ -40,8 +40,9 @@
             <div>
                 <div class="account-logged-in">
 
-                    <h1><span class="blue">KB</span></h1>
-                    <strong>Kristófer Breki Gylfason</strong>
+                    <h1><span th:text="${abbreviation}" class="blue"></span></h1>
+                    <!--suppress HtmlUnknownAttribute -->
+                    <strong th:text="${fullName}"></strong>
                 </div>
             </div>
         </div>

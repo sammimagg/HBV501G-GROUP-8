@@ -36,41 +36,33 @@
           <!--suppress HtmlUnknownAttribute -->
           <div th:case="*">
             <h2>Transaction</h2>
-            <table>
-              <thead>
-              <tr>
-                <th class="employee-transaction-list-date">Date</th>
-                <th class="employee-transaction-list-clock-in">Clock-in</th>
-                <th class="employee-transaction-list-clcok-out">Clock-out</th>
-                <th class="employee-transaction-list-work-time">Work Time</th>
-                <th class="employee-transaction-list-status">Status</th>
-                <th class="employee-transaction-list-comment"></th>
-                <th class="employee-transaction-list-request-review"></th>
-              </tr>
-              </thead>
+            <div class="employee-transaction-table">
+              <div class="employee-table-header">
+                <div class="employee-transaction-list-row">Date</div>
+                <div class="employee-transaction-list-row">Clock-in</div>
+                <div class="employee-transaction-list-row">Clock-out</div>
+                <div class="employee-transaction-list-row">Work Time</div>
+                <div class="employee-transaction-list-row">Status</div>
+                <div class="employee-transaction-list-row"></div>
+                <div class="employee-transaction-list-row"></div>
+              </div>
               <!--suppress HtmlUnknownAttribute -->
-              <tbody>
-              <tr th:each="transaction : ${transactions}">
-                <!--suppress HtmlUnknownAttribute -->
-                <td th:text="${transaction.clockInDate}"></td>
-                <!--suppress HtmlUnknownAttribute -->
-                <td th:text="${transaction.clockInTime}"></td>
-                <!--suppress HtmlUnknownAttribute -->
-                <td th:text="${transaction.clockOutTime}"></td>
-                <!-- <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td> -->
-                <!--<td><a th:href="@{/request-review/{id, clockIn, clockOut}(id=${transaction.ID, transaction.clockIn,
-                transaction.clockOut})}">Delete</a></td> -->
+              <div>
+                <div class="employee-table-row" th:each="transaction : ${transactions}">
+                    <!--suppress HtmlUnknownAttribute -->
+                    <div class="employee-transaction-list-row" th:text="${transaction.clockInDate}"></div>
+                    <!--suppress HtmlUnknownAttribute -->
+                    <div class="employee-transaction-list-row" th:text="${transaction.clockInTime}"></div>
+                    <!--suppress HtmlUnknownAttribute -->
+                    <div class="employee-transaction-list-row" th:text="${transaction.clockOutTime}"></div>
 
-                <!-- Í VINNSLU
-                  Breyta í input, skipta upp LocalDateTime í Date og Time fyrir framsetningu, setja fram í input hlut
-                  Post request svo ekki get beðni
-                  skoða seinna xoo
-
-                -->
-
-              </tr>
-              </tbody>
-            </table>
+                    <div class="employee-transaction-list-row"></div>
+                    <div class="employee-transaction-list-row"></div>
+                    <div class="employee-transaction-list-row"><button>*</button></div>
+                    <div class="employee-transaction-list-row"><button>*</button></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

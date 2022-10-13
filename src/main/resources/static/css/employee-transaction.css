@@ -1,21 +1,28 @@
-.employee-transaction-list-date {
-    min-width: 100px;
+
+.employee-transaction-list-row {
+    text-align: left;
+    min-width: 10em;
 }
-.employee-transaction-list-clock-in {
-    min-width: 100px;
+.employee-transaction-table{
+    width: 100%;
 }
-.employee-transaction-list-clcok-out {
-    min-width: 100px;
+table{
+    border-collapse:separate;
+    border-spacing: 0 1em;
+    border: 3px black solid;
 }
-.employee-transaction-list-work-time {
-    min-width: 100px;
+td {
+    border-top: solid 1px black;
+    border-bottom: solid 2px black
 }
-.employee-transaction-list-status {
-    min-width: 100px;
+.employee-table-row{
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 1em;
+    display: flex;
+
 }
-.employee-transaction-list-comment {
-    min-width: 100px;
-}
-.employee-transaction-list-request-review {
-    min-width: 100px;
+.employee-table-header{
+    display: flex;
 }

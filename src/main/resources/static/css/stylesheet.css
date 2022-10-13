@@ -1,12 +1,13 @@
 .grid {
     margin: 0 auto;
+    max-width: 1920px;
     overflow: hidden; }
 
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-left: -5px;
-    margin-right: -5px; }
+    margin-left: -15px;
+    margin-right: -15px; }
 
 .col {
     padding-left: 15px;
@@ -84,7 +85,8 @@
     width: 100%; }
 
 .offset-col-12 {
-    margin-left: 100%; }
+    margin-left: 100%;
+}
 
 * {
     box-sizing: border-box;

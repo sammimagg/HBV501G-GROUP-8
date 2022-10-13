@@ -33,8 +33,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
-
 @Controller
 public class TransactionController {
 
@@ -127,6 +125,8 @@ public class TransactionController {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser!=null) {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
         }
         return "listview";
     }
@@ -143,7 +143,16 @@ public class TransactionController {
     @RequestMapping(value="/list", method = RequestMethod.POST)
     public String TransactionsPOST(Model model, User user, DateHelper dateHelper, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null ) return "redirect:/login";
+        if (sessionUser == null ) {
+            return "redirect:/login";
+        }
+        else {
+
+           // String fullName = employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName();
+            System.out.println(employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
+            //model.addAttribute("LoggedInUser",fullName);
+
+        }
         System.out.println(dateHelper.getDate1());
         List<Transaction> allTransactions = transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay());
         System.out.println(sessionUser.getSSN());
@@ -152,10 +161,7 @@ public class TransactionController {
             row.setClockInTime(LocalTime.from(row.getClockIn()).truncatedTo(ChronoUnit.MINUTES));
             if(row.getClockOut() != null) {
                 row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
-                // Gæti þurft að vera:
-                // row.setWorkedTime(LocalTime.ofSecondOfDay(SECONDS.between(row.getClockIn(), row.getClockOut())).truncatedTo(ChronoUnit.MINUTES));
-                row.setWorkedTime(LocalTime.ofSecondOfDay(SECONDS.between(row.getClockIn(), row.getClockOut())));
-                System.out.println(row.getWorkedTime());
+                //row.setWorkedTime(ChronoUnit.SECONDS.between(row.getClockIn(), row.getClockOut()));
             }
             System.out.println(row.getClockInTime());
         }
@@ -190,6 +196,25 @@ public class TransactionController {
 
         return "redirect:/list";
     }
+    @RequestMapping(value="/listview", method = RequestMethod.POST)
+    public String Transactions(Model model, User user, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null ) {
+            return "redirect:/login";
+        }
+        else {
+
+            // String fullName = employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName();
+            System.out.println(employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
+            //model.addAttribute("LoggedInUser",fullName);
+
+        }
+
+
+        return "/";
+    }
+
     // <td><a th:href="@{/request-review/{id}(id=${transaction.ID})}">Delete</a></td>
+
 
 }
