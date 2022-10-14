@@ -161,10 +161,11 @@ public class TransactionController {
                 row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
                 //row.setWorkedTime(ChronoUnit.SECONDS.between(row.getClockIn(), row.getClockOut()));
             }
-            System.out.println(row.getClockInTime());
+
         }
         model.addAttribute("transactions", allTransactions);
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
         return "listview";
     }
 

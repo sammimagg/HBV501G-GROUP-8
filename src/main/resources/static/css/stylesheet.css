@@ -337,6 +337,35 @@ li p{
     background-repeat:no-repeat;
     height: 25em;
 }
+.icon-comment-grey {
+    background-image: url(icon/comment.svg);
+    background-repeat:no-repeat;
+    height: 25em;
+}
+.icon-edit-grey {
+    background-image: url(icon/edit.svg);
+    background-repeat:no-repeat;
+    height: 25em;
+}
+.icon-pending-yellow {
+    background-image: url(icon/pending-yellow.svg);
+    background-repeat:no-repeat;
+    height: 25em;
+}
+.icon-approved-green {
+    background-image: url(icon/approved-green.svg);
+    background-repeat:no-repeat;
+    height: 25em;
+}
+.icon-request-red {
+    background-image: url(icon/request-red.svg);
+    background-repeat:no-repeat;
+    height: 25em;
+}
+
+
+
+
 .font-white{
     color: white;
 }

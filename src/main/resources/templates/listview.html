@@ -17,7 +17,7 @@
     <div class="row">
       <div th:replace="~{fragments/menu :: menu}"></div>
       <div class="col col-9">
-        <div>
+        <div class="time-and-date-from-time-and-date-from">
           <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
           <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
             <label>From</label>
@@ -38,28 +38,48 @@
             <h2>Transaction</h2>
             <div class="employee-transaction-table">
               <div class="employee-table-header">
-                <div class="employee-transaction-list-row">Date</div>
-                <div class="employee-transaction-list-row">Clock-in</div>
-                <div class="employee-transaction-list-row">Clock-out</div>
-                <div class="employee-transaction-list-row">Work Time</div>
-                <div class="employee-transaction-list-row">Status</div>
-                <div class="employee-transaction-list-row"></div>
-                <div class="employee-transaction-list-row"></div>
+                <p class="employee-transaction-list-row">Date</p>
+                <p class="employee-transaction-list-row">Clock-in</p>
+                <p class="employee-transaction-list-row">Clock-out</p>
+                <p class="employee-transaction-list-row">Work Time</p>
+                <p class="employee-transaction-list-row">Status</p>
+                <p class="employee-transaction-list-row"></p>
+                <p class="employee-transaction-list-row"></p>
               </div>
               <!--suppress HtmlUnknownAttribute -->
-              <div>
+              <div class="employee-table-rows">
                 <div class="employee-table-row" th:each="transaction : ${transactions}">
-                    <!--suppress HtmlUnknownAttribute -->
-                    <div class="employee-transaction-list-row" th:text="${transaction.clockInDate}"></div>
-                    <!--suppress HtmlUnknownAttribute -->
-                    <div class="employee-transaction-list-row" th:text="${transaction.clockInTime}"></div>
-                    <!--suppress HtmlUnknownAttribute -->
-                    <div class="employee-transaction-list-row" th:text="${transaction.clockOutTime}"></div>
-
-                    <div class="employee-transaction-list-row"></div>
-                    <div class="employee-transaction-list-row"></div>
-                    <div class="employee-transaction-list-row"><button>*</button></div>
-                    <div class="employee-transaction-list-row"><button>*</button></div>
+                    <div class="employee-table-inner-row">
+                      <!--suppress HtmlUnknownAttribute -->
+                      <p class="employee-transaction-list-row" th:text="${transaction.clockInDate}"></p>
+                      <!--suppress HtmlUnknownAttribute -->
+                      <p class="employee-transaction-list-row" th:text="${transaction.clockInTime}"></p>
+                      <!--suppress HtmlUnknownAttribute -->
+                      <p class="employee-transaction-list-row" th:text="${transaction.clockOutTime}"></p>
+                      <p class="employee-transaction-list-row" th:text="${transaction.workedTime}"></p>
+                      <div th:switch="${transaction.status}" class="employee-transaction-list-row">
+                        <svg th:case="'approved'" class="icon-approved-green" height="25" width="25"></svg>
+                        <svg th:case="'pending'" class="icon-pending-yellow" height="25" width="25"></svg>
+                        <svg th:case="'request'" class="icon-request-red" height="25" width="25"></svg>
+                      </div>
+                      <div class="employee-transaction-list-row">
+                        <button>
+                          <svg class="icon-comment-grey" height="25" width="25"></svg>
+                        </button>
+                      </div>
+                      <div class="employee-transaction-list-row">
+                        <button>
+                          <svg class="icon-edit-grey" height="25" width="25"></svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="employee-table-inner-row">
+                      <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                      <input type="time" id="apfsapt" name="appt" min="09:00" max="18:00" required>
+                      <input type="time" id="appfdsat" name="appt" min="09:00" max="18:00" required>
+                      <button>Save</button>
+                      <button>Cancel</button>
+                    </div>
                 </div>
               </div>
             </div>

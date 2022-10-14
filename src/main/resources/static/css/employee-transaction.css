@@ -18,11 +18,22 @@ td {
 .employee-table-row{
     border: 1px solid #D4D4D4;
     border-radius: 5px;
-    height: 50px;
     margin-bottom: 1em;
+    padding-top: 12px;
+}
+.employee-table-inner-row{
     display: flex;
-
+    height: 50px;
+    margin-left: 1em;
 }
 .employee-table-header{
     display: flex;
+}
+.employee-table-row button{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
