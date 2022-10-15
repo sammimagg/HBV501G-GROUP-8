@@ -195,22 +195,5 @@ public class TransactionController {
 
         return "redirect:/list";
     }
-    @RequestMapping(value="/listview", method = RequestMethod.POST)
-    public String Transactions(Model model, User user, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null ) {
-            return "redirect:/login";
-        }
-        else {
-
-
-        }
-
-
-        return "/";
-    }
-
-    // <td><a th:href="@{/request-review/{id}(id=${transaction.ID})}">Delete</a></td>
-
 
 }

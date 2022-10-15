@@ -8,7 +8,6 @@
     <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
     <title th:case="*" th:text="${username}"></title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
     <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
   </head>
@@ -48,7 +47,7 @@
               </div>
               <!--suppress HtmlUnknownAttribute -->
               <div class="employee-table-rows">
-                <div class="employee-table-row" th:each="transaction : ${transactions}">
+                <div class="employee-table-row" th:each="transaction : ${transactions}" th:id="${transaction.getID}">
                     <div class="employee-table-inner-row">
                       <!--suppress HtmlUnknownAttribute -->
                       <p class="employee-transaction-list-row" th:text="${transaction.clockInDate}"></p>
@@ -74,9 +73,18 @@
                       </div>
                     </div>
                     <div class="employee-table-inner-row">
-                      <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
-                      <input type="time" id="apfsapt" name="appt" min="09:00" max="18:00" required>
-                      <input type="time" id="appfdsat" name="appt" min="09:00" max="18:00" required>
+                      <div class="employee-transaction-list-row">
+                        <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                      </div >
+                      <div class="employee-transaction-list-row">
+                        <input type="time" id="apfsapt" name="appt" min="09:00" max="18:00" required>
+                      </div>
+                      <div class="employee-transaction-list-row">
+                        <input type="time" id="appfdsat" name="appt" min="09:00" max="18:00" required>
+                      </div>
+                      <div class="employee-transaction-list-row">
+                        <p>Missing</p>
+                      </div>
                       <button>Save</button>
                       <button>Cancel</button>
                     </div>
