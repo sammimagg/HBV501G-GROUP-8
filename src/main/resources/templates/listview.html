@@ -47,7 +47,7 @@
               </div>
               <!--suppress HtmlUnknownAttribute -->
               <div class="employee-table-rows">
-                <div class="employee-table-row" th:each="transaction : ${transactions}" th:id="${transaction.getID}">
+                <div class="employee-table-row"th:each="transaction : ${transactions}" th:id="${transaction.getID}">
                     <div class="employee-table-inner-row">
                       <!--suppress HtmlUnknownAttribute -->
                       <p class="employee-transaction-list-row" th:text="${transaction.clockInDate}"></p>
@@ -67,12 +67,12 @@
                         </button>
                       </div>
                       <div class="employee-transaction-list-row">
-                        <button>
+                        <button th:id="'button-' + ${transaction.getID}" onClick="reply_click(this.id)">
                           <svg class="icon-edit-grey" height="25" width="25"></svg>
                         </button>
                       </div>
                     </div>
-                    <div class="employee-table-inner-row">
+                    <div class="employee-table-inner-row " style="display: none" th:id="'row-' + ${transaction.getID}">
                       <div class="employee-transaction-list-row">
                         <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
                       </div >
@@ -102,5 +102,16 @@
   <script>
     document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);
     document.getElementById('endDate').value = new Date().toISOString().substring(0, 10);
+    function reply_click(clicked_id) {
+      const id = clicked_id.slice(7,);
+      const rowWithId = "row-".concat(id);
+      console.log(rowWithId);
+      const currentRow = document.getElementById(rowWithId);
+      if (currentRow && currentRow.style.display =='none')
+        currentRow.style.display ='flex';
+      else
+        currentRow.style.display ='none';
+    }
   </script>
+
 </html>
