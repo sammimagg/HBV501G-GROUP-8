@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 
@@ -96,21 +97,21 @@ public class UserController {
      * @param result BindingResult
      * @param model Model
      * @param session HttpSession
-     * @return The result of the operation if logging in is successful, or a redirect with errors
+     * @return RedirectReview The result of the operation if logging in is successful, or a redirect with errors
      *          if the logging in procedure failed.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPOST(User user, BindingResult result, Model model, HttpSession session){
+    public RedirectView loginPOST(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
-            return "login";
+            return new RedirectView("login");
         }
         User exists = userService.login(user);
         if(exists != null){
             session.setAttribute("LoggedInUser", exists);
             model.addAttribute("LoggedInUser", exists);
-            return "LoggedInUser";
+            return new RedirectView("/list");
         }
-        return "redirect:/";
+        return new RedirectView("/");
     }
     /**
      * Handler for GET requests on /loggedin
@@ -298,7 +299,7 @@ public class UserController {
     /**
      * A handler for GET requests on /reviews
      * 
-     * @// TODO: 22.10.2022  
+     * @// TODO: 22.10.2022
      *
      * @param model Model
      * @param session HttpSession

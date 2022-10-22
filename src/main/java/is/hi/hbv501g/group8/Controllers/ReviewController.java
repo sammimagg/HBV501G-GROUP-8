@@ -4,7 +4,7 @@
  * Description: Controller for everything to do with
  *              responding to requests. (Transaction Review)
  *              
- * @// TODO: 22.10.2022  
+ * @// TODO: 22.10.2022
  *
  * @author kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is
