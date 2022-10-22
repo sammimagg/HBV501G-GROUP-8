@@ -157,6 +157,12 @@ public class UserController {
             model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
             model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
             model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
+            model.addAttribute("startDate", employeeService.findBySSN(sessionUser.getSSN()).getStartDate());
+            // VOID
+            employeeService.findBySSN(sessionUser.getSSN()).updateRemainingVacationDays();
+            employeeService.findBySSN(sessionUser.getSSN()).updateRemainingSickDays();
+            model.addAttribute("sickDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingSickDays());
+            model.addAttribute("vacationDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingVacationDays());
         }
         return "profile";
     }

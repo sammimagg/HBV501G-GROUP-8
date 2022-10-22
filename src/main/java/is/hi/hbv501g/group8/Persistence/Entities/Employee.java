@@ -11,6 +11,9 @@
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 @Entity
 @Table(name = "employees")
@@ -24,6 +27,11 @@ public class Employee {
     private String jobTitle;
     private double salary;
     private String phoneNumber;
+
+    private LocalDate startDate;
+    private int vacationDaysUsed, sickDaysUsed;
+    @Transient
+    private int remainingVacationDays, remainingSickDays;
 
     public void Employee() {
 
@@ -105,5 +113,53 @@ public class Employee {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public int getVacationDaysUsed() {
+        return vacationDaysUsed;
+    }
+
+    public void setVacationDaysUsed(int vacationDaysUsed) {
+        this.vacationDaysUsed = vacationDaysUsed;
+    }
+
+    public int getSickDaysUsed() {
+        return sickDaysUsed;
+    }
+
+    public void setSickDaysUsed(int sickDaysUsed) {
+        this.sickDaysUsed = sickDaysUsed;
+    }
+
+    public int getRemainingVacationDays() {
+        return remainingVacationDays;
+    }
+
+    /**
+     * Updates remainingVacationDays with:
+     * 2 x Months Worked - Vacation Days Used
+     */
+    public void updateRemainingVacationDays() {
+        this.remainingVacationDays = (int)(ChronoUnit.MONTHS.between(getStartDate(),LocalDate.now())*2)-(getVacationDaysUsed());
+    }
+
+    public int getRemainingSickDays() {
+        return remainingSickDays;
+    }
+    /**
+     * Updates remainingSickDays with:
+     * 2 x Months Worked - Sick Days Used
+     */
+
+    public void updateRemainingSickDays() {
+        this.remainingSickDays = (int)(ChronoUnit.MONTHS.between(getStartDate(),LocalDate.now())*2)-(getSickDaysUsed());;
     }
 }
