@@ -1,3 +1,16 @@
+/**
+ * DatabaseConfig
+ *
+ * Description: Configuration file for database connection.
+ *
+ * @author kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ *
+ * @/ TODO: 22.10.2022
+ *      safely move to /Configuration/
+ */
+
 package is.hi.hbv501g.group8;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -23,6 +36,12 @@ public class DatabaseConfig {
         return new JdbcTemplate(dataSource);
     }
 
+
+    /**
+     * Description: Creates a HikariDataSource
+     * @link application.p
+     * @return new HikariDataSource
+     */
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
