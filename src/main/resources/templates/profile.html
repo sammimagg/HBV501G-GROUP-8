@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <!--suppress HtmlUnknownAttribute -->
+    <head th:switch="${username}">
+        <meta charset="UTF-8">
+        <!--suppress HtmlUnknownAttribute -->
+        <title th:case="null">Log in to see worked hours</title>
+        <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+        <title th:case="*" th:text="${username}"></title>
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+        <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
+    </head>
+    <body>
+        <main class="grid">
+            <div class="row">
+                <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
+                <div class="col col-9">
+                    <h1>Profile</h1>
+                    <p th:text="${firstName}">First name</p>
+                    <p th:text="${lastName}">Last name</p>
+                    <p th:text="${phoneNumber}">Phone number</p>
+                    <p th:text="${company}">Company</p>
+                    <p th:text="${jobtitle}">Jobtitle</p>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

@@ -7,31 +7,31 @@
         <div class="nav-border">
             <ul class="menu-ul">
                 <li>
-                    <a href="#" class="">
+                    <a href="realtimeinsights" class="">
                         <svg class="icon-real-time-insights-grey"></svg>
                         <p>Real-Time Insights</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="">
+                    <a href="employees" class="">
                         <svg class="icon-employees-grey"></svg>
                         <p>Employees</p>
                     </a>
                 </li>
                 <li class="li-active">
-                    <a href="#" class="">
+                    <a href="list" class="">
                         <svg class="icon-time-and-attendance-green"></svg>
                         <p>Time & Attendance</p>
                     </a>
                 </li>
                 <li >
-                    <a href="#" class="">
+                    <a href="reviews" class="">
                         <svg class="icon-request-reviews-grey"></svg>
                         <p>Request Reviews</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" >
+                    <a href="profile" >
                         <svg class="icon-setting-grey"></svg>
                         <p>Settings</p>
                     </a>
@@ -39,10 +39,11 @@
             </ul>
             <div>
                 <div class="account-logged-in">
-
-                    <h1><span th:text="${abbreviation}" class="blue"></span></h1>
-                    <!--suppress HtmlUnknownAttribute -->
-                    <strong th:text="${fullName}"></strong>
+                    <a href="profile">
+                        <h1><span th:text="${abbreviation}" class="blue"></span></h1>
+                        <!--suppress HtmlUnknownAttribute -->
+                        <strong th:text="${fullName}"></strong>
+                    </a>
                 </div>
             </div>
         </div>
