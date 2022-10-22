@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="en" >
+</head>
+<nav class="col-3" th:fragment="menu">
+    <div class="nav-border">
+        <ul class="menu-ul">
+
+            <li>
+                <a href="#" class="">
+                    <svg class="icon-employees-grey"></svg>
+                    <p>Employees</p>
+                </a>
+            </li>
+            <li class="li-active">
+                <a href="#" class="">
+                    <svg class="icon-time-and-attendance-green"></svg>
+                    <p>Time & Attendance</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" >
+                    <svg class="icon-setting-grey"></svg>
+                    <p>Settings</p>
+                </a>
+            </li>
+        </ul>
+        <div>
+            <div class="account-logged-in">
+
+                <h1><span th:text="${abbreviation}" class="blue"></span></h1>
+                <!--suppress HtmlUnknownAttribute -->
+                <strong th:text="${fullName}"></strong>
+            </div>
+        </div>
+    </div>
+</nav>
+</html>

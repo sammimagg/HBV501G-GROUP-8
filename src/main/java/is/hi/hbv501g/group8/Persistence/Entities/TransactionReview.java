@@ -8,12 +8,19 @@ import java.time.LocalDateTime;
 public class TransactionReview {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
     private String SSN, status;
-    private LocalDateTime originalClockIn, originalClockedOut, changedClockIn, changedClockOut;
+    private LocalDateTime changedClockIn, changedClockOut;
 
     public TransactionReview(){}
+
+    public TransactionReview(long ID, String SSN, String status, LocalDateTime changedClockIn, LocalDateTime changedClockOut) {
+        this.ID = ID;
+        this.SSN = SSN;
+        this.status = status;
+        this.changedClockIn = changedClockIn;
+        this.changedClockOut = changedClockOut;
+    }
 
     public long getID() {
         return ID;
@@ -31,41 +38,21 @@ public class TransactionReview {
         this.SSN = SSN;
     }
 
-    public String getStatus() {
-        return status;
-    }
+
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public LocalDateTime getOriginalClockIn() {
-        return originalClockIn;
-    }
 
-    public void setOriginalClockIn(LocalDateTime originalClockIn) {
-        this.originalClockIn = originalClockIn;
-    }
 
-    public LocalDateTime getOriginalClockedOut() {
-        return originalClockedOut;
-    }
 
-    public void setOriginalClockedOut(LocalDateTime originalClockedOut) {
-        this.originalClockedOut = originalClockedOut;
-    }
-
-    public LocalDateTime getChangedClockIn() {
-        return changedClockIn;
-    }
 
     public void setChangedClockIn(LocalDateTime changedClockIn) {
         this.changedClockIn = changedClockIn;
     }
 
-    public LocalDateTime getChangedClockOut() {
-        return changedClockOut;
-    }
+
 
     public void setChangedClockOut(LocalDateTime changedClockOut) {
         this.changedClockOut = changedClockOut;

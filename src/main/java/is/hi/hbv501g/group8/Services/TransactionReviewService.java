@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface TransactionReviewService {
     TransactionReview save(TransactionReview transactionReview);
+
     void delete(TransactionReview transactionReview);
 
     List<TransactionReview> findAll();

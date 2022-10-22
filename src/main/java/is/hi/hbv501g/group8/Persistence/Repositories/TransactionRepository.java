@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     Transaction save(Transaction transaction);
+
+
     void delete(Transaction transaction);
 
     List<Transaction> findAll();

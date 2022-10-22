@@ -19,17 +19,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +44,9 @@ public class TransactionController {
     EmployeeService employeeService;
     TransactionReviewService transactionReviewService;
 
+    LocalDate dateOne;
+    LocalDate dateTwo;
+
     /**
      * {@link java.lang.reflect.Constructor} for TransactionController
      *
@@ -48,8 +55,7 @@ public class TransactionController {
      * @param transactionReviewService
      */
     @Autowired
-    public TransactionController(TransactionService transactionService, EmployeeService employeeService,
-                                 TransactionReviewService transactionReviewService) {
+    public TransactionController(TransactionService transactionService, EmployeeService employeeService, TransactionReviewService transactionReviewService) {
         this.transactionService = transactionService;
         this.employeeService = employeeService;
         this.transactionReviewService = transactionReviewService;
@@ -105,6 +111,7 @@ public class TransactionController {
         }
         else {
             exists.setClockOut(LocalDateTime.now());
+            exists.setStatus("pending");
             exists.setFinished(true);
             redirectAttributes.addAttribute("message", "Takk fyrir daginn, "+temp.getFirstName()+"!");
             transactionService.save(exists);
@@ -127,6 +134,7 @@ public class TransactionController {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
         return "listview";
     }
@@ -143,6 +151,7 @@ public class TransactionController {
     @RequestMapping(value="/list", method = RequestMethod.POST)
     public String TransactionsPOST(Model model, User user, DateHelper dateHelper, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
+
         if (sessionUser == null ) {
             return "redirect:/login";
         }
@@ -150,50 +159,123 @@ public class TransactionController {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
-        System.out.println(dateHelper.getDate1());
-        List<Transaction> allTransactions = transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay());
-        System.out.println(sessionUser.getSSN());
-        for ( Transaction row : allTransactions) {
-            row.setClockInDate(row.getClockIn().toLocalDate());
-            row.setClockInTime(LocalTime.from(row.getClockIn()).truncatedTo(ChronoUnit.MINUTES));
-            if(row.getClockOut() != null) {
-                row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
-                //row.setWorkedTime(ChronoUnit.SECONDS.between(row.getClockIn(), row.getClockOut()));
-            }
+        dateOne = dateHelper.getDate1();
+        dateTwo = dateHelper.getDate2();
 
-        }
-        model.addAttribute("transactions", allTransactions);
+
+        model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),dateHelper.getDate1(),dateHelper.getDate2()));
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
         return "listview";
     }
+    @RequestMapping(value="/edit", method = RequestMethod.POST)
+    public String edit(Model model, User user, RequestReview rr,DateHelper dateHelper, HttpSession session){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser!=null) {
+            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        }
 
-    /**
-     * Vantar lýsingu..
-     *
-     * @param id
-     * @param model
-     * @return redirect:/list
-     */
-    @RequestMapping(value="/request-review/{id}", method = RequestMethod.GET)
-    public String requestReview(@PathVariable("id") long id, Model model, Transaction transaction){
-        Transaction transactionToMarkForReview = transactionService.findByID(id);
-        TransactionReview newReview = new TransactionReview();
+        model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),dateHelper.getDate1(),dateHelper.getDate2()));
+        System.out.println("Date: " + rr.getDate() + " TimeIn: " + rr.getTimeIn() + " TimeOut: " + rr.getTimeOut() +" ID: " + rr.getId());
+        System.out.println("Date1 " + dateOne + " Date2 " + dateTwo);
 
-        // Insert information!
-        newReview.setID(transactionToMarkForReview.getID());
-        newReview.setSSN(transactionToMarkForReview.getSSN());
-        newReview.setOriginalClockIn(transactionToMarkForReview.getClockIn());
-        newReview.setOriginalClockedOut(transactionToMarkForReview.getClockOut());
-        newReview.setChangedClockIn(transaction.getClockIn());
-        newReview.setChangedClockOut(transaction.getClockOut());
 
-        //bookService.delete(bookToDelete);
+        Transaction orginalTransaction =transactionService.findByID(Long.parseLong(rr.getId()));
+        orginalTransaction.setStatus("request");
 
-        transactionReviewService.save(newReview);
+        DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter TIMEFORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDate dateFrom = LocalDate.parse(rr.getDate(),DATEFORMATTER);
+        LocalTime timeFrom = LocalTime.parse(rr.getTimeIn(),TIMEFORMATTER);
+        LocalDate dateTo = LocalDate.parse(rr.getDate(),DATEFORMATTER);
+        LocalTime timeTo = LocalTime.parse(rr.getTimeOut(),TIMEFORMATTER);
 
-        return "redirect:/list";
+        LocalDateTime dateTimeFrom = LocalDateTime.of(dateFrom,timeFrom);
+        LocalDateTime dateTimeTo = LocalDateTime.of(dateTo,timeTo);
+
+        TransactionReview exists = transactionReviewService.findByID(Long.parseLong(rr.getId()));
+        if(exists == null){
+            TransactionReview newTransaction = new TransactionReview(Long.parseLong(rr.getId()),
+                    user.getSSN(),
+                    "pending",
+                    dateTimeFrom,
+                    dateTimeTo);
+            transactionReviewService.save(newTransaction);
+        }
+        else {
+            exists.setStatus("pending");
+            exists.setChangedClockIn(dateTimeFrom);
+            exists.setChangedClockOut(dateTimeTo);
+            transactionReviewService.save(exists);
+        }
+
+        transactionService.save(orginalTransaction);
+
+        return "listview";
     }
+    @RequestMapping(value="/edit", method = RequestMethod.GET)
+    public String geteditTransaction(Model model, User user,DateHelper dateHelper, RequestReview rr, HttpSession session){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser!=null) {
+            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        }
 
+
+
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        //model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
+
+        System.out.println("Date: " + rr.getDate() + " TimeIn: " + rr.getTimeIn() + " TimeOut: " + rr.getTimeOut() +" ID: " + rr.getId());
+        return "listview";
+    }
+    /**
+     * Generates list for user by SSN,Date from, and Date to.
+     *
+     * @param SSN The SSN of the user who is searching
+     * @see Transaction
+     * @param dateFrom Search transaction from date
+     * @param dateTo Search transaction to date
+     * @return List<Transaction>
+     */
+    public List<Transaction> getTransactionList(String SSN,LocalDate dateFrom, LocalDate dateTo){
+        List<Transaction> allTransactions;
+
+        if(dateFrom != null && dateTo != null) {
+             allTransactions = transactionService.findAllBySSNAndClockInBetween(SSN, dateFrom.atStartOfDay(), dateTo.atStartOfDay());
+            for ( Transaction row : allTransactions) {
+                row.setClockInDate(row.getClockIn().toLocalDate());
+                row.setClockInTime(LocalTime.from(row.getClockIn()).truncatedTo(ChronoUnit.MINUTES));
+                if(row.isFinished() == true) {
+                    row.setWorkedHours(row.getClockOut().toLocalTime().getHour() - row.getClockIn().toLocalTime().getHour());
+                    row.setWorkedMinutes(row.getClockOut().toLocalTime().getMinute() - row.getClockIn().toLocalTime().getMinute());
+                }
+                else {
+                    row.setWorkedHours(LocalTime.now().getHour()- row.getClockIn().toLocalTime().getHour());
+                    row.setWorkedMinutes(LocalTime.now().getMinute()- row.getClockIn().toLocalTime().getMinute());
+                }
+                if(row.getClockOut() != null) {
+                    row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
+                }
+            }
+        }
+        else {
+            allTransactions = transactionService.findAllBySSNAndClockInBetween(SSN, dateOne.atStartOfDay(), dateTwo.atStartOfDay());
+            for ( Transaction row : allTransactions) {
+                row.setClockInDate(row.getClockIn().toLocalDate());
+                row.setClockInTime(LocalTime.from(row.getClockIn()).truncatedTo(ChronoUnit.MINUTES));
+                if(row.getClockOut() != null) {
+                    row.setClockOutTime(LocalTime.from(row.getClockOut()).truncatedTo(ChronoUnit.MINUTES));
+                }
+            }
+        }
+        return allTransactions;
+    }
 }

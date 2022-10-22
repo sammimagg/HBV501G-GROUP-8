@@ -27,18 +27,5 @@ public class ReviewController {
         this.transactionReviewService = transactionReviewService;
     }
 
-    /**
-     * GET-request for Transaction Reviews overview page
-     * Missing: EnsureAuth
-     *
-     * @param transactionReview TransactionReview
-     * @param model Model
-     * @return reviews HTML page
-     */
-    @RequestMapping(value="/reviews", method = RequestMethod.GET)
-    public String reviewsGET(TransactionReview transactionReview, Model model) {
-        List<TransactionReview> transactionsToReview = transactionReviewService.findAllByStatus("pending");
-        if(!transactionsToReview.isEmpty()) model.addAttribute("transactions", transactionsToReview);
-        return "reviews";
-    }
+
 }

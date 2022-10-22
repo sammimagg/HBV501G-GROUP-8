@@ -3,6 +3,12 @@
     text-align: left;
     min-width: 10em;
 }
+.employee-transaction-list-row-input-date {
+    width: 110px;
+}
+.employee-transaction-list-row-input-time {
+    width: 60px;
+}
 .employee-transaction-table{
     width: 100%;
 }

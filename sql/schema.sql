@@ -29,8 +29,6 @@ CREATE TABLE IF NOT EXISTS TransactionReviews (
     ID SERIAL PRIMARY KEY REFERENCES Transactions(ID),
     SSN VARCHAR(10),
     status VARCHAR(50),
-    original_clock_in TIMESTAMP WITH TIME ZONE,
-    original_clocked_out TIMESTAMP WITH TIME ZONE,
     changed_clock_in TIMESTAMP WITH TIME ZONE,
     changed_clock_out TIMESTAMP WITH TIME ZONE
 );

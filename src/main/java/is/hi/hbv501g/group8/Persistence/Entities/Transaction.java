@@ -10,6 +10,7 @@
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -29,7 +30,13 @@ public class Transaction {
     @Transient
     private LocalDate clockInDate;
     @Transient
-    private LocalTime clockInTime, clockOutTime, workedTime;
+    private LocalTime clockInTime, clockOutTime;
+
+    @Transient
+    private Time workedTime;
+
+    @Transient
+    private int workedHours, workedMinutes;
 
     public Transaction() {
 
@@ -160,11 +167,27 @@ public class Transaction {
         this.clockOutTime = clockOutTime;
     }
 
-    public LocalTime getWorkedTime() {
+    public Time getWorkedTime() {
         return workedTime;
     }
 
-    public void setWorkedTime(LocalTime workedTime) {
+    public void setWorkedTime(Time workedTime) {
         this.workedTime = workedTime;
+    }
+
+    public int getWorkedHours() {
+        return workedHours;
+    }
+
+    public int getWorkedMinutes() {
+        return workedMinutes;
+    }
+
+    public void setWorkedHours(int workedHours) {
+        this.workedHours = workedHours;
+    }
+
+    public void setWorkedMinutes(int workedMinutes) {
+        this.workedMinutes = workedMinutes;
     }
 }
