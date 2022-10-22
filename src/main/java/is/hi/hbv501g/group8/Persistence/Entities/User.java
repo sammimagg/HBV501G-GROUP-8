@@ -1,3 +1,17 @@
+/**
+ * User
+ *
+ * Description: User object linked to DB.
+ *              For authorizations and distinctify account types
+ *              accountType 1: Admin
+ *              accountType 2: Manager/Moderator
+ *              accountType 3: Normal user/Employee
+ *
+ * @author kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ */
+
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;

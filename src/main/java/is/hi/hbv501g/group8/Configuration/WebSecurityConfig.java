@@ -1,7 +1,9 @@
 /**
  * Web Security Config.
  *
- * Description:
+ * Description: Configuration file for the built in Spring Security features.
+ *              We use only Bcrypt so we in theory disable the automatic security from
+ *              Spring. (Allow all URLs)
  *
  * @author kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is

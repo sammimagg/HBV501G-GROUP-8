@@ -1,7 +1,7 @@
 /**
  * User Controller
  *
- * Description:
+ * Description: Controller for everything to do with users
  *
  * @author kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is
@@ -29,9 +29,10 @@ public class UserController {
     EmployeeService employeeService;
 
     /**
-     * Vantar lýsingu..
+     * Constructor for UserController
      *
-     * @param userService
+     * @param userService UserService
+     * @param employeeService EmployeeService
      */
 
     @Autowired
@@ -41,10 +42,10 @@ public class UserController {
     }
 
     /**
-     * Vantar lýsingu
+     * A handler for GET requests on /signup
      *
-     * @param user
-     * @return
+     * @param user User object
+     * @return signup A view for a sign-up page
      */
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signupGET(User user){
@@ -52,12 +53,16 @@ public class UserController {
     }
 
     /**
-     * Vantar lýsingu..
+     * A handler for POST requests on /signup
      *
-     * @param user
-     * @param result
-     * @param model
-     * @return
+     * This functions searches for existing users with the same username.
+     * If a User object already exists with said username, a new User is not created.
+     *
+     * @param user User object
+     * @param result BindingResult
+     * @param model Model
+     *
+     * @return redirect depending on results
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupPOST(User user, BindingResult result, Model model){
@@ -72,10 +77,10 @@ public class UserController {
     }
 
     /**
-     * Vantar lýsingu..
+     * A handler for GET requests on /login
      *
-     * @param user
-     * @return login
+     * @param user User object
+     * @return login login-page view
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(User user) {
@@ -83,13 +88,16 @@ public class UserController {
     }
 
     /**
-     * Vantar lýsingu..
+     * A handler for POST requests on /login
      *
-     * @param user
-     * @param result
-     * @param model
-     * @param session
-     * @return
+     * Authenticates user
+     *
+     * @param user User object
+     * @param result BindingResult
+     * @param model Model
+     * @param session HttpSession
+     * @return The result of the operation if logging in is successful, or a redirect with errors
+     *          if the logging in procedure failed.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(User user, BindingResult result, Model model, HttpSession session){
@@ -105,11 +113,14 @@ public class UserController {
         return "redirect:/";
     }
     /**
-    * Vantar lýsingu..
+     * Handler for GET requests on /loggedin
      *
-     * @param session
-     * @param model
-     * @return redirect
+     * Used for testing. Will be removed
+     *
+     * @param session HttpSession
+     * @param model Model
+     * @return redirect or a view, depending on the presence of a User session.
+     * @deprecated
     */
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public String loggedinGET(HttpSession session, Model model){
@@ -120,6 +131,18 @@ public class UserController {
         }
         return "redirect:/";
     }
+
+    /**
+     * Handler for GET requests on /profile
+     *
+     * Fetches relevant information about User from database.
+     * Displays said information using Model
+     *
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return profile A view for profile
+     */
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getProfile(Model model, HttpSession session, User user){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -136,6 +159,17 @@ public class UserController {
         }
         return "profile";
     }
+    /**
+     * Handler for POST requests on /profile
+     *
+     * Fetches relevant information about User from database.
+     * Displays said information using Model
+     *
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return profile A view for profile
+     */
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String upateProfile(Model model, HttpSession session, User user){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -144,7 +178,6 @@ public class UserController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-
             model.addAttribute("firstName",employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
             model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
             model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
@@ -153,6 +186,16 @@ public class UserController {
         }
         return "profile";
     }
+    /**
+     * Handler for GET requests on /employees
+     *
+     * @// TODO: 22.10.2022
+     *
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return employees A view for employees
+     */
     @RequestMapping(value = "employees", method = RequestMethod.POST)
     public String postEmployees(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -164,6 +207,16 @@ public class UserController {
         }
         return "employees";
     }
+    /**
+     * Handler for POST requests on /employees
+     *
+     * @// TODO: 22.10.2022
+     *
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return employees A view for employees
+     */
     @RequestMapping(value = "employees", method = RequestMethod.GET)
     public String getEmployees(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -175,6 +228,17 @@ public class UserController {
         }
         return "employees";
     }
+
+    /**
+     * Handler for POST requests on /realtimeinsights
+     *
+     * @// TODO: 22.10.2022
+     *
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return realtimeinsights A view for realtimeinsights
+     */
     @RequestMapping(value = "realtimeinsights", method = RequestMethod.POST)
     public String postRealTimeInsights(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -186,6 +250,17 @@ public class UserController {
         }
         return "realtimeinsights";
     }
+
+    /**
+     * Handler for GET requests on /realtimeinsights
+     *
+     * @// TODO: 22.10.2022  
+     * 
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return realtimeinsights A view for realtimeinsights
+     */
     @RequestMapping(value = "realtimeinsights", method = RequestMethod.GET)
     public String getRealTimeInsights(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -197,6 +272,17 @@ public class UserController {
         }
         return "realtimeinsights";
     }
+
+    /**
+     * Handler for POST requests on /reviews
+     * 
+     * @// TODO: 22.10.2022  
+     *
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return reviews A view for reviews
+     */
     @RequestMapping(value = "reviews", method = RequestMethod.POST)
     public String postRequest(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -208,6 +294,17 @@ public class UserController {
         }
         return "reviews";
     }
+
+    /**
+     * A handler for GET requests on /reviews
+     * 
+     * @// TODO: 22.10.2022  
+     *
+     * @param model Model
+     * @param session HttpSession
+     * @param user User
+     * @return reviews A view for reviews
+     */
     @RequestMapping(value = "reviews", method = RequestMethod.GET)
     public String getRequest(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");

@@ -1,3 +1,18 @@
+/**
+ * TransactionReview
+ *
+ * Description: TransactionReview object linked to our database.
+ *              TransactionReview references a Transaction in the DB.
+ *              TransactionReview is used to request reviews to worked hours
+ *
+ * @author kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ *
+ * References:
+ * @see is.hi.hbv501g.group8.Persistence.Entities.Transaction
+ */
+
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;

@@ -1,7 +1,8 @@
 /**
  * Transaction Controller
  *
- * Description:
+ * Description: Controller for Transactions
+ *              Each transaction represents a clock-in and a clock-out
  *
  * @author kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is
@@ -62,10 +63,12 @@ public class TransactionController {
     }
 
     /**
-     * Vantar lýsingu.. asdasdasd a
-     * HÆHÆÆÆÆÆÆÆÆÆÆÆÆ asdasdsdads
-     * @param transaction
-     * @return
+     * Handler for GET requests on /
+     *
+     * Displays the default clock-in page. No authentication required
+     *
+     * @param transaction Transaction
+     * @return clock A view for clocking in
      */
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String transactionGET(Transaction transaction) {
@@ -74,6 +77,8 @@ public class TransactionController {
 
 
     /**
+     * Handler for POST requests on /
+     *
      *  Function searches for a transaction in the databased by SSN and Finished.
      *  transactions marked unfinished with finished: false flag mean that the user has
      *  not clocked out.
@@ -86,9 +91,9 @@ public class TransactionController {
      *
      * @param transaction Transaction object.
      * @see Transaction
-     * @param result ónotað
-     * @param model ónotað
-     * @return redirect
+     * @param result BindingResult
+     * @param model Model
+     * @return redirect /
      */
     @RequestMapping(value="/", method = RequestMethod.POST)
     public String transactionPOST(Transaction transaction, RedirectAttributes redirectAttributes, BindingResult result, Model model){
@@ -119,13 +124,15 @@ public class TransactionController {
         return "redirect:/";
     }
     /**
-     * Vantar lýsingu..
+     * Handler for GET requests on /list
      *
-     * @param model
-     * @param dateHelper
-     * @param session
-     * @param user
-     * @return listview
+     * Returns a page with input fields for seeing transactions
+     *
+     * @param model Model
+     * @param dateHelper DateHelper
+     * @param session HttpSession
+     * @param user User
+     * @return listview a view for vlistview
      */
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session, User user) {
@@ -140,13 +147,15 @@ public class TransactionController {
     }
 
     /**
-     * Vantar lýsingu..
+     * Handler for POST requests on /list
      *
-     * @param model
-     * @param user
-     * @param dateHelper
-     * @param session
-     * @return listview
+     * Uses authenticated user, inputted dates to find relevant transaction history
+     *
+     * @param model Model
+     * @param user User
+     * @param dateHelper DateHelper
+     * @param session HttpSession
+     * @return listview A view for listview
      */
     @RequestMapping(value="/list", method = RequestMethod.POST)
     public String TransactionsPOST(Model model, User user, DateHelper dateHelper, HttpSession session) {
@@ -170,6 +179,18 @@ public class TransactionController {
         model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
         return "listview";
     }
+    /**
+     * Handler for POST requests on /edit
+     *
+     * Submits a Request-Review
+     *
+     * @param model Model
+     * @param user User
+     * @param rr RequestReview
+     * @param dateHelper DateHelper
+     * @param session HttpSession
+     * @return listview A view for listview
+     */
     @RequestMapping(value="/edit", method = RequestMethod.POST)
     public String edit(Model model, User user, RequestReview rr,DateHelper dateHelper, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -218,6 +239,18 @@ public class TransactionController {
 
         return "listview";
     }
+    /**
+     * Handler for POST requests on /edit
+     *
+     * Preperation for Request Review
+     *
+     * @param model Model
+     * @param user User
+     * @param rr RequestReview
+     * @param dateHelper DateHelper
+     * @param session HttpSession
+     * @return listview A view for listview
+     */
     @RequestMapping(value="/edit", method = RequestMethod.GET)
     public String geteditTransaction(Model model, User user,DateHelper dateHelper, RequestReview rr, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -237,7 +270,7 @@ public class TransactionController {
         return "listview";
     }
     /**
-     * Generates list for user by SSN,Date from, and Date to.
+     * Generates list for user by SSN, Date from, and Date to.
      *
      * @param SSN The SSN of the user who is searching
      * @see Transaction

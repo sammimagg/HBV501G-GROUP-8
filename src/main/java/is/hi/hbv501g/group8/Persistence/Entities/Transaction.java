@@ -1,7 +1,8 @@
 /**
  * Transaction
  *
- * Description:
+ * Description: Transaction object linked to our database.
+ *              Each transaction represents a clock-in and a clock-out
  *
  * @author kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is

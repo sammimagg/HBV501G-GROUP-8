@@ -1,11 +1,13 @@
 /**
  * Data Helper
  *
- * Description:
+ * Description: Assistance class for Date Formatting.
  *
  * @author kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is
  * @author Samúel Magnússon - sam38@hi.is
+ *
+ * @see is.hi.hbv501g.group8.Persistence.Entities.TransactionReview
  */
 package is.hi.hbv501g.group8.Persistence.Entities;
 

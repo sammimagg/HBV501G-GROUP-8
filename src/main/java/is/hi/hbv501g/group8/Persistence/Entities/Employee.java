@@ -1,7 +1,8 @@
 /**
  * Employee
  *
- * Description:
+ * Description: Employee object linked to DB.
+ *              Contains relevant information about employee.
  *
  * @author kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is
