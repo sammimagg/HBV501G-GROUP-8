@@ -12,6 +12,10 @@
  */
 package is.hi.hbv501g.group8.Controllers;
 
+import is.hi.hbv501g.group8.Persistence.Entities.Employee;
+
+import java.util.List;
+
 public class EmployeeController {
 
 }

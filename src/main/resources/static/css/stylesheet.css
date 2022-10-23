@@ -362,6 +362,12 @@ li p{
     background-repeat:no-repeat;
     height: 25em;
 }
+.plus-bubble-button-green {
+    background-image: url(icon/plus-bubble-button-green.svg);
+    background-repeat:no-repeat;
+    height: 100px;
+    width: 100px;
+}
 input{
     background: #F6F6F6;
     border: none;
@@ -372,10 +378,21 @@ input{
     border-radius: 5px;
     height: 25px;
 }
-
-
-
-
+.default-cancel-input {
+    border: 1px solid #1AEAB6 !important;
+    text-align: center;
+    color: #1AEAB6;
+    width: 100%;
+    margin-left:0.5em;
+}
+.default-save-input {
+    background-color: #1AEAB6 !important;
+    border: 1px solid #1AEAB6 !important;
+    text-align: center;
+    color: white;
+    width: 100%;
+    margin-right:0.5em
+}
 .font-white{
     color: white;
 }
@@ -405,6 +422,30 @@ body {
 .column{
     display: flex;
     flex-direction: column;
+}
+.default-table-row button{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+.default-table-row{
+    border: 1px solid #D4D4D4;
+    filter: drop-shadow(0px 1px 1px #DFDFDF);
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+    padding-top: 12.5px;
+    padding-bottom: 12.5px;
+}
+.default-table-inner-row{
+    display: flex;
+    height: 25px;
+    margin-left: 1em;
+}
+.default-table-header{
+    display: flex;
 }
 
 @media (max-width: 500px) {

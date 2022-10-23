@@ -3,9 +3,7 @@
   <!--suppress HtmlUnknownAttribute -->
   <head th:switch="${username}">
     <meta charset="UTF-8">
-    <!--suppress HtmlUnknownAttribute -->
     <title th:case="null">Log in to see worked hours</title>
-    <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
     <title th:case="*" th:text="${username}"></title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
@@ -16,7 +14,28 @@
       <div class="row">
         <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
         <div class="col col-9">
-          <h1>Missing</h1>
+          <h1>Employees</h1>
+          <div>
+            <div class="default-table-header">
+              <p class="">First name</p>
+              <p class="">Last name</p>
+              <p class="">Phone number</p>
+              <p class="">Role</p>
+              <p class=""></p>
+            </div>
+            <div class="default-table-list">
+              <div class="default-table-row user-profile-row" th:each="employee : ${employees}">
+                <div class="default-table-inner-row">
+                  <p th:text="${employee.firsNameOfEmployee}">First Name</p>
+                  <p th:text="${employee.lastNameOfEmployee}">Last Name</p>
+                  <p>Phone Number</p>
+                  <p>Role</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </main>

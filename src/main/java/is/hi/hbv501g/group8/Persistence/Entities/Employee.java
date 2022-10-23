@@ -33,9 +33,29 @@ public class Employee {
     @Transient
     private int remainingVacationDays, remainingSickDays;
 
+    @Transient
+    private String firstNameOfEmployee, lastNameOfEmployee;
+
     public void Employee() {
 
     }
+
+    public String getFirsNameOfEmployee() {
+        return firstNameOfEmployee;
+    }
+
+    public String getLastNameOfEmployee() {
+        return lastNameOfEmployee;
+    }
+
+    public void setFirsNameOfEmployee(String firstNameOfEmployee) {
+        this.firstNameOfEmployee = firstNameOfEmployee;
+    }
+
+    public void setLastNameOfEmployee(String lastNameOfEmployee) {
+        this.lastNameOfEmployee = lastNameOfEmployee;
+    }
+
     /**
      * Description:
      *

@@ -26,8 +26,37 @@ public class User {
     private String password;
     private int accountType;
 
+    @Transient
+    private String employeeUserName;
+    @Transient
+    private int employeeAccountType;
+
     public void User() {
 
+    }
+
+    public void setAccountType(int accountType) {
+        this.accountType = accountType;
+    }
+
+    public void setEmployeeUserName(String employeeUserName) {
+        this.employeeUserName = employeeUserName;
+    }
+
+    public void setEmployeeAccountType(int employeeAccountType) {
+        this.employeeAccountType = employeeAccountType;
+    }
+
+    public int getAccountType() {
+        return accountType;
+    }
+
+    public String getEmployeeUserName() {
+        return employeeUserName;
+    }
+
+    public int getEmployeeAccountType() {
+        return employeeAccountType;
     }
 
     public void setSSN(String ssn) {

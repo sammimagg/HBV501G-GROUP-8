@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<!--suppress HtmlUnknownAttribute -->
+<head th:switch="${username}">
+    <meta charset="UTF-8">
+    <!--suppress HtmlUnknownAttribute -->
+    <title th:case="null">Log in to see worked hours</title>
+    <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+    <title th:case="*" th:text="${username}"></title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+    <link th:href="@{/css/sickandvacation.css}" rel="stylesheet"/>
+</head>
+<body>
+<main class="grid">
+    <div class="row">
+        <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
+        <div class="col col-9">
+            <h1>Request Sick or Vacation Days</h1>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>

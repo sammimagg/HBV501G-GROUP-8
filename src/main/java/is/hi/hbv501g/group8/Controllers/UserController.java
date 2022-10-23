@@ -10,6 +10,7 @@
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
+import is.hi.hbv501g.group8.Persistence.Entities.Employee;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.UserService;
@@ -23,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -212,6 +214,7 @@ public class UserController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
+
         return "employees";
     }
     /**
@@ -233,6 +236,7 @@ public class UserController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
+        model.addAttribute("employees",getEmployeeList());
         return "employees";
     }
 
@@ -255,6 +259,7 @@ public class UserController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
+
         return "realtimeinsights";
     }
 
@@ -323,6 +328,14 @@ public class UserController {
         }
         return "reviews";
     }
+    public List<Employee> getEmployeeList() {
+        List<Employee> allEmployees;
+        allEmployees = employeeService.findAll();
 
-
+        for(Employee row : allEmployees) {
+            row.setFirsNameOfEmployee(row.getFirstName());
+            row.setLastNameOfEmployee(row.getLastName());
+        }
+        return allEmployees;
+    }
 }
