@@ -146,6 +146,7 @@ public class TransactionController {
         return "listview";
     }
 
+
     /**
      * Handler for POST requests on /list
      *
@@ -311,4 +312,10 @@ public class TransactionController {
         }
         return allTransactions;
     }
+    /* DORSKI laga mapping þetta þarf liklega vera inní /list? nenni ekki fokkaessu upp */
+    @RequestMapping(value="/sickness", method = RequestMethod.POST)
+        public String sicknessGET() {
+
+            return "sickness";
+        }
 }

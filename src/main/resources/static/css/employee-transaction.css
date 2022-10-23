@@ -45,3 +45,22 @@ td {
     overflow: hidden;
     outline: none;
 }
+
+
+.sickday-button {
+
+    width: 100px;
+    height: 100px;
+    left: 1280px;
+    top: 904px;
+    border-radius: 50%;
+
+    background: #1AEAB6;
+
+}
+
+.sickday-button:hover {
+    opacity:1;
+    transition: .5s ease;
+}
+
