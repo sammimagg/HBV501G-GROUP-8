@@ -311,4 +311,26 @@ public class TransactionController {
         }
         return allTransactions;
     }
+    @RequestMapping(value="/sickandvacation", method = RequestMethod.GET)
+    public String getSickAndVacation(Model model, User user, HttpSession session){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser!=null) {
+            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        }
+        return "sickandvacation";
+    }
+    @RequestMapping(value="/sickandvacation", method = RequestMethod.POST)
+    public String postSickAndVacation(Model model, User user, HttpSession session){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser!=null) {
+            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        }
+        return "sickandvacation";
+    }
 }

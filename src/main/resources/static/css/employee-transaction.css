@@ -45,3 +45,13 @@ td {
     overflow: hidden;
     outline: none;
 }
+.transparent-button{
+    background-color: transparent;
+    border-color: transparent;
+}
+.plus-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 1em;
+}

@@ -17,14 +17,14 @@
                 <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
                 <div class="col col-9">
                     <h1>Profile</h1>
-                    <p th:text="${firstName}">First name</p>
-                    <p th:text="${lastName}">Last name</p>
-                    <p th:text="${phoneNumber}">Phone number</p>
-                    <p th:text="${company}">Company</p>
-                    <p th:text="${jobtitle}">Jobtitle</p>
-                    <p th:text="${startDate}">startDate</p>
-                    <p th:text="${sickDays}">sickDays</p>
-                    <p th:text="${vacationDays}">vacationDays</p>
+                    <p th:text="'First Name: ' +${firstName}">First name</p>
+                    <p th:text="'Last Name: ' +${lastName}">Last name</p>
+                    <p th:text="'Phone number: ' +${phoneNumber}">Phone number</p>
+                    <p th:text="'Company: ' +${company}">Company</p>
+                    <p th:text="'Jobtitle: ' +${jobtitle}">Jobtitle</p>
+                    <p th:text="'Start Date: ' +${startDate}">startDate</p>
+                    <p th:text="'Sick Days: ' +${sickDays}">sickDays</p>
+                    <p th:text="'Vacation: ' + ${vacationDays}">vacationDays</p>
                 </div>
             </div>
         </main>
