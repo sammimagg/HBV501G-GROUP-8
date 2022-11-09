@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/driving/new}" th:object="${driving}"  method="post">
+    <p>SSN</p>
+    <input type="text" name="ssn" id="ssn" th:field="*{SSN}" />
+    <p>User name</p>
+    <input type="text" name="username" id="username" th:field="*{odometerStart}"/>
+    <p>Password</p>
+    <!--suppress HtmlUnknownAttribute -->
+    <input type="text" name="password" id="password" th:field="*{odometerEnd}"/>
+    <input type="submit" value="Sign up"/>
+</form>
+</body>
+</html>

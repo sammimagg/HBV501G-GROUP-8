@@ -3,12 +3,16 @@ package is.hi.hbv501g.group8.Services.Implementation;
 import is.hi.hbv501g.group8.Persistence.Entities.Driving;
 import is.hi.hbv501g.group8.Persistence.Repositories.DrivingRepository;
 import is.hi.hbv501g.group8.Services.DrivingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DrivingServiceImplementation implements DrivingService {
 
     private DrivingRepository drivingRepository;
+    @Autowired
 
     public DrivingServiceImplementation(DrivingRepository drivingRepository) {
         this.drivingRepository = drivingRepository;
