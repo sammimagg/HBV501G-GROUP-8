@@ -52,4 +52,14 @@ CREATE TABLE IF NOT EXISTS Users (
     constraint valid_type check (account_type < 9)
 );
 
+CREATE TABLE IF NOT EXISTS DrivingLog (
+    ID SERIAL PRIMARY KEY,
+    SSN varchar(10),
+    licence_plate VARCHAR(50),
+    odometer_start INT,
+    odometer_end INT,
+    distance_driven INT GENERATED ALWAYS AS ( odometer_start - odometer_end) STORED,
+    cp_km FLOAT,
+    );
+
 /*INSERT INTO users (username, password) VALUES ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');*/
