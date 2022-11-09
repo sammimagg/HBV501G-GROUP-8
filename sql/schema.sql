@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS DrivingLog (
     licence_plate VARCHAR(50),
     odometer_start INT,
     odometer_end INT,
-    distance_driven INT GENERATED ALWAYS AS ( odometer_start - odometer_end) STORED,
+    distance_driven INT GENERATED ALWAYS AS ( odometer_end - odometer_start) STORED,
     cp_km FLOAT
     );
 
