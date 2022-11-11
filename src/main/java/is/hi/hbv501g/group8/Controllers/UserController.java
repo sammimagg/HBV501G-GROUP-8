@@ -24,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -75,9 +76,20 @@ public class UserController {
         User exists = userService.findByUsername(user.getUsername());
         if(exists == null) {
             userService.save(user);
+            Employee newEmployeeProfile = new Employee();
+            newEmployeeProfile.setSSN(user.getSSN());
+            newEmployeeProfile.setFirstName(user.getUsername());
+            newEmployeeProfile.setLastName("To be changed");
+            newEmployeeProfile.setCompany("To be changed");
+            newEmployeeProfile.setPhoneNumber("To be changed");
+            newEmployeeProfile.setSalary(0);
+            newEmployeeProfile.setStartDate(LocalDate.now());
+            newEmployeeProfile.setJobTitle("To be changed");
+            employeeService.save(newEmployeeProfile);
         }
         return "redirect:/";
     }
+
 
     /**
      * A handler for GET requests on /login
