@@ -60,6 +60,6 @@ CREATE TABLE IF NOT EXISTS DrivingLog (
     odometer_end INT,
     distance_driven INT GENERATED ALWAYS AS ( odometer_end - odometer_start) STORED,
     cp_km FLOAT
-    );
+);
 
 /*INSERT INTO users (username, password) VALUES ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');*/
