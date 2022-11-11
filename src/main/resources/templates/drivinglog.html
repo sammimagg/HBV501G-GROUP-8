@@ -31,6 +31,31 @@
           </div>
         </div>
       </div>
+    <div th:switch="${instances}">
+      <!--<h2 th:case="null">No days driven found!</h2>-->
+      <div th:case="*">
+        <h2>Driving log</h2>
+        <div class="employee-drivinglog-table">
+          <div class="default-table-header">
+            <p class="employee-drivinglog-list-row">Date</p>
+            <p class="employee-drivinglog-list-row">Starting-Distance</p>
+            <p class="employee-drivinglog-list-row">End-Distance</p>
+            <p class="employee-drivinglog-list-row">Distance-Driven</p>
+            <p class="employee-drivinglog-list-row"></p>
+            <p class="employee-drivinglog-list-row"></p>
+          </div>
+          <div class="default-table-list">
+            <div class="default-table-row" th:each="instance : ${instances}" th:id="${instance.getID}">
+              <div class="default-table-inner-row">
+                <p class="employee-drivinglog-list-row" th:text="${instance.dags}"></p>
+                <p class="employee-drivinglog-list-row" th:text="${instance.odometerStart}"></p>
+                <p class="employee-drivinglog-list-row" th:text="${instance.odometerEnd}"></p>
+                <p class="employee-drivinglog-list-row" th:text="${instance.distanceDriven}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </main>

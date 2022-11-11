@@ -39,3 +39,47 @@
     background: #1AEAB6;
     border-radius: 8px;
 }
+.employee-drivinglog-table{
+    width: 100%;
+}
+
+table{
+    border-collapse:separate;
+    border-spacing: 0 1em;
+    border: 3px black solid;
+}
+
+td {
+    border-top: solid 1px black;
+    border-bottom: solid 2px black
+}
+
+.employee-table-row{
+    border: 1px solid #D4D4D4;
+    filter: drop-shadow(0px 1px 1px #DFDFDF);
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+    padding-top: 12.5px;
+    padding-bottom: 12.5px;
+}
+
+.employee-table-inner-row{
+    display: flex;
+    height: 25px;
+    margin-left: 1em;
+}
+
+.employee-table-header{
+    display: flex;
+}
+
+.employee-drivinglog-list-row {
+    text-align: left;
+    min-width: 10em;
+}
+.employee-transaction-list-row-input-date {
+    width: 110px;
+}
+.employee-transaction-list-row-input-time {
+    width: 60px;
+}

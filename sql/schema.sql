@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS Users (
 CREATE TABLE IF NOT EXISTS DrivingLog (
     ID SERIAL PRIMARY KEY,
     SSN varchar(10),
+    dags date,
     licence_plate VARCHAR(50),
     odometer_start INT,
     odometer_end INT,

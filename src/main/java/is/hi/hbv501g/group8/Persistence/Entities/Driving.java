@@ -1,6 +1,7 @@
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "drivinglog")
@@ -10,8 +11,17 @@ public class Driving {
     private long ID;
     private String licencePlate, SSN;
     private int odometerStart, odometerEnd;
+    private LocalDate dags;
     @Transient
     private int distanceDriven;
+
+    public LocalDate getDags() {
+        return dags;
+    }
+
+    public void setDags(LocalDate dags) {
+        this.dags = dags;
+    }
 
     public Driving() {
     }

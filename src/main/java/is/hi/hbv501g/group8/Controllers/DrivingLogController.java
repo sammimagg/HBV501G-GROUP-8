@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -60,7 +61,8 @@ public class DrivingLogController {
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
         driving.setSSN(sessionUser.getSSN());
+        driving.setDags(LocalDate.now());
         drivingService.save(driving);
-        return "drivinglog";
+        return "redirect:/drivinglog";
     }
 }
