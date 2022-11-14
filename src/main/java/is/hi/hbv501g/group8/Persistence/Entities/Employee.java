@@ -16,8 +16,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "SSN")
 @Table(name = "employees")
-public class Employee {
+public class Employee extends User {
 
     @Id // Primary Key
     private String SSN;
@@ -34,10 +35,18 @@ public class Employee {
     private int remainingVacationDays, remainingSickDays;
 
     @Transient
-    private String firstNameOfEmployee, lastNameOfEmployee;
+    private String firstNameOfEmployee, lastNameOfEmployee, phoneNumberEmployee;
 
     public void Employee() {
 
+    }
+
+    public String getPhoneNumberEmployee() {
+        return phoneNumberEmployee;
+    }
+
+    public void setPhoneNumberEmployee(String phoneNumberEmployee) {
+        this.phoneNumberEmployee = phoneNumberEmployee;
     }
 
     public String getFirsNameOfEmployee() {

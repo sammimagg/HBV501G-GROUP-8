@@ -74,6 +74,7 @@ public class UserController {
             return "redirect:/signup";
         }
         User exists = userService.findByUsername(user.getUsername());
+
         if(exists == null) {
             userService.save(user);
             Employee newEmployeeProfile = new Employee();
@@ -225,6 +226,7 @@ public class UserController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+
         }
 
         return "employees";

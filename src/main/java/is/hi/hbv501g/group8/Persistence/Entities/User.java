@@ -17,6 +17,7 @@ package is.hi.hbv501g.group8.Persistence.Entities;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users")
 public class User {
 

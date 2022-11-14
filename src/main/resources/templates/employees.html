@@ -26,8 +26,8 @@
               <div class="default-table-row user-profile-row" th:each="employee : ${employees}">
                 <div class="default-table-inner-row">
                   <p th:text="${employee.firsNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
-                  <p>8458094</p>
-                  <p>Admin</p>
+                  <p th:text="${employee.phoneNumberEmployee}">8458094</p>
+                  <p th:text="${employee.employeeAccountType}">Admin</p>
                   <p></p>
                 </div>
               </div>
