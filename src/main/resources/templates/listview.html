@@ -13,6 +13,16 @@
       <div class="row">
         <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
         <div class="col col-9">
+          <h2>Time and Attendance</h2>
+          <div class="default-table-row total-worked-hour">
+            <div class="total-worked-hour-inner-left">
+              <p style="color: #7A7A7A;">Work Time</p>
+              <p style="font-size: 2rem;">20:00 h</p>
+            </div>
+            <div class="total-worked-hour-inner-right">
+              <p style="color: #7A7A7A;">Total</p>
+            </div>
+          </div>
           <div class="time-and-date-from-time-and-date-from">
             <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
               <label>From</label>
@@ -83,7 +93,7 @@
       </div>
       <!-- dorski laga herna lika onclickið baby -->
       <form action="#" th:action="@{/sickness}"  method="post">
-      <button class="sickday-button" type="submit" onclick="window.location='sickness'"></button>
+       <button class="sickday-button" type="submit" onclick="window.location='sickness'"></button>
       </form>
 
     </main>

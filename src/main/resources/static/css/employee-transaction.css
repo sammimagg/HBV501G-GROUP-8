@@ -12,6 +12,25 @@
 .employee-transaction-table{
     width: 100%;
 }
+.total-worked-hour{
+    margin-top: 1em;
+    width: 470px;
+    height: 126px;
+    padding: 1em;
+    display: flex;
+}
+.total-worked-hour-inner-left {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+.total-worked-hour-inner-right {
+    display: flex;
+    align-items: end;
+    justify-content: right;
+    width: 100%;
+}
 table{
     border-collapse:separate;
     border-spacing: 0 1em;

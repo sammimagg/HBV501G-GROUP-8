@@ -15,12 +15,14 @@ import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
@@ -347,9 +349,26 @@ public class UserController {
         allEmployees = employeeService.findAll();
 
         for(Employee row : allEmployees) {
-            row.setFirsNameOfEmployee(row.getFirstName());
+            row.setFirstNameOfEmployee(row.getFirstName());
             row.setLastNameOfEmployee(row.getLastName());
+            row.setPhoneNumberEmployee(row.getPhoneNumber());
+            row.setSsnEmployee(row.getSSN());
         }
         return allEmployees;
     }
+    @RequestMapping("/edit/{ssn}")
+    public ModelAndView showEditUserPage(@PathVariable(name= "ssn") String ssn) {
+        ModelAndView editView = new ModelAndView("edit-employees");
+        Employee employee = employeeService.findBySSN(ssn);
+        editView.addObject("employee",employee);
+
+        return editView;
+    }
+    @RequestMapping("delete/{ssn}")
+    public String deleteEmployee(@PathVariable(name = "SSN") String SSN) {
+        Employee temp = employeeService.findBySSN(SSN);
+        employeeService.delete(temp);
+        return "redirect:/";
+    }
+
 }
