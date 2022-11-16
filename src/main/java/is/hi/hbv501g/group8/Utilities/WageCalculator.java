@@ -96,7 +96,10 @@ public class WageCalculator {
         int totalMinutes = end-start;
         totalHours = totalMinutes/60.0;
         hYV = Math.max(((end-start) / 60.0) - 12, 0);
-
+        // If end < start:
+        // Loopa loopa frá byrjunartíma að miðnætti
+        // breyta byrjunartíma í 0000
+        // halda áfarm niður:
         int ptr = start;
         /*
         *   Fyrir: ptr = start <= end
