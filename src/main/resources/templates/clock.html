@@ -1,34 +1,46 @@
-
-<!DOCTYPE html>
-<html lang="is" xmlns:th="https://thymeleaf.org">
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>clock</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
     <link th:href="@{/css/clock.css}" rel="stylesheet"/>
-    <head>
-        <meta charset="UTF-8">
-        <title>Clock</title>
-    </head>
-    <body>
-        <div>
+</head>
+<body>
+<div class="grid">
+    <div class="row">
+        <div class="col offset-col-2 col-8">
+            <div class="clockin-kassi">
+                <div class="flex-container">
+                    <div class="clockin-box-left flex-container column">
+                        <div class="login-h1 font-white center">
+                            <h1>DeadTime</h1>
+                        </div>
+                        <div class="cloud-login-white">
+                            <svg class="icon-cloud-login-white"/>
+                        </div>
+                    </div>
+                    <div class="flex-column column">
+                        <form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
+                            <p>SSN</p>
+                            <input class="ssn-kassi" type="text" name="ssn" id="ssn" th:value="*{SSN}" />
+                            <input class="submit-kassi" type="submit" value="Clock-in"/>
+                            <p class="output" id="test"></p>
+                            <input class="login-kassi" type="submit" value="Login"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="klukka">
-        <h2>Inn stimplaðu</h2>
-
-        <form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
-            <input type="text" name="ssn" id="ssn" th:value="*{SSN}" />
-            <input type="submit" value="KLUKK"/>
-        </form>
-        <p id="test"></p>
-        </div>
-        <div class="loginTakki">
-            <input type="submit" value="Login"/>
-        </div>
-        <script>
-            var params = new window.URLSearchParams(window.location.search);
-            if(params.get('message')!=null) {
-                let name = params.get('message')
-                document.getElementById("test").innerHTML=name;
-            }
-        </script>
-    </body>
+    </div>
+</div>
+<script>
+    var params = new window.URLSearchParams(window.location.search);
+    if(params.get('message')!=null) {
+        let name = params.get('message')
+        document.getElementById("test").innerHTML=name;
+    }
+</script>
+</body>
 </html>

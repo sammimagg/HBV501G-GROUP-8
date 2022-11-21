@@ -104,21 +104,21 @@ public class TransactionController {
         Transaction exists = transactionService.findBySSNAndFinished(transaction.getSSN(), false);
         Employee temp = employeeService.findBySSN(transaction.getSSN());
         if(temp == null) {
-            redirectAttributes.addAttribute("message", "Þú vinna ekki hafa");
+            redirectAttributes.addAttribute("message", "SSN not registered");
             return "redirect:/";
         }
         if(exists == null) {
             transaction.setClockIn(LocalDateTime.now());
             transaction.setFinished(false);
             transactionService.save(transaction);
-            redirectAttributes.addAttribute("message", "Velkomin/n, "+temp.getFirstName()+"!");
+            redirectAttributes.addAttribute("message", "Welcome, "+temp.getFirstName()+"!");
             return "redirect:/";
         }
         else {
             exists.setClockOut(LocalDateTime.now());
             exists.setStatus("pending");
             exists.setFinished(true);
-            redirectAttributes.addAttribute("message", "Takk fyrir daginn, "+temp.getFirstName()+"!");
+            redirectAttributes.addAttribute("message", "Thank you have. Have a nice day, "+temp.getFirstName()+"!");
             transactionService.save(exists);
         }
         return "redirect:/";

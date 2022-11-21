@@ -16,7 +16,7 @@
   <main class="grid">
     <div class="row">
       <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-      <div class="col col-9">
+      <div class="col col-6">
         <h2>Driving log</h2>
         <form class="drivinglog-form" action="#" th:action="@{/drivinglog/new}" th:object="${driving}"  method="post">
           <div class="drivinglog-flex-column">
