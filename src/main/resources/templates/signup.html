@@ -5,19 +5,47 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+    <link th:href="@{/css/signup.css}" rel="stylesheet"/>
+
 </head>
 <body>
-<h2>Signup for an account</h2>
-<!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
-<form action="#" th:action="@{/signup}" th:object="${user}"  method="post">
-    <p>SSN</p>
-    <input type="text" name="ssn" id="ssn" th:field="*{SSN}" />
-    <p>User name</p>
-    <input type="text" name="username" id="username" th:field="*{username}"/>
-    <p>Password</p>
-    <!--suppress HtmlUnknownAttribute -->
-    <input type="text" name="password" id="password" th:value="*{password}"/>
-    <input type="submit" value="Sign up"/>
-</form>
+<div class="grid">
+    <div class="row">
+        <div class="col offset-col-2 col-8">
+            <div class="signup-kassi">
+                <div class="flex-container">
+                    <div class="signup-box-left flex-container column">
+                        <div class="login-h1 font-white center">
+                            <h1>DeadTime</h1>
+                        </div>
+                        <div class="cloud-login-white">
+                            <svg class="icon-cloud-login-white"/>
+                        </div>
+                    </div>
+                    <div class="flex-column column">
+                        <form action="#" th:action="@{/signup}" th:object="${user}"  method="post">
+                            <p>User Name</p>
+                            <input class="username-kassi" type="text" name="username" id="username" th:field="*{username}"/>
+                            <p>SSN</p>
+                            <input class="ssn-kassi" type="text" name="ssn" id="ssn" th:value="*{SSN}" />
+                            <p>Email</p>
+                            <!-- <input class="email-kassi" type="text" name="email" id="email" th:field="*{email}"/> -->
+                            <p>Password</p>
+                            <input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/>
+                            <p>Confirm Password</p>
+                            <input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/>
+                            <div class="checkbox">
+                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                <label for="vehicle1">Agree to terms and service</label>
+                            </div>
+                            <input class="submit-kassi" type="submit" value="Sign up"/>
+                            <a th:href="@{/login/}"><p>Already have an account?</p></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
