@@ -330,6 +330,14 @@ li p{
     width: 25px;
     margin-top: 12.5px;
 }
+.icon-driving-log-grey {
+    background-image: url(icon/car-svgrepo-com.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+
 .icon-request-reviews-grey {
     background-image: url(icon/request-review-grey.svg);
     background-repeat:no-repeat;
@@ -362,6 +370,7 @@ li p{
     background-image: url(icon/cloud-login.svg);
     background-repeat:no-repeat;
     height: 25em;
+    width: 40em;
 }
 .icon-comment-grey {
     background-image: url(icon/comment.svg);
@@ -431,6 +440,8 @@ li p{
 .column{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    flex: auto;
 }
 .default-table-row button{
     background-color: transparent;

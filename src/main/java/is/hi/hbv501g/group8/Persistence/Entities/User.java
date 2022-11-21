@@ -26,6 +26,8 @@ public class User {
     private String username;
     private String password;
     private int accountType;
+    //driving log attribute
+
 
     @Transient
     private String employeeUserName;

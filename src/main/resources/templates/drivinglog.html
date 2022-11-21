@@ -13,51 +13,55 @@
   <link th:href="@{/css/drivinglog.css}" rel="stylesheet"/>
 </head>
 <body>
-<main class="grid">
-  <div class="row">
-    <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-    <div class="col col-5">
-      <div class="km-kassi">
-        <div class="flexb-container"></div>
-          <div class="flex-column column">
-            <form action="#" th:action="@{/drivinglog/new}" th:object="${driving}"  method="post">
-              <p>Upphafs keyrsla</p>
-              <input class="adoStart-kassi" type="text" name="username" id="username" th:field="*{odometerStart}"/>  <!--suppress HtmlUnknownAttribute -->
-              <p>Enda keyrsla</p>
-              <input class="adoEnd-kassi" type="text" name="password" id="password" th:field="*{odometerEnd}"/> <!--suppress HtmlUnknownAttribute -->
-              <p>Fá KM fjölda</p>
-              <input class="submit-kassi" type="submit" value="Append Driving Session!"/>
-            </form>
-          </div>
-        </div>
-      </div>
-    <div th:switch="${instances}">
-      <!--<h2 th:case="null">No days driven found!</h2>-->
-      <div th:case="*">
+  <main class="grid">
+    <div class="row">
+      <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
+      <div class="col col-9">
         <h2>Driving log</h2>
-        <div class="employee-drivinglog-table">
-          <div class="default-table-header">
-            <p class="employee-drivinglog-list-row">Date</p>
-            <p class="employee-drivinglog-list-row">Starting-Distance</p>
-            <p class="employee-drivinglog-list-row">End-Distance</p>
-            <p class="employee-drivinglog-list-row">Distance-Driven</p>
-            <p class="employee-drivinglog-list-row"></p>
-            <p class="employee-drivinglog-list-row"></p>
+        <form class="drivinglog-form" action="#" th:action="@{/drivinglog/new}" th:object="${driving}"  method="post">
+          <div class="drivinglog-flex-column">
+            <label>Upphafs keyrsla</label>
+            <input  type="text" name="username" id="username" th:field="*{odometerStart}"/>
           </div>
-          <div class="default-table-list">
-            <div class="default-table-row" th:each="instance : ${instances}" th:id="${instance.getID}">
-              <div class="default-table-inner-row">
-                <p class="employee-drivinglog-list-row" th:text="${instance.dags}"></p>
-                <p class="employee-drivinglog-list-row" th:text="${instance.odometerStart}"></p>
-                <p class="employee-drivinglog-list-row" th:text="${instance.odometerEnd}"></p>
-                <p class="employee-drivinglog-list-row" th:text="${instance.distanceDriven}"></p>
+          <div class="drivinglog-flex-column">
+            <label>Enda keyrsla</label>
+            <input type="text" name="password" id="password" th:field="*{odometerEnd}"/>
+          </div>
+          <input type="submit" value="Append Driving Session!"/>
+        </form>
+        <p>Time period 24.11.22-25.12.22</p>
+        <div>
+          <div th:switch="${instances}">
+            <!--<h2 th:case="null">No days driven found!</h2>-->
+            <div th:case="*">
+              <div class="employee-drivinglog-table">
+                <div class="default-table-header">
+                  <p class="employee-drivinglog-list-row">Date</p>
+                  <p class="employee-drivinglog-list-row">Starting-Distance</p>
+                  <p class="employee-drivinglog-list-row">End-Distance</p>
+                  <p class="employee-drivinglog-list-row">Distance-Driven</p>
+                  <p class="employee-drivinglog-list-row"></p>
+                  <p class="employee-drivinglog-list-row"></p>
+                </div>
+                <div class="default-table-list">
+                  <div class="default-table-row" th:each="instance : ${instances}" th:id="${instance.getID}">
+                    <div class="default-table-inner-row">
+                      <p class="employee-drivinglog-list-row" th:text="${instance.dags}"></p>
+                      <p class="employee-drivinglog-list-row" th:text="${instance.odometerStart}"></p>
+                      <p class="employee-drivinglog-list-row" th:text="${instance.odometerEnd}"></p>
+                      <p class="employee-drivinglog-list-row" th:text="${instance.distanceDriven}"></p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
-  </div>
-</main>
+    </div>
+    </div>
+  </main>
 </body>
+<script>
+</script>
 </html>
