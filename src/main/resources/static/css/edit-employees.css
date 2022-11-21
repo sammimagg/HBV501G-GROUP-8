@@ -1,0 +1,34 @@
+.employee-profile {
+    width: 25em;
+    position: absolute;
+}
+.employee-profile-column {
+    display: flex;
+    flex-direction: column;
+}
+.employee-profile-row {
+    display: flex;
+    margin-top: 1em;
+}
+.employee-profile input{
+    font-family: 'poppins';
+    border-radius: 5px;
+    border: 1px solid #000000;
+    background-color: white;
+    padding-left: 1em;
+    margin-top: 0.5em;
+    height: 3em;
+}
+.employee-profile label{
+    font-family: 'poppins';
+    margin-top: 1em;
+}
+.employee-profile select {
+    margin-top: 0.5em;
+    padding-left: 1em;
+    background-color: white;
+    height: 3em;
+    border-radius: 5px;
+    border: 1px solid #000000;
+}
+

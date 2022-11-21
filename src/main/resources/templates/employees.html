@@ -25,10 +25,12 @@
             <div class="default-table-list">
               <div class="default-table-row user-profile-row" th:each="employee : ${employees}">
                 <div class="default-table-inner-row">
-                  <p th:text="${employee.firsNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
+                  <p th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
                   <p th:text="${employee.phoneNumberEmployee}">8458094</p>
                   <p th:text="${employee.employeeAccountType}">Admin</p>
-                  <p></p>
+                  <a th:href="@{'/edit/' + ${employee.ssnEmployee}}">
+                    <svg class="icon-edit-grey" height="25" width="25"></svg>
+                  </a>
                 </div>
               </div>
             </div>

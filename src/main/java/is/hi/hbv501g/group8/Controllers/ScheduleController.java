@@ -51,7 +51,7 @@ public class ScheduleController {
         allEmployees = employeeService.findAll();
 
         for(Employee row : allEmployees) {
-            row.setFirsNameOfEmployee(row.getFirstName());
+            row.setFirstNameOfEmployee(row.getFirstName());
             row.setLastNameOfEmployee(row.getLastName());
 
         }

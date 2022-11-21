@@ -58,8 +58,11 @@ public class User {
         return employeeUserName;
     }
 
-    public int getEmployeeAccountType() {
-        return employeeAccountType;
+    public String getEmployeeAccountType() {
+        if(employeeAccountType == 0)
+            return "Admin";
+        else
+            return "User";
     }
 
     public void setSSN(String ssn) {

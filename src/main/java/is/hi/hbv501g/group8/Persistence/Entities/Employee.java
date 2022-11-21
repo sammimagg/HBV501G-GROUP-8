@@ -27,6 +27,7 @@ public class Employee extends User {
     private String company;
     private String jobTitle;
     private double salary;
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     private LocalDate startDate;
@@ -35,13 +36,23 @@ public class Employee extends User {
     private int remainingVacationDays, remainingSickDays;
 
     @Transient
-    private String firstNameOfEmployee, lastNameOfEmployee, phoneNumberEmployee;
+    private String firstNameOfEmployee, lastNameOfEmployee, phoneNumberEmployee, ssnEmployee;
+
 
     public void Employee() {
 
     }
 
+    public String getSsnEmployee() {
+        return ssnEmployee;
+    }
+
+    public void setSsnEmployee(String ssnEmployee) {
+        this.ssnEmployee = ssnEmployee;
+    }
+
     public String getPhoneNumberEmployee() {
+        System.out.println(phoneNumber);
         return phoneNumberEmployee;
     }
 
@@ -49,7 +60,7 @@ public class Employee extends User {
         this.phoneNumberEmployee = phoneNumberEmployee;
     }
 
-    public String getFirsNameOfEmployee() {
+    public String getFirstNameOfEmployee() {
         return firstNameOfEmployee;
     }
 
@@ -57,7 +68,8 @@ public class Employee extends User {
         return lastNameOfEmployee;
     }
 
-    public void setFirsNameOfEmployee(String firstNameOfEmployee) {
+    public void setFirstNameOfEmployee(String firstNameOfEmployee) {
+
         this.firstNameOfEmployee = firstNameOfEmployee;
     }
 
