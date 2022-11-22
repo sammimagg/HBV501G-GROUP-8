@@ -16,12 +16,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "SSN")
 @Table(name = "employees")
 public class Employee extends User {
 
-    @Id // Primary Key
-    private String SSN;
     private String firstName;
     private String lastName;
     private String company;
@@ -82,17 +79,7 @@ public class Employee extends User {
      *
      * @return SSN
      */
-    public String getSSN() {
-        return SSN;
-    }
-    /**
-     * Description:
-     *
-     * @param SSN ssn of a employee
-     */
-    public void setSSN(String SSN) {
-        this.SSN = SSN;
-    }
+
 
     /**
      * Description:

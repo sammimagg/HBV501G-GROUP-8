@@ -83,9 +83,17 @@ public class UserController {
         User exists = userService.findByUsername(user.getUsername());
 
         if(exists == null) {
-            userService.save(user);
+            //userService.save(user);
             Employee newEmployeeProfile = new Employee();
             newEmployeeProfile.setSSN(user.getSSN());
+            newEmployeeProfile.setUsername(user.getUsername());
+            /*
+            *  þið hafið ábyggilega séð djók comments eeins og
+            *  "ekki taka út, allt brotnar"
+            * þetta er svona komment
+            * ekki breyta
+            */
+            newEmployeeProfile.setPassword(userService.secureIt(user.getPassword()));
             newEmployeeProfile.setFirstName(user.getUsername());
             newEmployeeProfile.setLastName("To be changed");
             newEmployeeProfile.setCompany("To be changed");
@@ -94,6 +102,13 @@ public class UserController {
             newEmployeeProfile.setStartDate(LocalDate.now());
             newEmployeeProfile.setJobTitle("To be changed");
             employeeService.save(newEmployeeProfile);
+            /*
+            pls ekki spyrja
+            User fixPassword = userService.findBySSN(newEmployeeProfile.getSSN());
+            fixPassword.setPassword(user.getPassword());
+            userService.save(fixPassword);
+
+             */
         }
         return "redirect:/";
     }

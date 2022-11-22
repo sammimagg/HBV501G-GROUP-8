@@ -27,13 +27,13 @@
                             <p>User Name</p>
                             <input class="username-kassi" type="text" name="username" id="username" th:field="*{username}"/>
                             <p>SSN</p>
-                            <input class="ssn-kassi" type="text" name="ssn" id="ssn" th:value="*{SSN}" />
+                            <input class="ssn-kassi" type="text" name="ssn" id="ssn" th:field="*{SSN}" />
                             <p>Email</p>
                             <!-- <input class="email-kassi" type="text" name="email" id="email" th:field="*{email}"/> -->
                             <p>Password</p>
                             <input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/>
                             <p>Confirm Password</p>
-                            <input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/>
+                            <!--<input class="password-kassi" type="text" name="password" id="password" th:value="*{password}"/>-->
                             <div class="checkbox">
                                 <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
                                 <label for="vehicle1">Agree to terms and service</label>
