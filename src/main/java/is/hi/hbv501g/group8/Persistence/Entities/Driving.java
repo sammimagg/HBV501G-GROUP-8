@@ -67,10 +67,6 @@ public class Driving {
     }
 
     public int getDistanceDriven() {
-        return distanceDriven;
-    }
-
-    public void setDistanceDriven(int distanceDriven) {
-        this.distanceDriven = distanceDriven;
+        return odometerEnd - odometerStart;
     }
 }

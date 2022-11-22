@@ -15,6 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class DateHelper {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate date1;

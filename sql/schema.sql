@@ -59,8 +59,17 @@ CREATE TABLE IF NOT EXISTS DrivingLog (
     licence_plate VARCHAR(50),
     odometer_start INT,
     odometer_end INT,
-    distance_driven INT GENERATED ALWAYS AS ( odometer_end - odometer_start) STORED,
+    /* REDUNDANT distance_driven INT GENERATED ALWAYS AS ( odometer_end - odometer_start) STORED, */
     cp_km FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS Deviations (
+    ID SERIAL PRIMARY KEY,
+    SSN varchar(10),
+    comment varchar(100),
+    type varchar(5),
+    start_date date,
+    end_date date
 );
 
 /*INSERT INTO users (username, password) VALUES ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');*/

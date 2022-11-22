@@ -26,16 +26,17 @@
                     </div>
                 </div>
 
-                <form class="calander">
-                    <select class="calander">
-                        <option value="sickDay">Sick Day</option>
-                        <option value="vacationDay">Vaction Day</option>
+                <form class="calander" action="#" th:action="@{/sickandvacation}" th:object="${deviation}" method="POST">
+                    <select class="calander" th:field="*{type}">
+                        <option value="SICK">Sick Day</option>
+                        <option value="VACATION">Vaction Day</option>
+                        <option value="OTHER">Miscellaneous</option>
                     </select>
                     <div class="row">
                         <label>Date From</label>
-                        <input type="date">
+                        <input type="date" th:field="*{dateFrom}">
                         <label>Date to</label>
-                        <input type="date" value="dateFrom">
+                        <input type="date" th:field="*{dateTo}">
                     </div>
                     <div class="row">
                         <input class="default-save-input" type="submit" value="Save">
