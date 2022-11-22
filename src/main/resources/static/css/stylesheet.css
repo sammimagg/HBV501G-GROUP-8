@@ -297,6 +297,15 @@ li p{
     margin-left: 0.8em;
 }
 /*      Icons               */
+.icon-log-out-grey {
+    background-image: url(icon/logout-svgrepo-com.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+
+
 .icon-real-time-insights-grey {
     background-image: url(icon/time-and-attendance-grey.svg);
     background-repeat:no-repeat;

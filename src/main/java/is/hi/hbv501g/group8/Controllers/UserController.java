@@ -14,6 +14,9 @@ import is.hi.hbv501g.group8.Persistence.Entities.Employee;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
@@ -91,6 +96,21 @@ public class UserController {
             employeeService.save(newEmployeeProfile);
         }
         return "redirect:/";
+    }
+
+    /**
+     * A handler for GET requests on /logout
+     *
+     * @param request User object
+     * @return logout back to login-page view
+     */
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login";
     }
 
 
