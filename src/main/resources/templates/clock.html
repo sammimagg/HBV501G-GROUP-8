@@ -27,8 +27,14 @@
                             <input class="ssn-kassi" type="text" name="ssn" id="ssn" th:value="*{SSN}" />
                             <input class="submit-kassi" type="submit" value="Clock-in"/>
                             <p class="output" id="test"></p>
-                            <input class="login-kassi" type="submit" value="Login"/>
                         </form>
+                        <form action="#" th:action="@{/login}" th:object="${user}"  method="get">
+                            <input class="login-kassi"  type="submit" name="action" value="Login"/>
+                        </form>
+                        <form action="#" th:action="@{/signup}" th:object="${user}"  method="get">
+                            <input class="signup-kassi"  type="submit" name="action" value="Signup"/>
+                        </form>
+
                     </div>
                 </div>
             </div>

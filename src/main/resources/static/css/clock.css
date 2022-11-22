@@ -41,7 +41,7 @@ body{
     left: 736px;
     top: 543px;
 
-    background: #1AEAB6;
+    background: #1E90FF;
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -60,7 +60,25 @@ body{
 
     background: #1AEAB6;
     border-radius: 8px;
+    margin-bottom: 0.60em;
 }
+
+.signup-kassi {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 11px 24px;
+    gap: 10px;
+
+    width: 347px;
+    height: 44px;
+    left: 736px;
+    top: 543px;
+
+    background: #1AEAB6;
+    border-radius: 8px;
+}
+
 .output {
     margin-bottom: 10px;
 }
