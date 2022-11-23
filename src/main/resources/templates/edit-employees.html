@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<!--suppress HtmlUnknownAttribute -->
-<head th:switch="${username}">
-    <meta charset="UTF-8">
-    <!--suppress HtmlUnknownAttribute -->
-    <title th:case="null">Log in to see worked hours</title>
-    <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
-    <title th:case="*" th:text="${username}"></title>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
-    <link th:href="@{/css/edit-employees.css}" rel="stylesheet"/>
-</head>
-<body>
-<main class="grid">
-    <div class="row">
-        <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-        <div class="col col-9">
-            <form action="#" th:action="@{/save}" th:object="${employee}" method="post" class="employee-profile">
-                <div class="employee-profile-column">
-                    <label> SSN </label>
-                    <input type="text"  th:field="*{SSN}" readonly>
-                    <label >First Name</label>
-                    <input type="text" th:field="*{firstName}">
-                    <label>Last Name</label>
-                    <input type="text" th:field="*{lastName}">
-                    <label>Email</label>
-                    <input type="text" th:field="*{email}">
-                    <label>Phone Numer</label>
-                    <input type="text" th:field="*{phoneNumber}">
-                    <label>Role</label>
-                    <select name="role" th:value="'*{employeeAccountType}'">
-                        <option th:value="'Admin'">Admin</option>
-                        <option value="'User'">User</option>
-                    </select>
-                </div>
-                <div class="employee-profile-row">
-                    <input class="default-save-input" type="submit" value="Save">
-                    <input class="default-cancel-input" type="reset" value="Cancel">
-                </div>
-            </form>
+    <head th:switch="${username}">
+        <meta charset="UTF-8">
+        <!--suppress HtmlUnknownAttribute -->
+        <title th:case="null">Log in to see worked hours</title>
+        <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+        <title th:case="*" th:text="${username}"></title>
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+        <link th:href="@{/css/edit-employees.css}" rel="stylesheet"/>
+    </head>
+    <body>
+        <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+        <main>
+        <div class="row">
+            <div class="col col-9">
+                <form action="#" th:action="@{/save}" th:object="${employee}" method="post" class="employee-profile">
+                    <div class="employee-profile-column">
+                        <label >First Name</label>
+                            <input type="text" th:field="*{firstName}">
+                        <label>Last Name</label>
+                            <input type="text" th:field="*{lastName}">
+                        <label>Kennitala</label>
+                            <input type="text" th:field="*{ssnEmployee}">
+                        <label>Username</label>
+                            <input type="text" th:field="*{employeeUserName}">
+                        <label>Email</label>
+                            <input type="text" th:field="*{employeeUserName}">
+                        <label>Email</label>
+                            <input type="text">
+                        <label>Phone Number</label>
+                            <input type="text" th:field="*{phoneNumber}">
+                        <label>Role</label>
+                            <select name="role" th:value="'*{employeeAccountType}'">
+                                <option th:value="'Admin'">Admin</option>
+                                <option value="'User'">User</option>
+                            </select>
+                    </div>
+                    <div class="employee-profile-row">
+                        <input class="default-save-input" type="submit" value="Save">
+                        <input class="default-cancel-input" type="reset" value="Cancel">
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</main>
-</body>
+    </main>
+    </body>
 </html>

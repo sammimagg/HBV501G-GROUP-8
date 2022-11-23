@@ -3,12 +3,11 @@
     <head>
         <meta charset="en" >
     </head>
-    <nav class="col-3" th:fragment="menu">
-        <a href="logout" class="logout">
-            <p>Logout</p>
-            <svg class="icon-logout-grey"></svg>
-        </a>
-        <div class="nav-border">
+    <a href="logout" class="logout">
+        <p>Logout</p>
+        <svg class="icon-logout-grey"></svg>
+    </a>
+    <nav th:fragment="menu">
             <h1 class="logo">
                 <svg class="logoSVG"></svg>
             </h1>
@@ -56,15 +55,12 @@
                     </a>
                 </li>
             </ul>
-            <div>
-                <div class="account-logged-in">
+            <div class="account-logged-in">
                     <a href="profile">
                         <h1><span th:text="${abbreviation}" class="blue"></span></h1>
                         <!--suppress HtmlUnknownAttribute -->
                         <strong th:text="${fullName}"></strong>
                     </a>
                 </div>
-            </div>
-        </div>
     </nav>
 </html>

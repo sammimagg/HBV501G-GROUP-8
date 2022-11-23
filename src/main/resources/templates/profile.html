@@ -12,10 +12,10 @@
         <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
     </head>
     <body>
-        <main class="grid">
+        <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+        <main>
             <div class="row">
-                <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-                <div class="col col-9">
+                <div class="col col-12">
                     <h1>Profile</h1>
                     <p th:text="'First Name: ' +${firstName}">First name</p>
                     <p th:text="'Last Name: ' +${lastName}">Last name</p>

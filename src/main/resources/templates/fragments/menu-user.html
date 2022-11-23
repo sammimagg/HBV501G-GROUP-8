@@ -3,12 +3,11 @@
 <head>
     <meta charset="en" >
 </head>
-<nav class="col-3" th:fragment="menu">
     <a href="logout" class="logout">
         <p>Logout</p>
         <svg class="icon-logout-grey"></svg>
     </a>
-    <div class="nav-border">
+    <nav th:fragment="menu">
         <h1 class="logo">
             <svg class="logoSVG"></svg>
         </h1>
@@ -32,7 +31,8 @@
                 </a>
             </li>
         </ul>
-        <div>
+
+        <div class="float">
             <div class="account-logged-in">
                 <a href="profile">
                     <h1><span th:text="${abbreviation}" class="blue"></span></h1>
@@ -41,6 +41,5 @@
                 </a>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </html>

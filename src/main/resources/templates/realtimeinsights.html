@@ -12,10 +12,10 @@
     <link th:href="@{/css/real-time-insights.css}" rel="stylesheet"/>
   </head>
   <body>
-    <main class="grid">
+    <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+    <main >
       <div class="row">
-        <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-          <div class="col col-9">
+        <div class="col col-12">
             <h2>Real-Time Insights</h2>
 
             <div class=" total-worked-hour">
@@ -27,7 +27,6 @@
                 <p style="color: #7A7A7A;">Total</p>
               </div>
             </div>
-
             <div>
               <div class="default-table-header real-time-insights-spacing">
                 <p>Employee Name</p>
@@ -47,7 +46,7 @@
               </div>
             </div>
           </div>
-        </div>
+      </div>
     </main>
   </body>
 </html>

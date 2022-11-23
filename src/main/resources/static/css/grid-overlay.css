@@ -1,6 +1,6 @@
 :root {
     --offset: 10px;
-    --max_width: 1920px;
+    --max_width: 1450px;
     --columns: 12;
     --gutter: 30px;
     --color: hsla(204, 75%, 75%, 0.25);

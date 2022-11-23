@@ -9,104 +9,95 @@
     <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
   </head>
   <body>
-    <main class="grid">
-      <div class="row">
-        <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-        <div class="col col-9">
-          <h2>Time and Attendance</h2>
-          <div class="total-worked-hour" th:switch="${totalHours}">
-            <div class="total-worked-hour-inner-left" th:case="null">
-              <p style="color: #7A7A7A;">Work Time</p>
-              <p style="font-size: 2rem;">XOXO</p>
+    <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+    <main>
+        <div class="row">
+          <div class="col col-12">
+            <h2>Time and Attendance</h2>
+            <div class="total-worked-hour">
+              <div class="total-worked-hour-inner-left">
+                <p style="color: #7A7A7A;">Work Time</p>
+                <p style="font-size: 2rem;">20:00 h</p>
+              </div>
+              <div class="total-worked-hour-inner-right">
+                <p style="color: #7A7A7A;">Total</p>
+              </div>
             </div>
-            <div class="total-worked-hour-inner-left" th:case="*">
-              <p style="color: #7A7A7A;">Work Time</p>
-              <p style="font-size: 2rem;" th:text="${totalHours} +  ' ahoras'"></p>
+            <div class="time-and-date-from-time-and-date-from">
+              <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
+                <label>From</label>
+                <input type="date" name="startDate" id="startDate" th:field="*{date1}" />
+                <label>To</label>
+                <input type="date" name="endDate" id="endDate" th:field="*{date2}" />
+                <input type="submit" value="Search"/>
+              </form>
             </div>
-            <div class="total-worked-hour-inner-right">
-              <p style="color: #7A7A7A;">Total</p>
-            </div>
-          </div>
-          <div class="time-and-date-from-time-and-date-from">
-            <form action="#" th:action="@{/list}" th:object="${dateHelper}"  method="post">
-              <label>From</label>
-              <input type="date" name="startDate" id="startDate" th:field="*{date1}" />
-              <label>To</label>
-              <input type="date" name="endDate" id="endDate" th:field="*{date2}" />
-              <input type="submit" value="Search"/>
-            </form>
-          </div>
-          <div th:switch="${transactions}">
-            <h2 th:case="null">No transactions found!</h2>
-            <div th:case="*">
-              <h2>Transaction</h2>
-              <div class="employee-transaction-table">
-                <div class="default-table-header">
-                  <p class="employee-transaction-list-row">Date</p>
-                  <p class="employee-transaction-list-row">Clock-in</p>
-                  <p class="employee-transaction-list-row">Clock-out</p>
-                  <p class="employee-transaction-list-row">Work Time</p>
-                  <p class="employee-transaction-list-row">Status</p>
-                  <p class="employee-transaction-list-row"></p>
-                  <p class="employee-transaction-list-row"></p>
-                </div>
-                <div class="default-table-list">
-                  <div class="default-table-row" th:each="transaction : ${transactions}" th:id="${transaction.getID}">
-                    <div class="default-table-inner-row">
-                      <p class="employee-transaction-list-row" th:text="${transaction.clockInDate}"></p>
-                      <p class="employee-transaction-list-row" th:text="${transaction.clockInTime}"></p>
-                      <p class="employee-transaction-list-row" th:text="${transaction.clockOutTime}"></p>
-                      <p class="employee-transaction-list-row" th:text="${transaction.workedHours} + 'H ' + ${transaction.workedMinutes} + 'm'"></p>
-                      <div th:switch="${transaction.status}" class="employee-transaction-list-row">
-                        <svg th:case="'approved'" class="icon-approved-green" height="25" width="25"></svg>
-                        <svg th:case="'pending'" class="icon-pending-yellow" height="25" width="25"></svg>
-                        <svg th:case="'request'" class="icon-request-red" height="25" width="25"></svg>
+            <div th:switch="${transactions}">
+              <h2 th:case="null">No transactions found!</h2>
+              <div th:case="*">
+                <h2>Transaction</h2>
+                <div class="employee-transaction-table">
+                  <div class="default-table-header">
+                    <p class="employee-transaction-list-row">Date</p>
+                    <p class="employee-transaction-list-row">Clock-in</p>
+                    <p class="employee-transaction-list-row">Clock-out</p>
+                    <p class="employee-transaction-list-row">Work Time</p>
+                    <p class="employee-transaction-list-row">Status</p>
+                    <p class="employee-transaction-list-row"></p>
+                    <p class="employee-transaction-list-row"></p>
+                  </div>
+                  <div class="default-table-list">
+                    <div class="default-table-row" th:each="transaction : ${transactions}" th:id="${transaction.getID}">
+                      <div class="default-table-inner-row">
+                        <p class="employee-transaction-list-row" th:text="${transaction.clockInDate}"></p>
+                        <p class="employee-transaction-list-row" th:text="${transaction.clockInTime}"></p>
+                        <p class="employee-transaction-list-row" th:text="${transaction.clockOutTime}"></p>
+                        <p class="employee-transaction-list-row" th:text="${transaction.workedHours} + 'H ' + ${transaction.workedMinutes} + 'm'"></p>
+                        <div th:switch="${transaction.status}" class="employee-transaction-list-row">
+                          <svg th:case="'approved'" class="icon-approved-green" height="25" width="25"></svg>
+                          <svg th:case="'pending'" class="icon-pending-yellow" height="25" width="25"></svg>
+                          <svg th:case="'request'" class="icon-request-red" height="25" width="25"></svg>
+                        </div>
+                        <div class="employee-transaction-list-row">
+                          <button>
+                            <svg class="icon-comment-grey" height="25" width="25"></svg>
+                          </button>
+                        </div>
+                        <div class="employee-transaction-list-row">
+                          <button th:id="'button-' + ${transaction.getID}" onClick="reply_click(this.id)">
+                            <svg class="icon-edit-grey" height="25" width="25"></svg>
+                          </button>
+                        </div>
                       </div>
-                      <div class="employee-transaction-list-row">
-                        <button>
-                          <svg class="icon-comment-grey" height="25" width="25"></svg>
-                        </button>
-                      </div>
-                      <div class="employee-transaction-list-row">
-                        <button th:id="'button-' + ${transaction.getID}" onClick="reply_click(this.id)">
-                          <svg class="icon-edit-grey" height="25" width="25"></svg>
-                        </button>
-                      </div>
+                      <form action="#" th:action="@{/edit}" th:object="${RequestReview}" method="post" class="default-table-inner-row " style="display: none" th:id="'row-' + ${transaction.getID}">
+                        <input type="hidden" name="id" th:value="${transaction.getID}">
+                        <div class="employee-transaction-list-row">
+                          <input class="employee-transaction-list-row-input-date" type="text"placeholder="yyyy-mm-dd" name="date" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required/>
+                        </div >
+                        <div class="employee-transaction-list-row">
+                          <input class="employee-transaction-list-row-input-time" type="text" placeholder="hh:mm" name="timeIn"  required  />
+                        </div>
+                        <div class="employee-transaction-list-row">
+                          <input class="employee-transaction-list-row-input-time"  type="text" placeholder="hh:mm" name="timeOut" required />
+                        </div>
+                        <div class="employee-transaction-list-row">
+                          <input value="Save" type="submit" name="button"/>
+                        </div>
+                      </form>
                     </div>
-                    <form action="#" th:action="@{/edit}" th:object="${RequestReview}" method="post" class="default-table-inner-row " style="display: none" th:id="'row-' + ${transaction.getID}">
-                      <input type="hidden" name="id" th:value="${transaction.getID}">
-                      <div class="employee-transaction-list-row">
-                        <input class="employee-transaction-list-row-input-date" type="text"placeholder="yyyy-mm-dd" name="date" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required/>
-                      </div >
-                      <div class="employee-transaction-list-row">
-                        <input class="employee-transaction-list-row-input-time" type="text" placeholder="hh:mm" name="timeIn"  required  />
-                      </div>
-                      <div class="employee-transaction-list-row">
-                        <input class="employee-transaction-list-row-input-time"  type="text" placeholder="hh:mm" name="timeOut" required />
-                      </div>
-                      <div class="employee-transaction-list-row">
-                        <input value="Save" type="submit" name="button"/>
-                      </div>
-                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- dorski laga herna lika onclickið baby -->
-      <form action="#" th:action="@{/sickness}"  method="post">
-       <button class="sickday-button" type="submit" onclick="window.location='sickness'"></button>
-      </form>
-
+      <a href="sickandvacation" class="plus-button">
+        <button class="transparent-button">
+          <svg class="plus-bubble-button-green">
+          </svg>
+        </button>
+      </a>
     </main>
-    <a href="sickandvacation" class="plus-button">
-      <button class="transparent-button">
-        <svg class="plus-bubble-button-green">
-        </svg>
-      </button>
-    </a>
   </body>
   <script>
     document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);

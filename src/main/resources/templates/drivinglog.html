@@ -1,87 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<!--suppress HtmlUnknownAttribute -->
-<head th:switch="${username}">
-  <meta charset="UTF-8">
-  <!--suppress HtmlUnknownAttribute -->
-  <title th:case="null">Log in to see KM driven</title>
-  <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
-  <title th:case="*" th:text="${username}"></title>
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-  <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
-  <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
-  <link th:href="@{/css/drivinglog.css}" rel="stylesheet"/>
-</head>
-<body>
-  <main class="grid">
-    <div class="row">
-      <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-      <div class="col col-6">
-        <h2>Driving log</h2>
-        <form class="drivinglog-form" action="#" th:action="@{/drivinglog/new}" th:object="${driving}"  method="post">
-          <div class="drivinglog-flex-column">
-            <label>Odometer start</label>
-            <input class="start-kassi"  type="text" name="username" id="username" th:field="*{odometerStart}"/>
+
+  <head th:switch="${username}">
+    <meta charset="UTF-8">
+    <!--suppress HtmlUnknownAttribute -->
+    <title th:case="null">Log in to see KM driven</title>
+    <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+    <title th:case="*" th:text="${username}"></title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+    <link th:href="@{/css/drivinglog.css}" rel="stylesheet"/>
+  </head>
+  <body>
+  <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+  <main>
+      <div class="row">
+        <div class="col col-12">
+          <h2>Driving log</h2>
+          <form class="drivinglog-form" action="#" th:action="@{/drivinglog/new}" th:object="${driving}"  method="post">
+            <div class="drivinglog-flex-column">
+              <label>Odometer start</label>
+              <input class="start-kassi"  type="text" name="username" id="username" th:field="*{odometerStart}"/>
+            </div>
+            <div class="drivinglog-flex-column">
+              <label>Odometer end</label>
+              <input class="end-kassi" type="text" name="password" id="password" th:field="*{odometerEnd}"/>
+            </div>
+            <input class="append-kassi" type="submit" value="Append Driving Session!"/>
+          </form>
+          <p>Time period</p>
+          <div class="drivinglog-flex-column1">
+          <form class="driving-log-calander" action="#" th:action="@{/drivinglog}" th:object="${dateHelper}"  method="POST">
+            <select class="driving-log-calander" th:field="*{date1}">
+              <option value="2023-01-01" selected>Choose Month</option>
+              <option value="2023-01-01">January</option>
+              <option value="2023-02-01">February</option>
+              <option value="2023-03-01">March</option>
+              <option value="2023-04-01">April</option>
+              <option value="2022-05-01">May</option>
+              <option value="2022-06-01">June</option>
+              <option value="2022-07-01">July</option>
+              <option value="2022-08-01">August</option>
+              <option value="2022-09-01">September</option>
+              <option value="2022-10-01">October</option>
+              <option value="2022-11-01">November</option>
+              <option value="2022-12-01">December</option>
+            </select>
+            <input class="append-month" type="submit" value="Change month"/>
+          </form>
           </div>
-          <div class="drivinglog-flex-column">
-            <label>Odometer end</label>
-            <input class="end-kassi" type="text" name="password" id="password" th:field="*{odometerEnd}"/>
-          </div>
-          <input class="append-kassi" type="submit" value="Append Driving Session!"/>
-        </form>
-        <p>Time period</p>
-        <div class="drivinglog-flex-column1">
-        <form class="driving-log-calander" action="#" th:action="@{/drivinglog}" th:object="${dateHelper}"  method="POST">
-          <select class="driving-log-calander" th:field="*{date1}">
-            <option value="2023-01-01" selected>Choose Month</option>
-            <option value="2023-01-01">January</option>
-            <option value="2023-02-01">February</option>
-            <option value="2023-03-01">March</option>
-            <option value="2023-04-01">April</option>
-            <option value="2022-05-01">May</option>
-            <option value="2022-06-01">June</option>
-            <option value="2022-07-01">July</option>
-            <option value="2022-08-01">August</option>
-            <option value="2022-09-01">September</option>
-            <option value="2022-10-01">October</option>
-            <option value="2022-11-01">November</option>
-            <option value="2022-12-01">December</option>
-          </select>
-          <input class="append-month" type="submit" value="Change month"/>
-        </form>
-        </div>
-        <div>
-          <div th:switch="${instances}">
-            <!--<h2 th:case="null">No days driven found!</h2>-->
-            <div th:case="*">
-              <div class="employee-drivinglog-table">
-                <div class="default-table-header">
-                  <p class="employee-drivinglog-list-row">Date</p>
-                  <p class="employee-drivinglog-list-row">Starting-Distance</p>
-                  <p class="employee-drivinglog-list-row">End-Distance</p>
-                  <p class="employee-drivinglog-list-row">Distance-Driven</p>
-                  <p class="employee-drivinglog-list-row"></p>
-                  <p class="employee-drivinglog-list-row"></p>
-                </div>
-                <div class="default-table-list">
-                  <div class="default-table-row" th:each="instance : ${instances}" th:id="${instance.getID}">
-                    <div class="default-table-inner-row">
-                      <p class="employee-drivinglog-list-row" th:text="${instance.dags}"></p>
-                      <p class="employee-drivinglog-list-row" th:text="${instance.odometerStart}"></p>
-                      <p class="employee-drivinglog-list-row" th:text="${instance.odometerEnd}"></p>
-                      <p class="employee-drivinglog-list-row" th:text="${instance.distanceDriven}"></p>
+          <div>
+            <div th:switch="${instances}">
+              <!--<h2 th:case="null">No days driven found!</h2>-->
+              <div th:case="*">
+                <div class="employee-drivinglog-table">
+                  <div class="default-table-header">
+                    <p class="employee-drivinglog-list-row">Date</p>
+                    <p class="employee-drivinglog-list-row">Starting-Distance</p>
+                    <p class="employee-drivinglog-list-row">End-Distance</p>
+                    <p class="employee-drivinglog-list-row">Distance-Driven</p>
+                    <p class="employee-drivinglog-list-row"></p>
+                    <p class="employee-drivinglog-list-row"></p>
+                  </div>
+                  <div class="default-table-list">
+                    <div class="default-table-row" th:each="instance : ${instances}" th:id="${instance.getID}">
+                      <div class="default-table-inner-row">
+                        <p class="employee-drivinglog-list-row" th:text="${instance.dags}"></p>
+                        <p class="employee-drivinglog-list-row" th:text="${instance.odometerStart}"></p>
+                        <p class="employee-drivinglog-list-row" th:text="${instance.odometerEnd}"></p>
+                        <p class="employee-drivinglog-list-row" th:text="${instance.distanceDriven}"></p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-    </div>
-  </main>
-</body>
-<script>
-</script>
+      </div>
+    </main>
+  </body>
+  <script>
+  </script>
 </html>

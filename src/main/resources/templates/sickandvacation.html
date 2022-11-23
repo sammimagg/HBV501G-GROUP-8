@@ -12,9 +12,9 @@
 
 </head>
 <body>
-    <main class="grid">
+    <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+    <main >
         <div class="row">
-            <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
             <div class="reqest-calander offset-col-4 col-4">
                 <div class="calander">
                     <div class="calander-inner-left">
@@ -25,7 +25,6 @@
 
                     </div>
                 </div>
-
                 <form class="calander" action="#" th:action="@{/sickandvacation}" th:object="${deviation}" method="POST">
                     <select class="calander" th:field="*{type}">
                         <option value="SICK">Sick Day</option>

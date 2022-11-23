@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-  <!--suppress HtmlUnknownAttribute -->
+
   <head th:switch="${username}">
     <meta charset="UTF-8">
     <!--suppress HtmlUnknownAttribute -->
@@ -12,13 +12,12 @@
     <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
   </head>
   <body>
-    <main class="grid">
+    <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+    <main>
       <div class="row">
-        <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-        <div class="col col-9">
+        <div class="col col-12">
           <h1>Missing</h1>
           <p>Haldór ætti ekki vera hleypt í framendann</p>
-
           <div th:switch="${reviews}">
             <h2 th:case="null">No transactions need to be reviewed!</h2>
             <div th:case="*">
@@ -34,7 +33,6 @@
                   <p class="employee-transaction-list-row"></p>
                   <p class="employee-transaction-list-row"></p>
                 </div>
-
                 <div class="default-table-list">
                   <div class="default-table-row" th:each="review : ${reviews}" th:id="${review.getID}">
                     <div class="default-table-inner-row">
@@ -50,6 +48,12 @@
                         </select>
                         <input class="default-save-input" type="submit" value="Submit">
                       </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
