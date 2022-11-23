@@ -42,6 +42,14 @@
                       <p class="employee-transaction-list-row" th:text="${review.clockInDate}"></p>
                       <p class="employee-transaction-list-row" th:text="${review.originalClockInTime} + ' - ' + ${review.originalClockOutTime}"></p>
                       <p class="employee-transaction-list-row" th:text="${review.changedClockInTime} + ' - ' + ${review.changedClockOutTime}"></p>
+                      <form class="review-approve" action="#" th:action="@{/reviews}" th:object="${transactionReview}" method="POST">
+                        <input type="hidden" name="ID" th:value="${review.ID}">
+                        <select class="eitthvad" th:field="*{status}">
+                          <option value="approve">Approve</option>
+                          <option value="reject">Reject</option>
+                        </select>
+                        <input class="default-save-input" type="submit" value="Submit">
+                      </form>
         </div>
       </div>
     </main>
