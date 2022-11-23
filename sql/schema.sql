@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS Employees (
     job_title varchar(128) not null,
     salary FLOAT,
     phone_number varchar(128) not null,
+    email varchar(128) not null,
     start_date DATE,
     vacation_days_used INTEGER,
     sick_days_used INTEGER

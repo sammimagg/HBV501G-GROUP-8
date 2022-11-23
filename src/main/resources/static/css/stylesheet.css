@@ -21,6 +21,10 @@ h2 {
 p {
     color: #353535;
 }
+a{
+    color: #353535;
+    text-decoration: none
+}
 body {
     font-family: 'Poppins', helvetica, arial, sans-serif;
     font-size: 1em;
@@ -248,7 +252,7 @@ select {
 }
 
 span.blue {
-    background: #5178D0;
+    background: #D1D1D1;
     border-radius: 2.5em;
     color: #ffffff;
     display: inline-block;
@@ -285,29 +289,22 @@ li p{
 .li-active{
     border-left: 5px solid #1AEAB6;
 }
-.li-active a{
-    padding-left: 26px;
+.li-inactive{
+    border-left: 5px solid #ffffff;
 }
+
 .li-active p{
     color: black;
 }
 
 .menu-ul{
-    padding-top: 2em;
+    padding-top: 1em;
     margin-left: 0.8em;
 }
-/*      Icons               */
-.icon-log-out-grey {
-    background-image: url(icon/logout-svgrepo-com.svg);
-    background-repeat:no-repeat;
-    height: 25px;
-    width: 25px;
-    margin-top: 12.5px;
-}
-
-
+/*************   Icons  *********************/
+/* Real time insight icon*/
 .icon-real-time-insights-grey {
-    background-image: url(icon/time-and-attendance-grey.svg);
+    background-image: url(icon/real-time-insights-grey.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
@@ -320,6 +317,7 @@ li p{
     width: 25px;
     margin-top: 12.5px;
 }
+/* Employees icon */
 .icon-employees-grey {
     background-image: url(icon/employees-grey.svg);
     background-repeat:no-repeat;
@@ -334,6 +332,7 @@ li p{
     width: 25px;
     margin-top: 12.5px;
 }
+/* Time and attendance icon */
 .icon-time-and-attendance-grey {
     background-image: url(icon/time-and-attendance-grey.svg);
     background-repeat:no-repeat;
@@ -348,28 +347,52 @@ li p{
     width: 25px;
     margin-top: 12.5px;
 }
-.icon-driving-log-grey {
-    background-image: url(icon/car-svgrepo-com.svg);
-    background-repeat:no-repeat;
-    height: 25px;
-    width: 25px;
-    margin-top: 12.5px;
-}
-
+/* Request review icon*/
 .icon-request-reviews-grey {
-    background-image: url(icon/request-review-grey.svg);
+    background-image: url(icon/request-reviews-grey.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
 .icon-request-reviews-green {
-    background-image: url(icon/request-review-green.svg);
+    background-image: url(icon/request-reviews-green.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
     margin-top: 12.5px;
 }
+/* Driving log icon*/
+.icon-driving-log-grey {
+    background-image: url(icon/driving-log-grey.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+.icon-driving-log-green {
+    background-image: url(icon/driving-log-green.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+/* Make schedule icon*/
+.icon-make-schedule-grey {
+    background-image: url(icon/make-schedule-grey.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+.icon-make-schedule-green {
+    background-image: url(icon/make-schedule-green.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+/* Settings icon*/
 .icon-setting-grey {
     background-image: url(icon/settings-grey.svg);
     background-repeat:no-repeat;
@@ -379,6 +402,21 @@ li p{
 }
 .icon-setting-green {
     background-image: url(icon/settings-green.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+/* Log out icon*/
+.icon-logout-grey {
+    background-image: url(icon/logout-grey.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-left: 1rem;
+}
+.icon-logout-green {
+    background-image: url(icon/logout-green.svg);
     background-repeat:no-repeat;
     height: 25px;
     width: 25px;
@@ -421,6 +459,30 @@ li p{
     height: 100px;
     width: 100px;
 }
+
+/*******************************************************************/
+.logoSVG {
+    background-image: url(icon/logo.svg);
+    background-repeat: no-repeat;
+    height: 2em;
+    margin: 0;
+}
+.logo {
+    font-size: 2rem !important;
+    padding-left: 48px;
+    padding-top: 1rem;
+}
+/*******************************************************************/
+
+
+
+
+
+
+
+
+
+
 
 .default-cancel-input {
     border: 1px solid #1AEAB6 !important;
@@ -485,5 +547,15 @@ li p{
 .default-table-header{
     display: flex;
 }
-
+.logout{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    right: 0;
+    padding-top: 1em;
+    padding-right: 1em;
+}
+li:hover{
+    background-color: #F2F2F2;
+}
 

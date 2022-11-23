@@ -41,7 +41,7 @@ public class DrivingLogController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
-
+        model.addAttribute("activePage", "drivingLog");
         List<Driving> defaultLog = drivingService.findAll();
         model.addAttribute("instances", defaultLog);
 
@@ -60,6 +60,7 @@ public class DrivingLogController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
+        model.addAttribute("activePage", "drivingLog");
         driving.setSSN(sessionUser.getSSN());
         driving.setDags(LocalDate.now());
         drivingService.save(driving);

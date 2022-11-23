@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymleaf.org">
-    <head>
-        <meta charset="en" >
-    </head>
-    <nav class="col-3" th:fragment="menu">
-        <div class="nav-border">
-            <ul class="menu-ul">
-                <li class="li-active">
-                    <a href="list" class="">
-                        <svg class="icon-time-and-attendance-green"></svg>
-                        <p>Time & Attendance</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="profile" >
-                        <svg class="icon-setting-grey"></svg>
-                        <p>Settings</p>
-                    </a>
-                </li>
-            </ul>
-            <div>
-                <div class="account-logged-in">
-
+<head>
+    <meta charset="en" >
+</head>
+<nav class="col-3" th:fragment="menu">
+    <a href="logout" class="logout">
+        <p>Logout</p>
+        <svg class="icon-logout-grey"></svg>
+    </a>
+    <div class="nav-border">
+        <h1 class="logo">
+            <svg class="logoSVG"></svg>
+        </h1>
+        <ul class="menu-ul">
+            <li th:class="${activePage == 'timeAndAttendance'} ? 'li-active' : 'li-inactive'">
+                <a href="list">
+                    <svg th:class="${activePage == 'timeAndAttendance'} ? 'icon-time-and-attendance-green' : 'icon-time-and-attendance-grey'"></svg>
+                    <p>Time & Attendance</p>
+                </a>
+            </li>
+            <li th:class="${activePage == 'drivingLog'} ? 'li-active' : 'li-inactive'">
+                <a href="drivinglog" class="">
+                    <svg th:class="${activePage == 'drivingLog'} ? 'icon-driving-log-green' : 'icon-driving-log-grey'"></svg>
+                    <p>Driving Log</p>
+                </a>
+            </li>
+            <li th:class="${activePage == 'setting'} ? 'li-active' : 'li-inactive'">
+                <a href="profile" >
+                    <svg th:class="${activePage == 'setting'} ? 'icon-setting-green' : 'icon-setting-grey'"></svg>
+                    <p>Settings</p>
+                </a>
+            </li>
+        </ul>
+        <div>
+            <div class="account-logged-in">
+                <a href="profile">
                     <h1><span th:text="${abbreviation}" class="blue"></span></h1>
                     <!--suppress HtmlUnknownAttribute -->
                     <strong th:text="${fullName}"></strong>
-                </div>
+                </a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 </html>

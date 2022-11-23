@@ -143,6 +143,7 @@ public class TransactionController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "timeAndAttendance");
         }
         return "listview";
     }
@@ -170,6 +171,7 @@ public class TransactionController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "timeAndAttendance");
         }
         dateOne = dateHelper.getDate1();
         dateTwo = dateHelper.getDate2();
@@ -201,7 +203,7 @@ public class TransactionController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
-
+        model.addAttribute("activePage", "timeAndAttendace");
         model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),dateHelper.getDate1(),dateHelper.getDate2()));
         System.out.println("Date: " + rr.getDate() + " TimeIn: " + rr.getTimeIn() + " TimeOut: " + rr.getTimeOut() +" ID: " + rr.getId());
         System.out.println("Date1 " + dateOne + " Date2 " + dateTwo);
@@ -260,6 +262,7 @@ public class TransactionController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "timeAndAttendance");
         }
 
 

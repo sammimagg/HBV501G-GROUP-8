@@ -22,6 +22,7 @@ import javax.persistence.*;
 public class User {
 
     @Id // Primary Key
+
     private String SSN;
     private String username;
     private String password;

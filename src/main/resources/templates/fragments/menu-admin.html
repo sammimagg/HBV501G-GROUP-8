@@ -4,57 +4,57 @@
         <meta charset="en" >
     </head>
     <nav class="col-3" th:fragment="menu">
+        <a href="logout" class="logout">
+            <p>Logout</p>
+            <svg class="icon-logout-grey"></svg>
+        </a>
         <div class="nav-border">
+            <h1 class="logo">
+                <svg class="logoSVG"></svg>
+            </h1>
             <ul class="menu-ul">
-                <li>
-                    <a href="realtimeinsights" class="">
-                        <svg class="icon-real-time-insights-grey"></svg>
+                <li th:class="${activePage == 'realTimeInsight'} ? 'li-active' : 'li-inactive'">
+                    <a href="realtimeinsights">
+                        <svg th:class="${activePage == 'realTimeInsight'} ? 'icon-real-time-insights-green' : 'icon-real-time-insights-grey'"></svg>
                         <p>Real-Time Insights</p>
                     </a>
                 </li>
-                <li>
-                    <a href="employees" class="">
-                        <svg class="icon-employees-grey"></svg>
+                <li th:class="${activePage == 'employees'} ? 'li-active' : 'li-inactive'">
+                    <a href="employees">
+                        <svg th:class="${activePage == 'employees'} ? 'icon-employees-green' : 'icon-employees-grey'"></svg>
                         <p>Employees</p>
                     </a>
                 </li>
-                <li class="li-active">
-                    <a href="list" class="">
-                        <svg class="icon-time-and-attendance-green"></svg>
+                <li th:class="${activePage == 'timeAndAttendance'} ? 'li-active' : 'li-inactive'">
+                    <a href="list">
+                        <svg th:class="${activePage == 'timeAndAttendance'} ? 'icon-time-and-attendance-green' : 'icon-time-and-attendance-grey'"></svg>
                         <p>Time & Attendance</p>
                     </a>
                 </li>
-                <li >
+                <li th:class="${activePage == 'requestReview'} ? 'li-active' : 'li-inactive'">
                     <a href="reviews" class="">
-                        <svg class="icon-request-reviews-grey"></svg>
+                        <svg th:class="${activePage == 'requestReview'} ? 'icon-request-reviews-green' : 'icon-request-reviews-grey'"></svg>
                         <p>Request Reviews</p>
                     </a>
                 </li>
-                <li >
+                <li th:class="${activePage == 'drivingLog'} ? 'li-active' : 'li-inactive'">
                     <a href="drivinglog" class="">
-                        <svg class ="icon-driving-log-grey"></svg>
+                        <svg th:class="${activePage == 'drivingLog'} ? 'icon-driving-log-green' : 'icon-driving-log-grey'"></svg>
                         <p>Driving Log</p>
                     </a>
                 </li>
-                <li >
-                    <a href="schedule-admin" class="">
-                        <svg class="icon-request-reviews-grey"></svg>
+                <li th:class="${activePage == 'makeSchedule'} ? 'li-active' : 'li-inactive'">
+                    <a href="schedule-admin">
+                        <svg th:class="${activePage == 'makeSchedule'} ? 'icon-make-schedule-green' : 'icon-make-schedule-grey'"></svg>
                         <p>Make schedule</p>
                     </a>
                 </li>
-                <li>
+                <li th:class="${activePage == 'setting'} ? 'li-active' : 'li-inactive'">
                     <a href="profile" >
-                        <svg class="icon-setting-grey"></svg>
+                        <svg th:class="${activePage == 'setting'} ? 'icon-setting-green' : 'icon-setting-grey'"></svg>
                         <p>Settings</p>
                     </a>
                 </li>
-                <li>
-                    <a href="logout" >
-                        <svg class="icon-log-out-grey"></svg>
-                        <p>Logout</p>
-                    </a>
-                </li>
-
             </ul>
             <div>
                 <div class="account-logged-in">

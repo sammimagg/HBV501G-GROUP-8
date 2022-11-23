@@ -19,18 +19,24 @@
             <form action="#" th:action="@{/save}" th:object="${employee}" method="post" class="employee-profile">
                 <div class="employee-profile-column">
                     <label >First Name</label>
-                    <input type="text" th:field="*{firstName}">
+                        <input type="text" th:field="*{firstName}">
                     <label>Last Name</label>
-                    <input type="text" th:field="*{lastName}">
+                        <input type="text" th:field="*{lastName}">
+                    <label>Kennitala</label>
+                        <input type="text" th:field="*{ssnEmployee}">
+                    <label>Username</label>
+                        <input type="text" th:field="*{employeeUserName}">
                     <label>Email</label>
-                    <input type="text" th:field="*{firstName}">
-                    <label>Phone Numer</label>
-                    <input type="text" th:field="*{phoneNumber}">
+                        <input type="text" th:field="*{employeeUserName}">
+                    <label>Email</label>
+                        <input type="text">
+                    <label>Phone Number</label>
+                        <input type="text" th:field="*{phoneNumber}">
                     <label>Role</label>
-                    <select name="role" th:value="'*{employeeAccountType}'">
-                        <option th:value="'Admin'">Admin</option>
-                        <option value="'User'">User</option>
-                    </select>
+                        <select name="role" th:value="'*{employeeAccountType}'">
+                            <option th:value="'Admin'">Admin</option>
+                            <option value="'User'">User</option>
+                        </select>
                 </div>
                 <div class="employee-profile-row">
                     <input class="default-save-input" type="submit" value="Save">

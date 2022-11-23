@@ -28,8 +28,11 @@ public class ScheduleController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "makeSchedule");
+            model.addAttribute("activePage", "makeSchedule");
         }
         getEmployeeList();
+
         return "schedule-admin";
     }
     @RequestMapping(value = "schedule-admin", method = RequestMethod.GET)
@@ -40,6 +43,7 @@ public class ScheduleController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "makeSchedule");
         }
         model.addAttribute("employees",getEmployeeList());
 

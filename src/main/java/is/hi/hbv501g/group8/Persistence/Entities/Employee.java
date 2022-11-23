@@ -21,12 +21,18 @@ import java.util.Date;
 public class Employee extends User {
 
     @Id // Primary Key
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Basic(optional = false)
+    @Column(name = "ssn",unique=true, nullable = false)
     private String SSN;
     private String firstName;
     private String lastName;
     private String company;
     private String jobTitle;
     private double salary;
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -48,11 +54,11 @@ public class Employee extends User {
     }
 
     public void setSsnEmployee(String ssnEmployee) {
+        System.out.println(ssnEmployee + "er hér");
         this.ssnEmployee = ssnEmployee;
     }
 
     public String getPhoneNumberEmployee() {
-        System.out.println(phoneNumber);
         return phoneNumberEmployee;
     }
 

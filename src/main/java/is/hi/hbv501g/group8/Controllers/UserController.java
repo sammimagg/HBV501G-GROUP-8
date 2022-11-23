@@ -17,10 +17,7 @@ import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -201,6 +198,7 @@ public class UserController {
             model.addAttribute("sickDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingSickDays());
             model.addAttribute("vacationDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingVacationDays());
         }
+        model.addAttribute("activePage", "setting");
         return "profile";
     }
     /**
@@ -228,6 +226,7 @@ public class UserController {
             model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
             model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
         }
+        model.addAttribute("activePage", "setting");
         return "profile";
     }
     /**
@@ -250,7 +249,7 @@ public class UserController {
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
 
         }
-
+        model.addAttribute("activePage", "employees");
         return "employees";
     }
     /**
@@ -272,6 +271,7 @@ public class UserController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
+        model.addAttribute("activePage", "employees");
         model.addAttribute("employees",getEmployeeList());
         return "employees";
     }
@@ -295,7 +295,7 @@ public class UserController {
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
-
+        model.addAttribute("activePage", "realTimeInsight");
         return "realtimeinsights";
     }
 
@@ -317,6 +317,7 @@ public class UserController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "realTimeInsight");
         }
         return "realtimeinsights";
     }
@@ -339,6 +340,7 @@ public class UserController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "requestReview");
         }
         return "reviews";
     }
@@ -361,6 +363,7 @@ public class UserController {
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
             model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+            model.addAttribute("activePage", "requestReview");
         }
         return "reviews";
     }
@@ -368,11 +371,14 @@ public class UserController {
         List<Employee> allEmployees;
         allEmployees = employeeService.findAll();
 
+
         for(Employee row : allEmployees) {
             row.setFirstNameOfEmployee(row.getFirstName());
             row.setLastNameOfEmployee(row.getLastName());
             row.setPhoneNumberEmployee(row.getPhoneNumber());
+            System.out.println(row.getSSN());
             row.setSsnEmployee(row.getSSN());
+            row.setEmployeeUserName(row.getUsername());
         }
         return allEmployees;
     }
@@ -380,7 +386,9 @@ public class UserController {
     public ModelAndView showEditUserPage(@PathVariable(name= "ssn") String ssn) {
         ModelAndView editView = new ModelAndView("edit-employees");
         Employee employee = employeeService.findBySSN(ssn);
+        employee.setSsnEmployee(employee.getSSN());
         editView.addObject("employee",employee);
+
 
         return editView;
     }
@@ -390,5 +398,11 @@ public class UserController {
         employeeService.delete(temp);
         return "redirect:/";
     }
+    @PostMapping("/save")
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 
+
+        employeeService.save(employee);
+        return "employees";
+    }
 }
