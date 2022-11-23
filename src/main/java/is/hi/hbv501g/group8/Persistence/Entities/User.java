@@ -35,6 +35,9 @@ public class User {
     @Transient
     private int employeeAccountType;
 
+    @Transient
+    private String email;
+
     public void User() {
 
     }
@@ -96,5 +99,13 @@ public class User {
 
     public void setAccounttype(int accountType) {
         this.accountType = accountType;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
