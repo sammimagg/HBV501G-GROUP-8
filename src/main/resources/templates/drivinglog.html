@@ -32,7 +32,7 @@
         <p>Time period</p>
         <div class="drivinglog-flex-column1">
         <form class="driving-log-calander" action="#" th:action="@{/drivinglog}" th:object="${dateHelper}" method="POST">
-          <select class="driving-log-calander">
+          <select class="driving-log-calander" th:field="*{date1}">
             <option value="2023-01-01">January</option>
             <option value="2023-02-01">February</option>
             <option value="2023-03-01">March</option>
@@ -46,8 +46,8 @@
             <option value="2023-11-01">November</option>
             <option value="2023-12-01">December</option>
           </select>
-        </form>
           <input class="append-month" type="submit" value="Change month"/>
+        </form>
         </div>
         <div>
           <div th:switch="${instances}">
