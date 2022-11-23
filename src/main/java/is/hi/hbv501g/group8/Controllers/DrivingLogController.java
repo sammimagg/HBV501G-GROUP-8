@@ -29,6 +29,7 @@ public class DrivingLogController {
         this.drivingService = drivingService;
     }
 
+
     @RequestMapping(value="/drivinglog", method = RequestMethod.GET)
     public String drivingGET(Driving driving, User user, HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
