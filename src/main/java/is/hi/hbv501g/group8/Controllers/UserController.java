@@ -98,6 +98,7 @@ public class UserController {
             newEmployeeProfile.setSalary(0);
             newEmployeeProfile.setStartDate(LocalDate.now());
             newEmployeeProfile.setJobTitle("To be changed");
+            newEmployeeProfile.setAccounttype(1);
             employeeService.save(newEmployeeProfile);
             /*
             pls ekki spyrja
@@ -413,12 +414,5 @@ public class UserController {
         Employee temp = employeeService.findBySSN(SSN);
         employeeService.delete(temp);
         return "redirect:/";
-    }
-    @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-
-
-        employeeService.save(employee);
-        return "employees";
     }
 }

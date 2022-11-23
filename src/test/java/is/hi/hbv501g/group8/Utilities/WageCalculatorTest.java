@@ -24,7 +24,7 @@ class WageCalculatorTest {
 
     @Test
     void estimateWages() {
-        assertEquals(wageCalculator.splitHours(LocalTime.of(5,5), LocalTime.of(18,0)), 5);
+        assertEquals(wageCalculator.splitHours(LocalTime.of(23,0), LocalTime.of(18,0)), 5);
     }
 
     @Test
