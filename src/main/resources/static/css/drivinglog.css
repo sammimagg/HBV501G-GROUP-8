@@ -35,6 +35,10 @@
     align-items: center;
 
 }
+.drivinglog-flex-column1 {
+    display: flex;
+
+}
 .drivinglog-form {
     display: flex;
     flex-direction: row;
@@ -74,4 +78,22 @@
 .employee-drivinglog-table {
     height: 40em;
     overflow-y: scroll;
+}
+
+.driving-log-calendar {
+    width: 45rem;
+    height: 52rem;
+    background-color: #222227;
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
+
+}
+
+.append-month {
+    height: 40px;
+
+    background: #1AEAB6;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-top: 6px
+
 }

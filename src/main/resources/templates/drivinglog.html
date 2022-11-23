@@ -20,16 +20,35 @@
         <h1>Driving log</h1>
         <form class="drivinglog-form" action="#" th:action="@{/drivinglog/new}" th:object="${driving}"  method="post">
           <div class="drivinglog-flex-column">
-            <label>Upphafs keyrsla</label>
+            <label>Odometer start</label>
             <input class="start-kassi"  type="text" name="username" id="username" th:field="*{odometerStart}"/>
           </div>
           <div class="drivinglog-flex-column">
-            <label>Enda keyrsla</label>
+            <label>Odometer end</label>
             <input class="end-kassi" type="text" name="password" id="password" th:field="*{odometerEnd}"/>
           </div>
           <input class="append-kassi" type="submit" value="Append Driving Session!"/>
         </form>
-        <p>Time period 24.11.22-25.12.22</p>
+        <p>Time period</p>
+        <div class="drivinglog-flex-column1">
+        <form class="driving-log-calander" action="#" th:action="@{/drivinglog}" method="POST">
+          <select class="driving-log-calander">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+        </form>
+          <input class="append-month" type="submit" value="Change month"/>
+        </div>
         <div>
           <div th:switch="${instances}">
             <!--<h2 th:case="null">No days driven found!</h2>-->
