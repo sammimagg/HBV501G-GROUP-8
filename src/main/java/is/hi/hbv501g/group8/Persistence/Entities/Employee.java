@@ -16,23 +16,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "SSN")
 @Table(name = "employees")
 public class Employee extends User {
 
-    @Id // Primary Key
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Basic(optional = false)
-    @Column(name = "ssn",unique=true, nullable = false)
-    private String SSN;
     private String firstName;
     private String lastName;
     private String company;
+    private String email;
     private String jobTitle;
     private double salary;
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -54,12 +46,20 @@ public class Employee extends User {
     }
 
     public void setSsnEmployee(String ssnEmployee) {
-        System.out.println(ssnEmployee + "er hér");
         this.ssnEmployee = ssnEmployee;
     }
 
     public String getPhoneNumberEmployee() {
+        System.out.println(phoneNumber);
         return phoneNumberEmployee;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPhoneNumberEmployee(String phoneNumberEmployee) {
@@ -75,7 +75,6 @@ public class Employee extends User {
     }
 
     public void setFirstNameOfEmployee(String firstNameOfEmployee) {
-
         this.firstNameOfEmployee = firstNameOfEmployee;
     }
 
@@ -88,17 +87,7 @@ public class Employee extends User {
      *
      * @return SSN
      */
-    public String getSSN() {
-        return SSN;
-    }
-    /**
-     * Description:
-     *
-     * @param SSN ssn of a employee
-     */
-    public void setSSN(String SSN) {
-        this.SSN = SSN;
-    }
+
 
     /**
      * Description:

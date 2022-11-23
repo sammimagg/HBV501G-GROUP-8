@@ -28,8 +28,12 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User save(User user) {
-        user.setPassword(passwordEncoder.encode((user.getPassword())));
+        user.setPassword(passwordEncoder.encode((user.getPassword()))); // @Deprecated v/ extends User
         return userRepository.save(user);
+    }
+
+    public String secureIt(String password){
+        return passwordEncoder.encode(password);
     }
 
     @Override

@@ -21,7 +21,7 @@
             <form>
                 <div>
                     <select name="employee" id="employee">
-                        <option th:each="employee : ${employees}" th:text="${employee.firsNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}"></option>
+                        <option th:each="employee : ${employees}" th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}"></option>
                     </select>
                 </div>
                 <div>

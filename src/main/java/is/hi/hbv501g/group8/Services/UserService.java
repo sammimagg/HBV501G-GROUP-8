@@ -11,4 +11,6 @@ public interface UserService {
     User findByUsername(String username);
     User findBySSN(String ssn);
     User login(User user);
+
+    String secureIt(String password);
 }
