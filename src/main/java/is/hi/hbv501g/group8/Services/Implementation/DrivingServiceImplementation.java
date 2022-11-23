@@ -6,6 +6,7 @@ import is.hi.hbv501g.group8.Services.DrivingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -50,5 +51,16 @@ public class DrivingServiceImplementation implements DrivingService {
     @Override
     public List<Driving> findAllBySSN(String ssn) {
         return drivingRepository.findAllBySSN(ssn);
+    }
+
+    /**
+     * @param ssn
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Override
+    public List<Driving> findAllBySSNAndDagsBetween(String ssn, LocalDate startDate, LocalDate endDate) {
+        return drivingRepository.findAllBySSNAndDagsBetween(ssn, startDate, endDate);
     }
 }

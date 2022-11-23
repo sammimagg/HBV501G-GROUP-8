@@ -229,6 +229,8 @@ public class TransactionController {
                     "pending",
                     dateTimeFrom,
                     dateTimeTo);
+            newTransaction.setOriginalClockIn(orginalTransaction.getClockIn());
+            newTransaction.setOriginalClockOut(orginalTransaction.getClockOut());
             transactionReviewService.save(newTransaction);
         }
         else {

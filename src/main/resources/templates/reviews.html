@@ -17,6 +17,31 @@
         <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
         <div class="col col-9">
           <h1>Missing</h1>
+          <p>Haldór ætti ekki vera hleypt í framendann</p>
+
+          <div th:switch="${reviews}">
+            <h2 th:case="null">No transactions need to be reviewed!</h2>
+            <div th:case="*">
+              <h2>Transaction</h2>
+              <div class="employee-transaction-table">
+                <div class="default-table-header">
+                  <p class="employee-transaction-list-row">Employee</p>
+                  <p class="employee-transaction-list-row">Date</p>
+                  <p class="employee-transaction-list-row">Original Time</p>
+                  <p class="employee-transaction-list-row">Requested Time</p>
+                  <p class="employee-transaction-list-row">Work Time</p>
+                  <p class="employee-transaction-list-row">Status</p>
+                  <p class="employee-transaction-list-row"></p>
+                  <p class="employee-transaction-list-row"></p>
+                </div>
+
+                <div class="default-table-list">
+                  <div class="default-table-row" th:each="review : ${reviews}" th:id="${review.getID}">
+                    <div class="default-table-inner-row">
+                      <p class="employee-transaction-list-row" th:text="${review.SSN}"></p>
+                      <p class="employee-transaction-list-row" th:text="${review.clockInDate}"></p>
+                      <p class="employee-transaction-list-row" th:text="${review.originalClockInTime} + ' - ' + ${review.originalClockOutTime}"></p>
+                      <p class="employee-transaction-list-row" th:text="${review.changedClockInTime} + ' - ' + ${review.changedClockOutTime}"></p>
         </div>
       </div>
     </main>

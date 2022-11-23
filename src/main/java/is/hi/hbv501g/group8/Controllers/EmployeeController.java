@@ -55,8 +55,16 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
+    /**
+     * Function that ensures that logged in user is Manager or Admin
+     *
+     * @param session HttpSession
+     * @return true þá og því aðeins að enginn notandi er tengdur eða
+     *         tengdur notandi er skilgreindur sem 2 eða hærra, þ.e. Admin er 0,
+     *         Manager er 1, Venjulegir notendur 2
+     */
     private boolean ensureAuthorization(HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        return sessionUser == null;
+        return sessionUser == null || sessionUser.getAccounttype() > 1;
     }
 }

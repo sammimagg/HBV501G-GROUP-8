@@ -16,7 +16,9 @@
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="transactionreviews")
@@ -26,6 +28,13 @@ public class TransactionReview {
     private long ID;
     private String SSN, status;
     private LocalDateTime changedClockIn, changedClockOut;
+
+    private LocalDateTime originalClockIn, originalClockOut;
+
+    @Transient
+    private LocalDate clockInDate;
+    @Transient
+    private LocalTime originalClockInTime, originalClockOutTime, changedClockInTime, changedClockOutTime;
 
     public TransactionReview(){}
 
@@ -71,5 +80,53 @@ public class TransactionReview {
 
     public void setChangedClockOut(LocalDateTime changedClockOut) {
         this.changedClockOut = changedClockOut;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getChangedClockIn() {
+        return changedClockIn;
+    }
+
+    public LocalDateTime getChangedClockOut() {
+        return changedClockOut;
+    }
+
+    public LocalDateTime getOriginalClockIn() {
+        return originalClockIn;
+    }
+
+    public void setOriginalClockIn(LocalDateTime originalClockIn) {
+        this.originalClockIn = originalClockIn;
+    }
+
+    public LocalDateTime getOriginalClockOut() {
+        return originalClockOut;
+    }
+
+    public void setOriginalClockOut(LocalDateTime originalClockOut) {
+        this.originalClockOut = originalClockOut;
+    }
+
+    public LocalDate getClockInDate() {
+        return changedClockIn.toLocalDate();
+    }
+
+    public LocalTime getOriginalClockInTime() {
+        return originalClockIn.toLocalTime();
+    }
+
+    public LocalTime getOriginalClockOutTime() {
+        return originalClockOut.toLocalTime();
+    }
+
+    public LocalTime getChangedClockInTime() {
+        return changedClockIn.toLocalTime();
+    }
+
+    public LocalTime getChangedClockOutTime() {
+        return changedClockOut.toLocalTime();
     }
 }

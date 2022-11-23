@@ -65,5 +65,8 @@ public class DrivingLogController {
         driving.setDags(LocalDate.now());
         drivingService.save(driving);
         return "redirect:/drivinglog";
+
+        // Taka út:
+        //List<Driving> pp = drivingService.findAllBySSNAndDagsBetween(sessionUser.getSSN(), LocalDate eh.at)
     }
 }
