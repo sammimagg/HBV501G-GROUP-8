@@ -104,6 +104,7 @@ public class UserController {
             newEmployeeProfile.setSalary(0);
             newEmployeeProfile.setStartDate(LocalDate.now());
             newEmployeeProfile.setJobTitle("To be changed");
+            newEmployeeProfile.setEmail(user.getEmail());
             newEmployeeProfile.setAccounttype(2); // 0 - Admin, 1 - Manager, 2 - User
             employeeService.save(newEmployeeProfile);
             /*
