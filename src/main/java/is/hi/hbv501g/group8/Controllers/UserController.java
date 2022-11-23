@@ -281,6 +281,7 @@ public class UserController {
     @RequestMapping(value = "employees", method = RequestMethod.GET)
     public String getEmployees(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null || sessionUser.getAccounttype() != 0) return "redirect:/";
         if (sessionUser!=null) {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));

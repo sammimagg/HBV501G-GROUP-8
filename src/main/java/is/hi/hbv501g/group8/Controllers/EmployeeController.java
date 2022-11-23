@@ -40,17 +40,23 @@ public class EmployeeController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String submitChangesEmployee(Model model, Employee employee, HttpSession session) {
-        System.out.println(employee.getSSN());
-        Employee workingPloyee = employeeService.findBySSN(employee.getSSN());
 
+        if(ensureAuthorization(session)) return "redirect:/login";
+
+        // Update Employee
+        Employee workingPloyee = employeeService.findBySSN(employee.getSSN());
         workingPloyee.setFirstName(employee.getFirstName());
         workingPloyee.setLastName(employee.getLastName());
         workingPloyee.setEmail(employee.getEmail());
         workingPloyee.setPhoneNumber(employee.getPhoneNumber());
         workingPloyee.setAccounttype(employee.getAccounttype());
-
         employeeService.save(workingPloyee);
 
         return "redirect:/employees";
+    }
+
+    private boolean ensureAuthorization(HttpSession session){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        return sessionUser == null;
     }
 }
