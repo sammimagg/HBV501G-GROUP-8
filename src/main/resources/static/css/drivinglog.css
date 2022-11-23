@@ -32,10 +32,46 @@
 .drivinglog-flex-column {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
 }
 .drivinglog-form {
     display: flex;
     flex-direction: row;
     margin-bottom: 1em;
+    border: 1px solid #D4D4D4;
+}
+
+.start-kassi {
+    box-sizing: border-box;
+    /*width: 347px;*/
+    height: 44px;
+    left: 737px;
+    top: 385px;
+    border: 1px solid #C2C2C2;
+    border-radius: 8px;
+}
+
+.end-kassi {
+    box-sizing: border-box;
+    /*width: 347px;*/
+    height: 44px;
+    left: 737px;
+    top: 385px;
+    border: 1px solid #C2C2C2;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+.append-kassi {
+    height: 44px;
+    margin-top: 40px;
+
+    background: #1AEAB6;
+    border-radius: 8px;
+    margin-left: 10px;
+
+}
+.employee-drivinglog-table {
+    height: 40em;
+    overflow-y: scroll;
 }
