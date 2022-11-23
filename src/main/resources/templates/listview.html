@@ -14,7 +14,7 @@
         <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
         <div class="col col-9">
           <h2>Time and Attendance</h2>
-          <div class="default-table-row total-worked-hour">
+          <div class="total-worked-hour">
             <div class="total-worked-hour-inner-left">
               <p style="color: #7A7A7A;">Work Time</p>
               <p style="font-size: 2rem;">20:00 h</p>

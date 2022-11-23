@@ -1,0 +1,21 @@
+.offline{
+    opacity: 0.5;
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+.offline p:nth-child(2){
+    font-size: 12px;
+}
+.real-time-insights-spacing p:nth-child(1){
+    width: 25em;
+}
+.real-time-insights-spacing p:nth-child(2){
+    width: 10em;
+    margin-top: -5px;
+}
+.real-time-insights-spacing p:nth-child(3){
+    width: 10em;
+}
+.real-time-insights-spacing p:nth-child(4){
+    width: 10em;
+}

@@ -9,16 +9,45 @@
     <title th:case="*" th:text="${username}"></title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
-    <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
+    <link th:href="@{/css/real-time-insights.css}" rel="stylesheet"/>
   </head>
   <body>
     <main class="grid">
       <div class="row">
         <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
-        <div class="col col-9">
-          <h1>Missing</h1>
+          <div class="col col-9">
+            <h2>Real-Time Insights</h2>
+
+            <div class=" total-worked-hour">
+              <div class="total-worked-hour-inner-left">
+                <p style="color: #7A7A7A;">Work Time</p>
+                <p style="font-size: 2rem;">20:00 h</p>
+              </div>
+              <div class="total-worked-hour-inner-right">
+                <p style="color: #7A7A7A;">Total</p>
+              </div>
+            </div>
+
+            <div>
+              <div class="default-table-header real-time-insights-spacing">
+                <p>Employee Name</p>
+                <p>Clock-in</p>
+                <p >Clock-out</p>
+                <p>Work time</p>
+              </div>
+              <div class="default-table-list">
+                <div th:each="employee : ${employees}" th:class="${employee.status == 'onDuty'} ? 'default-table-row user-profile-row ' : 'offline default-table-row user-profile-row'">
+                  <div class="default-table-inner-row real-time-insights-spacing">
+                    <div>
+                      <p th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
+                      <p th:if="${employee.status != 'onDuty'}">Deactive</p>
+                    </div>
+                </div>
+            </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
     </main>
   </body>
 </html>
