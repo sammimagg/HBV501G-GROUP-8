@@ -98,7 +98,7 @@ public class UserController {
             newEmployeeProfile.setSalary(0);
             newEmployeeProfile.setStartDate(LocalDate.now());
             newEmployeeProfile.setJobTitle("To be changed");
-            newEmployeeProfile.setAccounttype(1);
+            newEmployeeProfile.setAccounttype(2); // 0 - Admin, 1 - Manager, 2 - User
             employeeService.save(newEmployeeProfile);
             /*
             pls ekki spyrja
@@ -337,52 +337,6 @@ public class UserController {
             model.addAttribute("activePage", "realTimeInsight");
         }
         return "realtimeinsights";
-    }
-
-    /**
-     * Handler for POST requests on /reviews
-     * 
-     * @// TODO: 22.10.2022  
-     *
-     * @param model Model
-     * @param session HttpSession
-     * @param user User
-     * @return reviews A view for reviews
-     */
-    @RequestMapping(value = "reviews", method = RequestMethod.POST)
-    public String postRequest(Model model, HttpSession session, User user) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "requestReview");
-        }
-        return "reviews";
-    }
-
-    /**
-     * A handler for GET requests on /reviews
-     * 
-     * @// TODO: 22.10.2022
-     *
-     * @param model Model
-     * @param session HttpSession
-     * @param user User
-     * @return reviews A view for reviews
-     */
-    @RequestMapping(value = "reviews", method = RequestMethod.GET)
-    public String getRequest(Model model, HttpSession session, User user) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "requestReview");
-        }
-        return "reviews";
     }
     public List<Employee> getEmployeeList() {
         List<Employee> allEmployees;

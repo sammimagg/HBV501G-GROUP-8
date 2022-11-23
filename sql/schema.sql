@@ -35,7 +35,9 @@ CREATE TABLE IF NOT EXISTS TransactionReviews (
     SSN VARCHAR(10),
     status VARCHAR(50),
     changed_clock_in TIMESTAMP WITH TIME ZONE,
-    changed_clock_out TIMESTAMP WITH TIME ZONE
+    changed_clock_out TIMESTAMP WITH TIME ZONE,
+    original_clock_in TIMESTAMP WITH TIME ZONE,
+    original_clock_out TIMESTAMP WITH TIME ZONE
 );
 
 CREATE TABLE IF NOT EXISTS Companies (
@@ -70,8 +72,8 @@ CREATE TABLE IF NOT EXISTS Deviations (
     SSN varchar(10),
     comment varchar(100),
     type varchar(5),
-    start_date date,
-    end_date date
+    date_from date,
+    date_to date
 );
 
 /*INSERT INTO users (username, password) VALUES ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');*/
