@@ -18,12 +18,12 @@ Create a new empty project in Railway and start by creating a PostgreSQL databas
 a new project from GitHub. You can use the following environment variables based on the database you just created.
 
 ```properties
-spring_profiles_active=
-PROD_DB_HOST=
-PROD_DB_PORT=
-PROD_DB_NAME=
-PROD_DB_PASSWORD=
-PROD_DB_USERNAME=
+spring_profiles_active=prod
+PROD_DB_HOST=containers-us-west-127.railway.app
+PROD_DB_PORT=5818
+PROD_DB_NAME=railway
+PROD_DB_PASSWORD=YrQX82x5rkMNDerEOTcw
+PROD_DB_USERNAME=postgres
 ```
 
 You don't need GitHub Actions or any type of pipeline for this setup because Railway handles this for you. Simply push your code to GitHub
