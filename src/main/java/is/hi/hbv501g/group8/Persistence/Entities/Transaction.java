@@ -12,6 +12,7 @@ package is.hi.hbv501g.group8.Persistence.Entities;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,6 +39,9 @@ public class Transaction {
 
     @Transient
     private int workedHours, workedMinutes;
+
+    @Transient
+    private Duration duration;
 
     public Transaction() {
 
@@ -190,5 +194,9 @@ public class Transaction {
 
     public void setWorkedMinutes(int workedMinutes) {
         this.workedMinutes = workedMinutes;
+    }
+
+    public long getDuration() {
+        return Duration.between(clockIn, clockOut).toMinutes();
     }
 }

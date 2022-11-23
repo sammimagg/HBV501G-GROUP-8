@@ -2,7 +2,9 @@ package is.hi.hbv501g.group8.Persistence.Repositories;
 
 import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 

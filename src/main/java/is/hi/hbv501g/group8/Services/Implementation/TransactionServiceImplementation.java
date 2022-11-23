@@ -4,9 +4,11 @@ import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import is.hi.hbv501g.group8.Persistence.Repositories.TransactionRepository;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 

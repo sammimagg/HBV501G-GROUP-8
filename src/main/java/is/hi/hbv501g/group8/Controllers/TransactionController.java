@@ -176,10 +176,19 @@ public class TransactionController {
         dateOne = dateHelper.getDate1();
         dateTwo = dateHelper.getDate2();
 
+        long totalHours = 0;
+
+        for (Transaction row : transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay())) {
+            totalHours += row.getDuration();
+        }
+
+        double ttlHrs = totalHours / 60.0;
+
 
         model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),dateHelper.getDate1(),dateHelper.getDate2()));
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
+        model.addAttribute("totalHours", ttlHrs);
         return "listview";
     }
     /**

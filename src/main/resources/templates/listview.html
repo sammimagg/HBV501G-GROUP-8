@@ -14,10 +14,14 @@
         <div th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></div>
         <div class="col col-9">
           <h2>Time and Attendance</h2>
-          <div class="total-worked-hour">
-            <div class="total-worked-hour-inner-left">
+          <div class="total-worked-hour" th:switch="${totalHours}">
+            <div class="total-worked-hour-inner-left" th:case="null">
               <p style="color: #7A7A7A;">Work Time</p>
-              <p style="font-size: 2rem;">20:00 h</p>
+              <p style="font-size: 2rem;">XOXO</p>
+            </div>
+            <div class="total-worked-hour-inner-left" th:case="*">
+              <p style="color: #7A7A7A;">Work Time</p>
+              <p style="font-size: 2rem;" th:text="${totalHours} +  ' ahoras'"></p>
             </div>
             <div class="total-worked-hour-inner-right">
               <p style="color: #7A7A7A;">Total</p>
