@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS Transactions;
 DROP TABLE IF EXISTS Employees;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Companies;
+DROP TABLE IF EXISTS Deviations;
 
 CREATE TABLE IF NOT EXISTS Employees (
     SSN varchar(10) primary key,
