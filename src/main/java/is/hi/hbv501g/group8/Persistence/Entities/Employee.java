@@ -75,7 +75,6 @@ public class Employee extends User {
     }
 
     public void setFirstNameOfEmployee(String firstNameOfEmployee) {
-
         this.firstNameOfEmployee = firstNameOfEmployee;
     }
 
