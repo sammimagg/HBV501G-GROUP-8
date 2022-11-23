@@ -18,12 +18,14 @@
         <div class="col col-9">
             <form action="#" th:action="@{/save}" th:object="${employee}" method="post" class="employee-profile">
                 <div class="employee-profile-column">
+                    <label> SSN </label>
+                    <input type="text"  th:field="*{SSN}" readonly>
                     <label >First Name</label>
                     <input type="text" th:field="*{firstName}">
                     <label>Last Name</label>
                     <input type="text" th:field="*{lastName}">
                     <label>Email</label>
-                    <input type="text" th:field="*{firstName}">
+                    <input type="text" th:field="*{email}">
                     <label>Phone Numer</label>
                     <input type="text" th:field="*{phoneNumber}">
                     <label>Role</label>

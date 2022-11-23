@@ -22,6 +22,7 @@ public class Employee extends User {
     private String firstName;
     private String lastName;
     private String company;
+    private String email;
     private String jobTitle;
     private double salary;
     @Column(name = "phone_number")
@@ -51,6 +52,14 @@ public class Employee extends User {
     public String getPhoneNumberEmployee() {
         System.out.println(phoneNumber);
         return phoneNumberEmployee;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPhoneNumberEmployee(String phoneNumberEmployee) {
