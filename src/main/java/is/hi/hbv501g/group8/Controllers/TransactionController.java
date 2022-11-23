@@ -138,6 +138,7 @@ public class TransactionController {
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if(sessionUser == null) return "redirect:/";
         if (sessionUser!=null) {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
             model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
@@ -145,6 +146,25 @@ public class TransactionController {
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
             model.addAttribute("activePage", "timeAndAttendance");
         }
+
+        dateOne = dateHelper.getDate1();
+        dateTwo = dateHelper.getDate2();
+
+        long totalHours = 0;
+
+        LocalDate currentDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
+
+        for (Transaction row : transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), currentDate.atStartOfDay(), currentDate.plusMonths(1).atStartOfDay())) {
+            totalHours += row.getDuration();
+        }
+
+        double ttlHrs = totalHours / 60.0;
+
+        model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),currentDate, currentDate.plusMonths(1)));
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
+        model.addAttribute("totalHours", ttlHrs);
+
         return "listview";
     }
 
