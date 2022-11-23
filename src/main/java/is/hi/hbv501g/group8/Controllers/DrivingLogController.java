@@ -1,5 +1,6 @@
 package is.hi.hbv501g.group8.Controllers;
 
+import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
 import is.hi.hbv501g.group8.Persistence.Entities.Driving;
 import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
@@ -22,6 +23,9 @@ public class DrivingLogController {
 
     private DrivingService drivingService;
     private EmployeeService employeeService;
+
+    localDate dateOne;
+    localDate dateTwo;
 
     @Autowired
     public DrivingLogController(DrivingService drivingService, EmployeeService employeeService) {
@@ -48,6 +52,25 @@ public class DrivingLogController {
 
         return "drivinglog";
     }
+
+    @RequestMapping(value="/drivinglog/manudur", method = RequestMethod.POST)
+    public String monthPost(Driving driving, User user, HttpSession session, Model model ) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        }
+
+        dateOne = dateHelper.getDate1();
+        dateTwo = dateHelper.getDate2();
+
+    }
+
+
 
     @RequestMapping(value="/drivinglog/new", method = RequestMethod.POST)
     public String drivingPOST(Driving driving, User user, HttpSession session, Model model){
