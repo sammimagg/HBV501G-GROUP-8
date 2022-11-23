@@ -11,9 +11,12 @@ package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
 import is.hi.hbv501g.group8.Persistence.Entities.Employee;
+import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.EmployeeService;
+import is.hi.hbv501g.group8.Services.TransactionService;
 import is.hi.hbv501g.group8.Services.UserService;
+import is.hi.hbv501g.group8.Utilities.Status;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -36,6 +39,8 @@ public class UserController {
     UserService userService;
     EmployeeService employeeService;
 
+    TransactionService transactionService;
+
     /**
      * Constructor for UserController
      *
@@ -44,9 +49,10 @@ public class UserController {
      */
 
     @Autowired
-    public UserController(UserService userService, EmployeeService employeeService) {
+    public UserController(UserService userService, EmployeeService employeeService,TransactionService transactionService) {
         this.userService = userService;
         this.employeeService = employeeService;
+        this.transactionService = transactionService;
     }
 
     /**
@@ -336,20 +342,25 @@ public class UserController {
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
             model.addAttribute("activePage", "realTimeInsight");
         }
+        model.addAttribute("employees",getEmployeeList());
         return "realtimeinsights";
     }
     public List<Employee> getEmployeeList() {
         List<Employee> allEmployees;
         allEmployees = employeeService.findAll();
 
-
         for(Employee row : allEmployees) {
             row.setFirstNameOfEmployee(row.getFirstName());
             row.setLastNameOfEmployee(row.getLastName());
             row.setPhoneNumberEmployee(row.getPhoneNumber());
-            System.out.println(row.getSSN());
             row.setSsnEmployee(row.getSSN());
             row.setEmployeeUserName(row.getUsername());
+            if(transactionService.findBySSNAndFinished(row.getSSN(), false) == null ){
+                row.setStatus("offDuty");
+            }
+            else {
+                row.setStatus("onDuty");
+            }
         }
         return allEmployees;
     }

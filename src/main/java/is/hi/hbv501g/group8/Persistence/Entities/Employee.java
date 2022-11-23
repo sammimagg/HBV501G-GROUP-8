@@ -10,6 +10,8 @@
  */
 package is.hi.hbv501g.group8.Persistence.Entities;
 
+import is.hi.hbv501g.group8.Utilities.Status;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -25,6 +27,7 @@ public class Employee extends User {
     private String email;
     private String jobTitle;
     private double salary;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -34,7 +37,8 @@ public class Employee extends User {
     private int remainingVacationDays, remainingSickDays;
 
     @Transient
-    private String firstNameOfEmployee, lastNameOfEmployee, phoneNumberEmployee, ssnEmployee;
+    private String firstNameOfEmployee, lastNameOfEmployee, phoneNumberEmployee, ssnEmployee, status;
+
 
 
     public void Employee() {
@@ -197,5 +201,13 @@ public class Employee extends User {
 
     public void updateRemainingSickDays() {
         this.remainingSickDays = (int)(ChronoUnit.MONTHS.between(getStartDate(),LocalDate.now())*2)-(getSickDaysUsed());;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
