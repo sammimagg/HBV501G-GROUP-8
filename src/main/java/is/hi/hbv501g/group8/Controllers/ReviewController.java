@@ -13,6 +13,7 @@
 
 package is.hi.hbv501g.group8.Controllers;
 
+import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import is.hi.hbv501g.group8.Persistence.Entities.TransactionReview;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.EmployeeService;
@@ -52,7 +53,7 @@ public class ReviewController {
      * @return reviews A view for reviews
      */
     @RequestMapping(value = "reviews", method = RequestMethod.POST)
-    public String postRequest(Model model, HttpSession session, User user) {
+    public String postRequest(Model model, HttpSession session, User user, TransactionReview transactionReview) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser!=null) {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
@@ -61,6 +62,30 @@ public class ReviewController {
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
             model.addAttribute("activePage", "requestReview");
         }
+
+        // muna auth
+        if(ensureAuthorization(session)) return "redirect:/login";
+        TransactionReview temp = transactionReviewService.findByID(transactionReview.getID());
+        Transaction tmp = transactionService.findByID(transactionReview.getID());
+        if(tmp == null || temp == null) return "redirect:/";
+        if( transactionReview.getStatus().equals("approve")) {
+            System.out.println("Accepta!");
+            System.out.println(transactionReview.getID());
+            temp.setStatus("accepted");
+            tmp.setClockIn(temp.getChangedClockIn());
+            tmp.setClockOut(temp.getChangedClockOut());
+            tmp.setStatus("request accepted");
+
+        } else if (transactionReview.getStatus().equals("reject")) {
+            System.out.println("Rejecta!");
+            temp.setStatus("rejected");
+            tmp.setStatus("request rejected");
+        }
+
+        transactionReviewService.save(temp);
+        transactionService.save(tmp);
+
+
         return "reviews";
     }
 
@@ -75,7 +100,7 @@ public class ReviewController {
      * @return reviews A view for reviews
      */
     @RequestMapping(value = "reviews", method = RequestMethod.GET)
-    public String getRequest(Model model, HttpSession session, User user) {
+    public String getRequest(Model model, HttpSession session, User user, TransactionReview transactionReview) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser!=null) {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");

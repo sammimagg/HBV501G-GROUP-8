@@ -231,12 +231,14 @@ public class TransactionController {
                     dateTimeTo);
             newTransaction.setOriginalClockIn(orginalTransaction.getClockIn());
             newTransaction.setOriginalClockOut(orginalTransaction.getClockOut());
+            newTransaction.setSSN(orginalTransaction.getSSN());
             transactionReviewService.save(newTransaction);
         }
         else {
             exists.setStatus("pending");
             exists.setChangedClockIn(dateTimeFrom);
             exists.setChangedClockOut(dateTimeTo);
+            exists.setSSN(orginalTransaction.getSSN());
             transactionReviewService.save(exists);
         }
 
