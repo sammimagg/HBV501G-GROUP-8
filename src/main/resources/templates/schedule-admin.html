@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col col-12">
                     <h1>Make schedule</h1>
-                    <form th:action="@{/schedule-admin}" th:object="${schedule}"  method="POST">
+                    <form >
                         <div>
                             <select name="employee" id="employee">
                                 <option th:each="employee : ${employees}" th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}"></option>

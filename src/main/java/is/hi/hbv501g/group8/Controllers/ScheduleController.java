@@ -29,7 +29,7 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
     @RequestMapping(value = "schedule-admin", method = RequestMethod.POST)
-    public String postRequest(Model model, HttpSession session, User user,Schedule schedule) {
+    public String postRequest(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser!=null) {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
@@ -41,14 +41,12 @@ public class ScheduleController {
         }
         getEmployeeList();
 
-        System.out.println(schedule.getDateFrom());
-
 
 
         return "schedule-admin";
     }
     @RequestMapping(value = "schedule-admin", method = RequestMethod.GET)
-    public String getRequest(Model model, HttpSession session, User user, Schedule schedule) {
+    public String getRequest(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser!=null) {
             model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
