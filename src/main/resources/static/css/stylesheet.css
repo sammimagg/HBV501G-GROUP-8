@@ -34,6 +34,10 @@ body {
     font-weight: 500;
     min-height: 100%;
 }
+.body-sidebar{
+    flex-direction: row;
+    display: flex;
+}
 label{
     font-family: 'poppins';
     margin-top: 1em;
@@ -52,10 +56,7 @@ select {
     overflow: hidden;
     width: 100%;
 }
-body {
-    flex-direction: row;
-    display: flex;
-}
+
 .grid{
     margin: 0 auto;
     max-width: 1450px;
@@ -497,8 +498,14 @@ main{
 }
 
 /*******************************************************************/
-.logoSVG {
-    background-image: url(icon/logo.svg);
+.logoSVGgreen {
+    background-image: url(icon/logo-green.svg);
+    background-repeat: no-repeat;
+    height: 2em;
+    margin: 0;
+}
+.logoSVGwhite {
+    background-image: url(icon/logo-white.svg);
     background-repeat: no-repeat;
     height: 2em;
     margin: 0;
@@ -548,7 +555,7 @@ main{
     color: #1AEAB6;
     height: 50px;
     min-width: 200px;
-
+    background-color: white !important;
 
 }
 .default-save-input {
@@ -558,6 +565,7 @@ main{
     color: white;
     min-width: 200px;
     margin-right:0.5em
+
 }
 .font-white{
     color: white;

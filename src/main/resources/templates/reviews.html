@@ -11,7 +11,7 @@
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
     <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
   </head>
-  <body>
+  <body class="body-sidebar">
     <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
     <main>
       <div class="row">
@@ -20,7 +20,7 @@
           <div th:switch="${reviews}">
             <h2 th:case="null">No transactions need to be reviewed!</h2>
             <div th:case="*">
-              <h2>Transaction</h2>
+              <h3>Transaction</h3>
               <div class="employee-transaction-table">
                 <div class="default-table-header">
                   <p class="employee-transaction-list-row">Employee</p>

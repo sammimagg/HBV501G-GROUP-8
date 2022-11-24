@@ -11,7 +11,7 @@
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
 
 </head>
-<body>
+<body class="body-sidebar">
     <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
     <main >
         <div class="row">

@@ -1,7 +1,7 @@
 .clockin-kassi {
     margin-top: 10%;
     height: 500px;
-    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.25);
+
 }
 .clockin-box-left{
     width: 38.5%;
@@ -10,14 +10,9 @@
 
 }
 body{
-    background: linear-gradient(
-            to right,
-                /*90deg,*/
-            #1AEAB6 0%,
-            #1AEAB6 42.66666666666%,
-            #ffffff 0%,
-            #ffffff 100%);
+    background: linear-gradient( to right, #1AEAB6 0%, #1AEAB6 45%, #fff 0%, #fff 100%);
 }
+
 
 .ssn-kassi {
     box-sizing: border-box;
@@ -27,6 +22,7 @@ body{
     top: 385px;
     border: 1px solid #C2C2C2;
     border-radius: 8px;
+    margin-bottom: 0.5em;
 }
 
 .submit-kassi {

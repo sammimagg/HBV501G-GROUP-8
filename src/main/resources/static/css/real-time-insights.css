@@ -19,3 +19,6 @@
 .real-time-insights-spacing p:nth-child(4){
     width: 25%;
 }
+.real-time-insights-row{
+    height: 50px;
+}

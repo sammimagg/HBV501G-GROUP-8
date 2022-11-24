@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <title>clock</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link th:href="@{/css/grid-overlay.css}" rel="stylesheet"/>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
     <link th:href="@{/css/clock.css}" rel="stylesheet"/>
 </head>
@@ -15,7 +14,9 @@
                 <div class="flex-container">
                     <div class="clockin-box-left flex-container column">
                         <div class="login-h1 font-white center">
-                            <h1>DeadTime</h1>
+                            <h1 class="logo">
+                                <svg class="logoSVGwhite"></svg>
+                            </h1>
                         </div>
                         <div class="cloud-login-white">
                             <svg class="icon-cloud-login-white"/>
@@ -25,14 +26,13 @@
                         <form action="#" th:action="@{/}" th:object="${transaction}"  method="post">
                             <p>SSN</p>
                             <input class="ssn-kassi" type="text" name="ssn" id="ssn" th:value="*{SSN}" />
-                            <input class="submit-kassi" type="submit" value="Clock-in"/>
-                            <p class="output" id="test"></p>
+                            <input class="submit-kassi default-save-input" type="submit" value="Clock-in"/>
                         </form>
                         <form action="#" th:action="@{/login}" th:object="${user}"  method="get">
-                            <input class="login-kassi"  type="submit" name="action" value="Login"/>
+                            <input class="login-kassi default-cancel-input"  type="submit" name="action" value="Login"/>
                         </form>
                         <form action="#" th:action="@{/signup}" th:object="${user}"  method="get">
-                            <input class="signup-kassi"  type="submit" name="action" value="Signup"/>
+                            <input class="signup-kassi default-cancel-input"  type="submit" name="action" value="Signup"/>
                         </form>
 
                     </div>
