@@ -79,7 +79,9 @@ body {
     padding-left: 2em;
     padding-right: 2em;
     width: 100%;
-    margin-bottom: 2em; }
+    margin-bottom: 2em;
+}
+
 
 .col-1 {
     width: 8.33333%; }
@@ -544,15 +546,17 @@ main{
     border: 1px solid #1AEAB6 !important;
     text-align: center;
     color: #1AEAB6;
-    width: 100%;
-    margin-left:0.5em;
+    height: 50px;
+    min-width: 200px;
+
+
 }
 .default-save-input {
     background-color: #1AEAB6 !important;
     border: 1px solid #1AEAB6 !important;
     text-align: center;
     color: white;
-    width: 100%;
+    min-width: 200px;
     margin-right:0.5em
 }
 .font-white{
@@ -594,7 +598,6 @@ main{
     margin-bottom: 0.5em;
     padding-top: 12.5px;
     padding-bottom: 12.5px;
-    height: 50px;
 }
 .default-table-inner-row{
     display: flex;
@@ -602,6 +605,7 @@ main{
     margin-left: 1em;
 }
 .default-table-header{
+    padding-left: 1em;
     display: flex;
 }
 .logout{
@@ -611,6 +615,10 @@ main{
     right: 0;
     padding-top: 1em;
     padding-right: 1em;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
 }
 li:hover{
     background-color: #F2F2F2;

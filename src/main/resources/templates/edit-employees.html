@@ -13,37 +13,69 @@
     <body>
         <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
         <main>
-        <div class="row">
-            <div class="col col-9">
-                <form action="#" th:action="@{/save}" th:object="${employee}" method="post" class="employee-profile">
-                    <div class="employee-profile-column">
-                        <label >First Name</label>
+            <h2>Edit Employee</h2>
+            <form class="employee-profile" action="#" th:action="@{/save}" th:object="${employee}" method="post">
+                <div class="row">
+                    <div class="col col-4">
+                        <div class="flex-column">
+                            <label >First Name</label>
                             <input type="text" th:field="*{firstName}">
-                        <label>Last Name</label>
+                        </div>
+                    </div>
+                    <div class="col col-4">
+                        <div class="flex-column">
+                            <label>Last Name</label>
                             <input type="text" th:field="*{lastName}">
-                        <label>Kennitala</label>
-                            <input type="text" th:field="*{ssnEmployee}">
-                        <label>Username</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-4">
+                        <div class="flex-column">
+                            <label>Username</label>
                             <input type="text" th:field="*{employeeUserName}">
-                        <label>Email</label>
-                            <input type="text" th:field="*{employeeUserName}">
-                        <label>Email</label>
-                            <input type="text">
-                        <label>Phone Number</label>
+                        </div>
+                    </div>
+                    <div class="col col-4">
+                        <div class="flex-column">
+                            <label> SSN </label>
+                            <input type="text"  th:field="*{SSN}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col col-4">
+                        <div class="flex-column">
+                            <label>Email</label>
+                            <input type="text" th:field="*{email}">
+                        </div>
+
+                    </div>
+                    <div class="col col-4">
+                        <div class="flex-column">
+                            <label>Phone Number</label>
                             <input type="text" th:field="*{phoneNumber}">
-                        <label>Role</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col col-4">
+                        <div class="flex-column">
+                            <label>Role</label>
                             <select name="role" th:value="'*{employeeAccountType}'">
                                 <option th:value="'Admin'">Admin</option>
                                 <option value="'User'">User</option>
                             </select>
+                        </div>
                     </div>
-                    <div class="employee-profile-row">
+                </div>
+                <div class="row">
+                    <div class="col col-12">
                         <input class="default-save-input" type="submit" value="Save">
                         <input class="default-cancel-input" type="reset" value="Cancel">
                     </div>
-                </form>
-            </div>
-        </div>
-    </main>
+                </div>
+            </form>
+        </main>
     </body>
 </html>

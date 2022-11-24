@@ -7,7 +7,7 @@
     <title th:case="*" th:text="${username}"></title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
-    <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
+    <link th:href="@{/css/edit-employees.css}" rel="stylesheet"/>
   </head>
   <body>
     <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
@@ -16,7 +16,7 @@
         <div class="col col-12">
           <h2>Employees</h2>
           <div>
-            <div class="default-table-header">
+            <div class="default-table-header employees-spacing">
               <p class="">Name</p>
               <p class="">Phone number</p>
               <p class="">Role</p>
@@ -24,7 +24,7 @@
             </div>
             <div class="default-table-list">
               <div class="default-table-row user-profile-row" th:each="employee : ${employees}">
-                <div class="default-table-inner-row">
+                <div class="default-table-inner-row employees-spacing">
                   <p th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
                   <p th:text="${employee.phoneNumberEmployee}">8458094</p>
                   <p th:text="${employee.employeeAccountType}">Admin</p>

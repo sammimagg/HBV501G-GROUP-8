@@ -1,7 +1,4 @@
-.employee-profile {
-    width: 25em;
-    position: absolute;
-}
+
 .employee-profile-column {
     display: flex;
     flex-direction: column;
@@ -21,7 +18,7 @@
 }
 .employee-profile label{
     font-family: 'poppins';
-    margin-top: 1em;
+    margin-top: 0;
 }
 .employee-profile select {
     margin-top: 0.5em;
@@ -31,4 +28,15 @@
     border-radius: 5px;
     border: 1px solid #000000;
 }
-
+.employees-spacing p:nth-child(1) {
+    width: 25%;
+}
+.employees-spacing p:nth-child(2) {
+    width: 25%;
+}
+.employees-spacing p:nth-child(3) {
+    width: 25%;
+}
+.employees-spacing p:nth-child(4) {
+    width: 25%;
+}

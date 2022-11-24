@@ -54,7 +54,9 @@
                         <p class="employee-transaction-list-row" th:text="${transaction.clockOutTime}"></p>
                         <p class="employee-transaction-list-row" th:text="${transaction.workedHours} + 'H ' + ${transaction.workedMinutes} + 'm'"></p>
                         <div th:switch="${transaction.status}" class="employee-transaction-list-row">
-                          <svg th:case="'approved'" class="icon-approved-green" height="25" width="25"></svg>
+                          <svg th:case="'request accepted'" class="icon-approved-green" height="25" width="25"></svg>
+                          <svg th:case="'pending VACATION'" class="icon-pending-yellow" height="25" width="25"></svg>
+                          <svg th:case="'pending SICK'" class="icon-pending-yellow" height="25" width="25"></svg>
                           <svg th:case="'pending'" class="icon-pending-yellow" height="25" width="25"></svg>
                           <svg th:case="'request'" class="icon-request-red" height="25" width="25"></svg>
                         </div>
