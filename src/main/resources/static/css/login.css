@@ -11,13 +11,7 @@
 
 }
 body{
-    background: linear-gradient(
-            to right,
-                /*90deg,*/
-            #1AEAB6 0%,
-            #1AEAB6 42.66666666666%,
-            #ffffff 0%,
-            #ffffff 100%);
+    background: linear-gradient( to right, #1AEAB6 0%, #1AEAB6 45%, #fff 0%, #fff 100%);
 }
 
 

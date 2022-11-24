@@ -3,13 +3,14 @@
 <head>
     <meta charset="en" >
 </head>
-    <a href="logout" class="logout">
-        <p>Logout</p>
-        <svg class="icon-logout-grey"></svg>
-    </a>
+
     <nav th:fragment="menu">
+        <a href="logout" class="logout">
+            <p>Logout</p>
+            <svg class="icon-logout-grey"></svg>
+        </a>
         <h1 class="logo">
-            <svg class="logoSVG"></svg>
+            <svg class="logoSVGgreen"></svg>
         </h1>
         <ul class="menu-ul">
             <li th:class="${activePage == 'timeAndAttendance'} ? 'li-active' : 'li-inactive'">
