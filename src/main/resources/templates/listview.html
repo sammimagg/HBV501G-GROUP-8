@@ -74,7 +74,7 @@
                       <form action="#" th:action="@{/edit}" th:object="${RequestReview}" method="post" class="default-table-inner-row " style="display: none" th:id="'row-' + ${transaction.getID}">
                         <input type="hidden" name="id" th:value="${transaction.getID}">
                         <div class="employee-transaction-list-row">
-                          <input class="employee-transaction-list-row-input-date" type="text"placeholder="yyyy-mm-dd" name="date" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required/>
+                          <input class="employee-transaction-list-row-input-date" type="text" placeholder="yyyy-mm-dd" name="date" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required/>
                         </div >
                         <div class="employee-transaction-list-row">
                           <input class="employee-transaction-list-row-input-time" type="text" placeholder="hh:mm" name="timeIn"  required  />

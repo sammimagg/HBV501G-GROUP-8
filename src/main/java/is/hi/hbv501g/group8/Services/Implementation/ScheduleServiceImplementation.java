@@ -3,6 +3,7 @@ package is.hi.hbv501g.group8.Services.Implementation;
 
 import is.hi.hbv501g.group8.Persistence.Entities.Schedule;
 import is.hi.hbv501g.group8.Persistence.Repositories.ScheduleRepository;
+import is.hi.hbv501g.group8.Services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

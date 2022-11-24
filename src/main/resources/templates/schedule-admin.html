@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col col-12">
                     <h1>Make schedule</h1>
-                    <form>
+                    <form th:action="@{/schedule-admin}" th:object="${schedule}"  method="POST">
                         <div>
                             <select name="employee" id="employee">
                                 <option th:each="employee : ${employees}" th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}"></option>
@@ -26,9 +26,9 @@
                         </div>
                         <div>
                             <p>Start Date:</p>
-                            <input type="date">
+                            <input type="text" name="dateFrom"  placeholder="yyyy-mm-dd"/>
                             <p>End Date:</p>
-                            <input type="date">
+                            <input type="text" name="dateTo"  placeholder="yyyy-mm-dd"/>
                         </div>
                         <div>
                             <p>Start Time</p>

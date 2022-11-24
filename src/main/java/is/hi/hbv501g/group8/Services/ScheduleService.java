@@ -1,4 +1,4 @@
-package is.hi.hbv501g.group8.Services.Implementation;
+package is.hi.hbv501g.group8.Services;
 
 import is.hi.hbv501g.group8.Persistence.Entities.Schedule;
 

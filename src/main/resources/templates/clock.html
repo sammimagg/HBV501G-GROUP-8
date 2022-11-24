@@ -27,6 +27,7 @@
                             <p>SSN</p>
                             <input class="ssn-kassi" type="text" name="ssn" id="ssn" th:value="*{SSN}" />
                             <input class="submit-kassi default-save-input" type="submit" value="Clock-in"/>
+                            <p class="output" id="test"></p>
                         </form>
                         <form action="#" th:action="@{/login}" th:object="${user}"  method="get">
                             <input class="login-kassi default-cancel-input"  type="submit" name="action" value="Login"/>
