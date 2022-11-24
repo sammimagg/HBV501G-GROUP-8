@@ -1,8 +1,8 @@
 package is.hi.hbv501g.group8.Services.Implementation;
 
+
 import is.hi.hbv501g.group8.Persistence.Entities.Schedule;
 import is.hi.hbv501g.group8.Persistence.Repositories.ScheduleRepository;
-import is.hi.hbv501g.group8.Services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
     }
 
     @Override
-    List<Schedule> findAllBySSN(String ssn) {
+    public List<Schedule> findAllBySSN(String ssn) {
         return scheduleRepository.findAllBySSN(ssn);
     }
 }

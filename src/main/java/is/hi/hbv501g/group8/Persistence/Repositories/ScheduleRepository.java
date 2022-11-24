@@ -1,6 +1,7 @@
 package is.hi.hbv501g.group8.Persistence.Repositories;
 
 import is.hi.hbv501g.group8.Persistence.Entities.Driving;
+import is.hi.hbv501g.group8.Persistence.Entities.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

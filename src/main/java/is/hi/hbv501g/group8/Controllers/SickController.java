@@ -15,7 +15,6 @@
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.*;
-import is.hi.hbv501g.group8.Services.DeviationService;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
@@ -33,11 +32,11 @@ import java.time.temporal.ChronoUnit;
 public class SickController {
     private final TransactionReviewService transactionReviewService;
     private final EmployeeService employeeService;
-    private final DeviationService deviationService;
+    private final EmployeeService.DeviationService deviationService;
     private final TransactionService transactionService;
 
     @Autowired
-    public SickController(TransactionReviewService transactionReviewService, EmployeeService employeeService, DeviationService deviationService, TransactionService transactionService) {
+    public SickController(TransactionReviewService transactionReviewService, EmployeeService employeeService, EmployeeService.DeviationService deviationService, TransactionService transactionService) {
         this.transactionReviewService = transactionReviewService;
         this.employeeService = employeeService;
         this.deviationService = deviationService;

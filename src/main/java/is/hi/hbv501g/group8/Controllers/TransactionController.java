@@ -146,7 +146,7 @@ public class TransactionController {
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
             model.addAttribute("activePage", "timeAndAttendance");
         }
-
+        System.out.println(dateHelper.getDate1());
         dateOne = dateHelper.getDate1();
         dateTwo = dateHelper.getDate2();
 
@@ -193,8 +193,10 @@ public class TransactionController {
             model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
             model.addAttribute("activePage", "timeAndAttendance");
         }
+
         dateOne = dateHelper.getDate1();
         dateTwo = dateHelper.getDate2();
+        System.out.println(dateOne + "hér");
 
         long totalHours = 0;
 
@@ -234,8 +236,8 @@ public class TransactionController {
         }
         model.addAttribute("activePage", "timeAndAttendace");
         model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),dateHelper.getDate1(),dateHelper.getDate2()));
-        System.out.println("Date: " + rr.getDate() + " TimeIn: " + rr.getTimeIn() + " TimeOut: " + rr.getTimeOut() +" ID: " + rr.getId());
-        System.out.println("Date1 " + dateOne + " Date2 " + dateTwo);
+       System.out.println("Date: " + rr.getDate() + " TimeIn: " + rr.getTimeIn() + " TimeOut: " + rr.getTimeOut() +" ID: " + rr.getId());
+       System.out.println("Date1 " + dateOne + " Date2 " + dateTwo);
 
 
         Transaction orginalTransaction =transactionService.findByID(Long.parseLong(rr.getId()));

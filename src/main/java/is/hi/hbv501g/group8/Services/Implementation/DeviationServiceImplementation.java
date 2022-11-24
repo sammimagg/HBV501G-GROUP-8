@@ -1,15 +1,17 @@
 package is.hi.hbv501g.group8.Services.Implementation;
 
 import is.hi.hbv501g.group8.Persistence.Entities.Deviation;
+import is.hi.hbv501g.group8.Persistence.Entities.Schedule;
+
 import is.hi.hbv501g.group8.Persistence.Repositories.DeviationRepository;
-import is.hi.hbv501g.group8.Services.DeviationService;
+import is.hi.hbv501g.group8.Services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DeviationServiceImplementation implements DeviationService {
+public class DeviationServiceImplementation implements EmployeeService.DeviationService {
     private DeviationRepository deviationRepository;
 
     @Autowired
@@ -32,6 +34,16 @@ public class DeviationServiceImplementation implements DeviationService {
     @Override
     public void delete(Deviation deviation) {
         deviationRepository.delete(deviation);
+    }
+
+    @Override
+    public Schedule save(Schedule schedule) {
+        return null;
+    }
+
+    @Override
+    public void delete(Schedule schedule) {
+
     }
 
     /**

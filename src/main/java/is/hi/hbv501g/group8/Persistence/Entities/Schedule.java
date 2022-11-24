@@ -1,3 +1,10 @@
+package is.hi.hbv501g.group8.Persistence.Entities;
+
+
+import javax.persistence.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="schedule")
@@ -9,7 +16,7 @@ public class Schedule {
     private LocalDate dateFrom, dateTo;
     private LocalTime timeFrom, timeTo;
 
-        public Transaction() {
+        public void Transaction() {
 
     }
 
