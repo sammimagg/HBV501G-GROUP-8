@@ -76,4 +76,15 @@ CREATE TABLE IF NOT EXISTS Deviations (
     date_to date
 );
 
+CREATE TABLE IF NOT EXISTS Schedule {
+    ID SERIAL PRIMARY KEY,
+    SSN VARCHAR(10),
+    date_from date,
+    date_to date,
+    time_from TIMESTAMP,
+    time_to TIMESTAMP
+}
+
+
+
 /*INSERT INTO users (username, password) VALUES ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');*/

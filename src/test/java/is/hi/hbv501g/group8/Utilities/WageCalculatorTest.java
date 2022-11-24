@@ -36,3 +36,4 @@ class WageCalculatorTest {
         assertEquals(wageCalculator.getOvertime(), 2077.00);
     }
 }
+
