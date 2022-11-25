@@ -38,18 +38,19 @@ public class DrivingLogController {
         if (sessionUser == null ) {
             return "redirect:/login";
         }
-        else {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-        }
+        loadUserComponent(sessionUser, model);
         model.addAttribute("activePage", "drivingLog");
 
-        LocalDate currentDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
+        LocalDate currentDate = LocalDate.of(
+                LocalDate.now().getYear(),
+                LocalDate.now().getMonth(),
+                1
+        );
 
-        List<Driving> defaultLog = drivingService.findAllBySSNAndDagsBetween(sessionUser.getSSN(),
-                currentDate, currentDate.plusMonths(1));
+        List<Driving> defaultLog = drivingService.findAllBySSNAndDagsBetween(
+                sessionUser.getSSN(),
+                currentDate, currentDate.plusMonths(1)
+        );
         model.addAttribute("instances", defaultLog);
 
         return "drivinglog";
@@ -58,18 +59,17 @@ public class DrivingLogController {
     @RequestMapping(value="/drivinglog", method = RequestMethod.POST)
     public String monthPost(Driving driving, User user, HttpSession session, Model model, DateHelper dateHelper) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null) {
+        if (sessionUser == null ) {
             return "redirect:/login";
-        } else {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
         }
-        System.out.println(dateHelper.getDate1());
+        loadUserComponent(sessionUser, model);
 
-        List<Driving> sessionLog = drivingService.findAllBySSNAndDagsBetween(sessionUser.getSSN(),
-                dateHelper.getDate1().minusDays(1), dateHelper.getDate1().plusMonths(1));
+        List<Driving> sessionLog = drivingService.findAllBySSNAndDagsBetween
+                (
+                sessionUser.getSSN(),
+                dateHelper.getDate1().minusDays(1),
+                dateHelper.getDate1().plusMonths(1)
+                );
 
         model.addAttribute("instances", sessionLog);
 
@@ -84,19 +84,24 @@ public class DrivingLogController {
         if (sessionUser == null ) {
             return "redirect:/login";
         }
-        else {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-        }
+        loadUserComponent(sessionUser, model);
         model.addAttribute("activePage", "drivingLog");
+
         driving.setSSN(sessionUser.getSSN());
         driving.setDags(LocalDate.now());
         drivingService.save(driving);
         return "redirect:/drivinglog";
 
-        // Taka út:
-        //List<Driving> pp = drivingService.findAllBySSNAndDagsBetween(sessionUser.getSSN(), LocalDate eh.at)
+    }
+    /**
+     *  Help function to load necessary component on authorized site.
+     * @param sessionUser Current logged in user
+     * @param model model of current site
+     */
+    public void loadUserComponent(User sessionUser, Model model) {
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+        model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+        model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
     }
 }

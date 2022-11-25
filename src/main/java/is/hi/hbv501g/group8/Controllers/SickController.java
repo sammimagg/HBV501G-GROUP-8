@@ -46,12 +46,11 @@ public class SickController {
     @RequestMapping(value="/sickandvacation", method = RequestMethod.GET)
     public String getSickAndVacation(Model model, User user, HttpSession session, Deviation deviation){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        if (sessionUser ==null) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser, model);
+
         return "sickandvacation";
     }
 
@@ -59,24 +58,13 @@ public class SickController {
     @RequestMapping(value="/sickandvacation", method = RequestMethod.POST)
     public String postSickAndVacation(Model model, User user, HttpSession session, Deviation deviation){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-        }
-
-        if (sessionUser == null ) {
+        if (sessionUser ==null) {
             return "redirect:/login";
         }
+        loadUserComponent(sessionUser, model);
 
         deviation.setSSN(sessionUser.getSSN());
         deviationService.save(deviation);
-
-        /*
-        *    Væri flottara ef þetta væri sitt eigið fall
-        *    En við erum að breyta used Sick/Vacation days hér
-        */
 
         Employee emp = employeeService.findBySSN(sessionUser.getSSN());
         int currDays;
@@ -120,14 +108,15 @@ public class SickController {
 
         return "sickandvacation";
     }
-
-    /*
-     * Tafla sem heldur utan um veikindi/frí
-     * Ný veikindaskráning =>
-     *  A. Ný transaction fyrir hvern dag í veikindum. Innstimplun OG útstimplun 08:00 = 0 mín en hægt að breyta m/ review
-     *      A1. Status = Sick-Unreviewd
-     *  B. Hækka sick_days_used í employees töflunni
-     *
-     *
+    /**
+     *  Help function to load necessary component on authorized site.
+     * @param sessionUser Current logged in user
+     * @param model model of current site
      */
+    public void loadUserComponent(User sessionUser, Model model) {
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+        model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+        model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+    }
 }

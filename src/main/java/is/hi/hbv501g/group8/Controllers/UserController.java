@@ -38,7 +38,6 @@ import java.util.List;
 public class UserController {
     UserService userService;
     EmployeeService employeeService;
-
     TransactionService transactionService;
 
     /**
@@ -83,19 +82,11 @@ public class UserController {
         if(result.hasErrors()) {
             return "redirect:/signup";
         }
-        User exists = userService.findByUsername(user.getUsername());
 
-        if(exists == null) {
-            //userService.save(user);
+        if(userService.findByUsername(user.getUsername()) == null) {
             Employee newEmployeeProfile = new Employee();
             newEmployeeProfile.setSSN(user.getSSN());
             newEmployeeProfile.setUsername(user.getUsername());
-            /*
-            *  þið hafið ábyggilega séð djók comments eeins og
-            *  "ekki taka út, allt brotnar"
-            * þetta er svona komment
-            * ekki breyta
-            */
             newEmployeeProfile.setPassword(userService.secureIt(user.getPassword()));
             newEmployeeProfile.setFirstName(user.getUsername());
             newEmployeeProfile.setLastName("To be changed");
@@ -107,13 +98,6 @@ public class UserController {
             newEmployeeProfile.setEmail(user.getEmail());
             newEmployeeProfile.setAccounttype(2); // 0 - Admin, 1 - Manager, 2 - User
             employeeService.save(newEmployeeProfile);
-            /*
-            pls ekki spyrja
-            User fixPassword = userService.findBySSN(newEmployeeProfile.getSSN());
-            fixPassword.setPassword(user.getPassword());
-            userService.save(fixPassword);
-
-             */
         }
         return "redirect:/";
     }
@@ -170,25 +154,7 @@ public class UserController {
         }
         return new RedirectView("/");
     }
-    /**
-     * Handler for GET requests on /loggedin
-     *
-     * Used for testing. Will be removed
-     *
-     * @param session HttpSession
-     * @param model Model
-     * @return redirect or a view, depending on the presence of a User session.
-     * @deprecated
-    */
-    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
-    public String loggedinGET(HttpSession session, Model model){
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if(sessionUser  != null) {
-            model.addAttribute("LoggedInUser", sessionUser);
-            return "loggedInUser";
-        }
-        return "redirect:/";
-    }
+
 
     /**
      * Handler for GET requests on /profile
@@ -204,24 +170,24 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getProfile(Model model, HttpSession session, User user){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("firstName",employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
-            model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
-            model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
-            model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
-            model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
-            model.addAttribute("startDate", employeeService.findBySSN(sessionUser.getSSN()).getStartDate());
-            // VOID
-            employeeService.findBySSN(sessionUser.getSSN()).updateRemainingVacationDays();
-            employeeService.findBySSN(sessionUser.getSSN()).updateRemainingSickDays();
-            model.addAttribute("sickDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingSickDays());
-            model.addAttribute("vacationDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingVacationDays());
+        if (sessionUser == null || sessionUser.getAccounttype() != 0) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
         model.addAttribute("activePage", "setting");
+
+
+        model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
+        model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
+        model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
+        model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
+        model.addAttribute("startDate", employeeService.findBySSN(sessionUser.getSSN()).getStartDate());
+        // VOID
+        employeeService.findBySSN(sessionUser.getSSN()).updateRemainingVacationDays();
+        employeeService.findBySSN(sessionUser.getSSN()).updateRemainingSickDays();
+        model.addAttribute("sickDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingSickDays());
+        model.addAttribute("vacationDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingVacationDays());
+
         return "profile";
     }
     /**
@@ -238,18 +204,18 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String upateProfile(Model model, HttpSession session, User user){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("firstName",employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
-            model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
-            model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
-            model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
-            model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
+        if (sessionUser == null || sessionUser.getAccounttype() != 0) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
+
+        model.addAttribute("firstName",employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
+        model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
+        model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
+        model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
+        model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
         model.addAttribute("activePage", "setting");
+
         return "profile";
     }
     /**
@@ -265,13 +231,10 @@ public class UserController {
     @RequestMapping(value = "employees", method = RequestMethod.POST)
     public String postEmployees(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-
+        if (sessionUser == null || sessionUser.getAccounttype() != 0) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
         model.addAttribute("activePage", "employees");
         return "employees";
     }
@@ -288,13 +251,10 @@ public class UserController {
     @RequestMapping(value = "employees", method = RequestMethod.GET)
     public String getEmployees(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null || sessionUser.getAccounttype() != 0) return "redirect:/";
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        if (sessionUser == null && sessionUser.getAccounttype() != 0) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
         model.addAttribute("activePage", "employees");
         model.addAttribute("employees",getEmployeeList());
         return "employees";
@@ -313,12 +273,10 @@ public class UserController {
     @RequestMapping(value = "realtimeinsights", method = RequestMethod.POST)
     public String postRealTimeInsights(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        if (sessionUser == null) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
         model.addAttribute("activePage", "realTimeInsight");
         return "realtimeinsights";
     }
@@ -336,16 +294,15 @@ public class UserController {
     @RequestMapping(value = "realtimeinsights", method = RequestMethod.GET)
     public String getRealTimeInsights(Model model, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "realTimeInsight");
+        if (sessionUser == null) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
+        model.addAttribute("activePage", "realTimeInsight");
         model.addAttribute("employees",getEmployeeList());
         return "realtimeinsights";
     }
+
     public List<Employee> getEmployeeList() {
         List<Employee> allEmployees;
         allEmployees = employeeService.findAll();
@@ -372,7 +329,6 @@ public class UserController {
         employee.setSsnEmployee(employee.getSSN());
         editView.addObject("employee",employee);
 
-
         return editView;
     }
     @RequestMapping("delete/{ssn}")
@@ -380,5 +336,16 @@ public class UserController {
         Employee temp = employeeService.findBySSN(SSN);
         employeeService.delete(temp);
         return "redirect:/";
+    }
+    /**
+     *  Help function to load necessary component on authorized site.
+     * @param sessionUser Current logged in user
+     * @param model model of current site
+     */
+    public void loadUserComponent(User sessionUser,Model model){
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+        model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+        model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
     }
 }

@@ -138,15 +138,13 @@ public class TransactionController {
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session, User user) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if(sessionUser == null) return "redirect:/";
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "timeAndAttendance");
+        if (sessionUser == null) {
+            return "redirect:/login";
         }
-        System.out.println(dateHelper.getDate1());
+        loadUserComponent(sessionUser,model);
+        model.addAttribute("activePage", "timeAndAttendance");
+
+
         dateOne = dateHelper.getDate1();
         dateTwo = dateHelper.getDate2();
 
@@ -182,28 +180,19 @@ public class TransactionController {
     @RequestMapping(value="/list", method = RequestMethod.POST)
     public String TransactionsPOST(Model model, User user, DateHelper dateHelper, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-
-        if (sessionUser == null ) {
+        if (sessionUser == null) {
             return "redirect:/login";
         }
-        else {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "timeAndAttendance");
-        }
+        loadUserComponent(sessionUser,model);
+        model.addAttribute("activePage", "timeAndAttendance");
 
         dateOne = dateHelper.getDate1();
         dateTwo = dateHelper.getDate2();
-        System.out.println(dateOne + "hér");
 
         long totalHours = 0;
-
         for (Transaction row : transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay())) {
             totalHours += row.getDuration();
         }
-
         double ttlHrs = totalHours / 60.0;
 
 
@@ -211,6 +200,7 @@ public class TransactionController {
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
         model.addAttribute("totalHours", ttlHrs);
+
         return "listview";
     }
     /**
@@ -228,17 +218,11 @@ public class TransactionController {
     @RequestMapping(value="/edit", method = RequestMethod.POST)
     public String edit(Model model, User user, RequestReview rr,DateHelper dateHelper, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
+        if (sessionUser == null) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
         model.addAttribute("activePage", "timeAndAttendace");
-        //model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),dateHelper.getDate1(),dateHelper.getDate2()));
-       System.out.println("Date: " + rr.getDate() + " TimeIn: " + rr.getTimeIn() + " TimeOut: " + rr.getTimeOut() +" ID: " + rr.getId());
-       System.out.println("Date1 " + dateOne + " Date2 " + dateTwo);
-
 
         Transaction orginalTransaction =transactionService.findByID(Long.parseLong(rr.getId()));
         orginalTransaction.setStatus("request");
@@ -292,20 +276,14 @@ public class TransactionController {
     @RequestMapping(value="/edit", method = RequestMethod.GET)
     public String geteditTransaction(Model model, User user,DateHelper dateHelper, RequestReview rr, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "timeAndAttendance");
+        if (sessionUser == null) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
 
-
-
+        model.addAttribute("activePage", "timeAndAttendance");
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-        //model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
 
-        System.out.println("Date: " + rr.getDate() + " TimeIn: " + rr.getTimeIn() + " TimeOut: " + rr.getTimeOut() +" ID: " + rr.getId());
         return "listview";
     }
     /**
@@ -349,5 +327,16 @@ public class TransactionController {
             }
         }
         return allTransactions;
+    }
+    /**
+     *  Help function to load necessary component on authorized site.
+     * @param sessionUser Current logged in user
+     * @param model model of current site
+     */
+    public void loadUserComponent(User sessionUser, Model model) {
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+        model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+        model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
     }
 }

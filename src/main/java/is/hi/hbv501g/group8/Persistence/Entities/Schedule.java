@@ -1,8 +1,11 @@
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -13,7 +16,9 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
     private String SSN;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateFrom, dateTo;
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime timeFrom, timeTo;
 
         public void Transaction() {

@@ -55,29 +55,22 @@ public class ReviewController {
     @RequestMapping(value = "reviews", method = RequestMethod.POST)
     public String postRequest(Model model, HttpSession session, User user, TransactionReview transactionReview) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "requestReview");
+        if (sessionUser == null) {
+            return "redirect:/login";
         }
+        loadUserComponent(sessionUser,model);
+        model.addAttribute("activePage", "requestReview");
 
-        // muna auth
-        if(ensureAuthorization(session)) return "redirect:/login";
         TransactionReview temp = transactionReviewService.findByID(transactionReview.getID());
         Transaction tmp = transactionService.findByID(transactionReview.getID());
         if(tmp == null || temp == null) return "redirect:/";
         if( transactionReview.getStatus().equals("approve")) {
-            System.out.println("Accepta!");
-            System.out.println(transactionReview.getID());
             temp.setStatus("accepted");
             tmp.setClockIn(temp.getChangedClockIn());
             tmp.setClockOut(temp.getChangedClockOut());
             tmp.setStatus("request accepted");
 
         } else if (transactionReview.getStatus().equals("reject")) {
-            System.out.println("Rejecta!");
             temp.setStatus("rejected");
             tmp.setStatus("request rejected");
         }
@@ -102,15 +95,12 @@ public class ReviewController {
     @RequestMapping(value = "reviews", method = RequestMethod.GET)
     public String getRequest(Model model, HttpSession session, User user, TransactionReview transactionReview) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser!=null) {
-            model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
-            model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
-            model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
-            model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
-            model.addAttribute("activePage", "requestReview");
+        if (sessionUser == null) {
+            return "redirect:/login";
         }
-        // Væri flott að gera eh "U not have access" síðu
-        if(ensureAuthorization(session)) return "redirect:/login";
+        loadUserComponent(sessionUser,model);
+        model.addAttribute("activePage", "requestReview");
+
         List<TransactionReview> pendingReview = transactionReviewService.findAllByStatus("pending");
         model.addAttribute("reviews", pendingReview);
 
@@ -128,5 +118,16 @@ public class ReviewController {
     private boolean ensureAuthorization(HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         return sessionUser == null || sessionUser.getAccounttype() > 1;
+    }
+    /**
+     *  Help function to load necessary component on authorized site.
+     * @param sessionUser Current logged in user
+     * @param model model of current site
+     */
+    public void loadUserComponent(User sessionUser, Model model) {
+        model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
+        model.addAttribute("abbreviation",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName().charAt(0) + "" + employeeService.findBySSN(sessionUser.getSSN()).getLastName().charAt(0)));
+        model.addAttribute("fullName",(employeeService.findBySSN(sessionUser.getSSN()).getFirstName() + " " + employeeService.findBySSN(sessionUser.getSSN()).getLastName()));
+        model.addAttribute("userRole",sessionUser.getAccounttype()); // Used to display the right nav bar
     }
 }
