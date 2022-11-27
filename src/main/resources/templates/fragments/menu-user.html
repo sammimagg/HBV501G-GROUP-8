@@ -14,25 +14,25 @@
         </h1>
         <ul class="menu-ul">
             <li th:class="${activePage == 'timeAndAttendance'} ? 'li-active' : 'li-inactive'">
-                <a href="list">
+                <a href="/list">
                     <svg th:class="${activePage == 'timeAndAttendance'} ? 'icon-time-and-attendance-green' : 'icon-time-and-attendance-grey'"></svg>
                     <p>Time & Attendance</p>
                 </a>
             </li>
             <li th:class="${activePage == 'schedule'} ? 'li-active' : 'li-inactive'">
-                <a href="schedule" class="">
+                <a href="/schedule" class="">
                     <svg th:class="${activePage == 'schedule'} ? 'icon-schedule-green' : 'icon-schedule-grey'"></svg>
                     <p>Schedule</p>
                 </a>
             </li>
             <li th:class="${activePage == 'drivingLog'} ? 'li-active' : 'li-inactive'">
-                <a href="drivinglog" class="">
+                <a href="/drivinglog" class="">
                     <svg th:class="${activePage == 'drivingLog'} ? 'icon-driving-log-green' : 'icon-driving-log-grey'"></svg>
                     <p>Driving Log</p>
                 </a>
             </li>
             <li th:class="${activePage == 'setting'} ? 'li-active' : 'li-inactive'">
-                <a href="profile" >
+                <a href="/profile" >
                     <svg th:class="${activePage == 'setting'} ? 'icon-setting-green' : 'icon-setting-grey'"></svg>
                     <p>Settings</p>
                 </a>
@@ -41,7 +41,7 @@
 
         <div class="float">
             <div class="account-logged-in">
-                <a href="profile">
+                <a href="/profile">
                     <h1><span th:text="${abbreviation}" class="blue"></span></h1>
                     <!--suppress HtmlUnknownAttribute -->
                     <strong th:text="${fullName}"></strong>

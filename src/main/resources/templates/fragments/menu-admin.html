@@ -14,50 +14,50 @@
             </h1>
             <ul class="menu-ul">
                 <li th:class="${activePage == 'realTimeInsight'} ? 'li-active' : 'li-inactive'">
-                    <a href="realtimeinsights">
+                    <a href="/realtimeinsights">
                         <svg th:class="${activePage == 'realTimeInsight'} ? 'icon-real-time-insights-green' : 'icon-real-time-insights-grey'"></svg>
                         <p>Real-Time Insights</p>
                     </a>
                 </li>
                 <li th:class="${activePage == 'employees'} ? 'li-active' : 'li-inactive'">
-                    <a href="employees">
+                    <a href="/employees">
                         <svg th:class="${activePage == 'employees'} ? 'icon-employees-green' : 'icon-employees-grey'"></svg>
                         <p>Employees</p>
                     </a>
                 </li>
                 <li th:class="${activePage == 'timeAndAttendance'} ? 'li-active' : 'li-inactive'">
-                    <a href="list">
+                    <a href="/list">
                         <svg th:class="${activePage == 'timeAndAttendance'} ? 'icon-time-and-attendance-green' : 'icon-time-and-attendance-grey'"></svg>
                         <p>Time & Attendance</p>
                     </a>
                 </li>
                 <li th:class="${activePage == 'requestReview'} ? 'li-active' : 'li-inactive'">
-                    <a href="reviews" class="">
+                    <a href="/reviews" class="">
                         <svg th:class="${activePage == 'requestReview'} ? 'icon-request-reviews-green' : 'icon-request-reviews-grey'"></svg>
                         <p>Request Reviews</p>
                     </a>
                 </li>
                 <li th:class="${activePage == 'drivingLog'} ? 'li-active' : 'li-inactive'">
-                    <a href="drivinglog" class="">
+                    <a href="/drivinglog" class="">
                         <svg th:class="${activePage == 'drivingLog'} ? 'icon-driving-log-green' : 'icon-driving-log-grey'"></svg>
                         <p>Driving Log</p>
                     </a>
                 </li>
                 <li th:class="${activePage == 'makeSchedule'} ? 'li-active' : 'li-inactive'">
-                    <a href="schedule-admin">
+                    <a href="/schedule-admin">
                         <svg th:class="${activePage == 'makeSchedule'} ? 'icon-make-schedule-green' : 'icon-make-schedule-grey'"></svg>
                         <p>Make schedule</p>
                     </a>
                 </li>
                 <li th:class="${activePage == 'setting'} ? 'li-active' : 'li-inactive'">
-                    <a href="profile" >
+                    <a href="/profile" >
                         <svg th:class="${activePage == 'setting'} ? 'icon-setting-green' : 'icon-setting-grey'"></svg>
                         <p>Settings</p>
                     </a>
                 </li>
             </ul>
             <div class="account-logged-in">
-                    <a href="profile">
+                    <a href="/profile">
                         <h1><span th:text="${abbreviation}" class="blue"></span></h1>
                         <!--suppress HtmlUnknownAttribute -->
                         <strong th:text="${fullName}"></strong>

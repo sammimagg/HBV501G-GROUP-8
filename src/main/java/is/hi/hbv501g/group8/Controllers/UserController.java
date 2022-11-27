@@ -177,7 +177,7 @@ public class UserController {
         loadUserComponent(sessionUser,model);
         model.addAttribute("activePage", "setting");
 
-
+        model.addAttribute("firstName",employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
         model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
         model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
         model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
@@ -323,7 +323,11 @@ public class UserController {
      * @return edited ssn
      */
     @RequestMapping("/edit/{ssn}")
-    public ModelAndView showEditUserPage(@PathVariable(name= "ssn") String ssn) {
+    public ModelAndView showEditUserPage(@PathVariable(name= "ssn") String ssn, HttpSession session, User user,Model model) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+
+        loadUserComponent(sessionUser,model);
+
         ModelAndView editView = new ModelAndView("edit-employees");
         Employee employee = employeeService.findBySSN(ssn);
         employee.setSsnEmployee(employee.getSSN());
