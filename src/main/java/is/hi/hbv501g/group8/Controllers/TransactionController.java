@@ -43,9 +43,9 @@ public class TransactionController {
     /**
      * {@link java.lang.reflect.Constructor} for TransactionController
      *
-     * @param transactionService
-     * @param employeeService
-     * @param transactionReviewService
+     * @param transactionService TransactionService
+     * @param employeeService EmployeeService
+     * @param transactionReviewService TransactionReviewService
      */
     @Autowired
     public TransactionController(TransactionService transactionService, EmployeeService employeeService, TransactionReviewService transactionReviewService) {
@@ -86,6 +86,7 @@ public class TransactionController {
      * @see Transaction
      * @param result BindingResult
      * @param model Model
+     * @param redirectAttributes RedirectAttributes
      * @return redirect /
      */
     @RequestMapping(value="/", method = RequestMethod.POST)
@@ -125,7 +126,7 @@ public class TransactionController {
      * @param dateHelper DateHelper
      * @param session HttpSession
      * @param user User
-     * @return listview a view for vlistview
+     * @return listview a view for listview
      */
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String transactionsGET(Model model, DateHelper dateHelper, HttpSession session, User user) {
@@ -261,7 +262,7 @@ public class TransactionController {
      *
      * @param model Model
      * @param user User
-     * @param rr RequestReview
+     * @param rr TimeAndDate
      * @param dateHelper DateHelper
      * @param session HttpSession
      * @return listview A view for listview

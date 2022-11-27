@@ -45,11 +45,10 @@ public class ReviewController {
     /**
      * Handler for POST requests on /reviews
      *
-     * @// TODO: 22.10.2022
-     *
      * @param model Model
      * @param session HttpSession
      * @param user User
+     * @param transactionReview TransactionReview
      * @return reviews A view for reviews
      */
     @RequestMapping(value = "reviews", method = RequestMethod.POST)
@@ -85,11 +84,10 @@ public class ReviewController {
     /**
      * A handler for GET requests on /reviews
      *
-     * @// TODO: 22.10.2022
-     *
      * @param model Model
      * @param session HttpSession
      * @param user User
+     * @param transactionReview TransactionReview
      * @return reviews A view for reviews
      */
     @RequestMapping(value = "reviews", method = RequestMethod.GET)

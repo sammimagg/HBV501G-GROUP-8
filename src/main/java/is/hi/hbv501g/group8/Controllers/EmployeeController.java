@@ -39,11 +39,9 @@ public class EmployeeController {
      *
      * Edits employee information
      *
-     * @param driving Driving
-     * @param user User
      * @param session HttpSession
      * @param model Model
-     * @param dateHelper DateHelper
+     * @param employee Employee
      * @return clock A view for clocking in
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)

@@ -9,17 +9,19 @@
     <title th:case="*" th:text="${username}"></title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+    <link th:href="@{/css/sickandvacation.css}" rel="stylesheet"/>
 
 </head>
 <body class="body-sidebar">
     <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
-    <main >
+    <main>
         <div class="row">
             <div class="reqest-calander offset-col-4 col-4">
+                <div class="calander-overview">
                 <div class="calander">
                     <div class="calander-inner-left">
-                        <h1>20</h1>
-                        <p>Monday</p>
+                        <h1 id="output1"></h1>
+                        <p id="demo"> </p>
                     </div>
                     <div class="calander-inner-right">
 
@@ -31,22 +33,26 @@
                         <option value="VACATION">Vaction Day</option>
                         <option value="OTHER">Miscellaneous</option>
                     </select>
-                    <div class="row">
+                    <div class="dates-row">
                         <label>Date From</label>
                         <input type="date" th:field="*{dateFrom}">
                         <label>Date to</label>
                         <input type="date" th:field="*{dateTo}">
                     </div>
-                    <div class="row">
+                    <div class="dates-row">
                         <input class="default-save-input" type="submit" value="Save">
-                        <input class="default-cancel-input " type="reset" value="Cancel">
                     </div>
                 </form>
+            </div>
             </div>
         </div>
     </main>
 </body>
-<script>const date = new Date();
+<script>
+    let day1 = new Date().getDate();
+    document.getElementById("output1").innerHTML = day1;
+
+    const date = new Date();
 
 const renderCalendar = () => {
     date.setDate(1);
@@ -145,4 +151,13 @@ function HighlightT() {
 }
 
 </script>
+
+<script>
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    const d = new Date();
+    let day = days[d.getDay()];
+    document.getElementById("demo").innerHTML = day;
+</script>
+
 </html>

@@ -45,6 +45,7 @@ public class UserController {
      *
      * @param userService UserService
      * @param employeeService EmployeeService
+     * @param transactionService TransactionService
      */
 
     @Autowired
@@ -221,8 +222,6 @@ public class UserController {
     /**
      * Handler for GET requests on /employees
      *
-     * @// TODO: 22.10.2022
-     *
      * @param model Model
      * @param session HttpSession
      * @param user User
@@ -240,8 +239,6 @@ public class UserController {
     }
     /**
      * Handler for POST requests on /employees
-     *
-     * @// TODO: 22.10.2022
      *
      * @param model Model
      * @param session HttpSession
@@ -263,12 +260,10 @@ public class UserController {
     /**
      * Handler for POST requests on /realtimeinsights
      *
-     * @// TODO: 22.10.2022
-     *
      * @param model Model
      * @param session HttpSession
      * @param user User
-     * @return realtimeinsights A view for realtimeinsights
+     * @return realtimeinsights, A view for realtimeinsights
      */
     @RequestMapping(value = "realtimeinsights", method = RequestMethod.POST)
     public String postRealTimeInsights(Model model, HttpSession session, User user) {
@@ -283,13 +278,11 @@ public class UserController {
 
     /**
      * Handler for GET requests on /realtimeinsights
-     *
-     * @// TODO: 22.10.2022  
      * 
      * @param model Model
      * @param session HttpSession
      * @param user User
-     * @return realtimeinsights A view for realtimeinsights
+     * @return realtimeinsights, A view for realtimeinsights
      */
     @RequestMapping(value = "realtimeinsights", method = RequestMethod.GET)
     public String getRealTimeInsights(Model model, HttpSession session, User user) {
@@ -322,6 +315,13 @@ public class UserController {
         }
         return allEmployees;
     }
+
+    /**
+     * Handler for editing ssn
+     *
+     * @param ssn String object
+     * @return edited ssn
+     */
     @RequestMapping("/edit/{ssn}")
     public ModelAndView showEditUserPage(@PathVariable(name= "ssn") String ssn) {
         ModelAndView editView = new ModelAndView("edit-employees");
@@ -331,6 +331,13 @@ public class UserController {
 
         return editView;
     }
+
+    /**
+     * Handler for deleting ssn
+     *
+     * @param SSN String object
+     * @return deleted SSN
+     */
     @RequestMapping("delete/{ssn}")
     public String deleteEmployee(@PathVariable(name = "SSN") String SSN) {
         Employee temp = employeeService.findBySSN(SSN);

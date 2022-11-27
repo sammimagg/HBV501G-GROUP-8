@@ -25,7 +25,7 @@ public class DateHelper {
     LocalDate date2;
 
     /**
-     * Description:
+     * Description: LocalDate for both dates
      *
      * @param date1
      * @param date2
@@ -34,32 +34,36 @@ public class DateHelper {
         this.date1 = date1;
         this.date2 = date2;
     }
+
     /**
-     * Description:
+     * Description: Getter for the first date, Date1
      *
      * @return
      */
     public LocalDate getDate1() {
         return date1;
     }
+
     /**
-     * Description:
+     * Description: Setter for the first date, Date1
      *
      * @param date1
      */
     public void setDate1(LocalDate date1) {
         this.date1 = date1;
     }
+
     /**
-     * Description:
+     * Description: Getter for the second date, Date2
      *
      * @return
      */
     public LocalDate getDate2() {
         return date2;
     }
+
     /**
-     * Description:
+     * Description: Setter for the second date, Date2
      *
      * @param date2
      */

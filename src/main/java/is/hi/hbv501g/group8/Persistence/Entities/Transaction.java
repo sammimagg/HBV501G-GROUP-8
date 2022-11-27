@@ -118,7 +118,7 @@ public class Transaction {
     }
 
     /**
-    * Description: Help function to tell if transaction is finnished.
+    * Description: Help function to tell if transaction is finished.
     *
     * @return If Clock-in and Clock-out is not null then it's true.
     * Else false
@@ -128,7 +128,7 @@ public class Transaction {
     }
 
     /**
-    * Description:
+    * Description: Setter for finished of clock-in
     *
     * @param finished
     */
@@ -136,66 +136,146 @@ public class Transaction {
         this.finished = finished;
     }
 
+    /**
+     * Description: Setter for SSN of a transaction
+     *
+     * @param SSN
+     */
     public void setSSN(String SSN) {
         this.SSN = SSN;
     }
 
+    /**
+     * Description: Getter for status of transaction
+     *
+     * @return status
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * Description: Setter for status of transaction
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * Description: Getter for date of clock-in
+     *
+     * @return clockInDate
+     */
     public LocalDate getClockInDate() {
         return clockInDate;
     }
 
+    /**
+     * Description: Setter for date of clock-in
+     *
+     * @param clockInDate LocalDate
+     */
     public void setClockInDate(LocalDate clockInDate) {
         this.clockInDate = clockInDate;
     }
 
+    /**
+     * Description: Getter for time of clock-in
+     *
+     * @return clockInTime
+     */
     public LocalTime getClockInTime() {
         return clockInTime;
     }
 
+    /**
+     * Description: Setter for time of clock-in
+     *
+     * @param clockInTime LocalTime
+     */
     public void setClockInTime(LocalTime clockInTime) {
         this.clockInTime = clockInTime;
     }
 
+    /**
+     * Description: Getter for time of clock-out
+     *
+     * @return clockOutTime
+     */
     public LocalTime getClockOutTime() {
         return clockOutTime;
     }
 
+    /**
+     * Description: Setter for time of clock-out
+     *
+     * @param clockOutTime LocalTime
+     */
     public void setClockOutTime(LocalTime clockOutTime) {
         this.clockOutTime = clockOutTime;
     }
 
+    /**
+     * Description: Getter for over-all worked time in a month
+     *
+     * @return workedTime
+     */
     public Time getWorkedTime() {
         return workedTime;
     }
 
+    /**
+     * Description: Setter for over-all worked time in a month
+     *
+     * @param workedTime Time
+     */
     public void setWorkedTime(Time workedTime) {
         this.workedTime = workedTime;
     }
 
+    /**
+     * Description: Getter for over-all worked hours in a month
+     *
+     * @return workedHours
+     */
     public int getWorkedHours() {
         return workedHours;
     }
 
+    /**
+     * Description: Getter for over-all worked minutes in a month
+     *
+     * @return workedMinutes
+     */
     public int getWorkedMinutes() {
         return workedMinutes;
     }
 
+    /**
+     * Description: Setter for over-all worked hours in a month
+     *
+     * @param workedHours
+     */
     public void setWorkedHours(int workedHours) {
         this.workedHours = workedHours;
     }
 
+    /**
+     * Description: Setter for over-all worked mintues in a month
+     *
+     * @param workedMinutes
+     */
     public void setWorkedMinutes(int workedMinutes) {
         this.workedMinutes = workedMinutes;
     }
 
+    /**
+     * Description: Getter to change the duration between clock-in and clock-out to minutes
+     *
+     * @return Duration
+     */
     public long getDuration() {
         return Duration.between(clockIn, clockOut).toMinutes();
     }

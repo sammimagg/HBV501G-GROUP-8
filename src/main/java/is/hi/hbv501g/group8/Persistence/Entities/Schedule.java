@@ -43,26 +43,56 @@ public class Schedule {
         this.ID = ID;
     }
 
+    /**
+     * Description: Getter for getting the date and time from clock-in
+     *
+     * @return dateAndTimeFrom
+     */
     public LocalDateTime getDateAndTimeFrom() {
         return dateAndTimeFrom;
     }
 
+    /**
+     * Description: Getter for getting the date and time to clock-out
+     *
+     * @return dateAndTimeTo
+     */
     public LocalDateTime getDateAndTimeTo() {
         return dateAndTimeTo;
     }
 
+    /**
+     * Description: Setter for getting the date and time from clock-in
+     *
+     * @param dateAndTimeFrom LocalDateTime
+     */
     public void setDateAndTimeFrom(LocalDateTime dateAndTimeFrom) {
         this.dateAndTimeFrom = dateAndTimeFrom;
     }
 
+    /**
+     * Description: Setter for getting the date and time to clock-out
+     *
+     * @param dateAndTimeTo LocalDateTime
+     */
     public void setDateAndTimeTo(LocalDateTime dateAndTimeTo) {
         this.dateAndTimeTo = dateAndTimeTo;
     }
 
+    /**
+     * Description: Getter for SSN
+     *
+     * @return SSN
+     */
     public String getSSN() {
         return SSN;
     }
 
+    /**
+     * Description: Setter for SSN
+     *
+     * @param SSN String
+     */
     public void setSSN(String SSN) {
         this.SSN = SSN;
     }
