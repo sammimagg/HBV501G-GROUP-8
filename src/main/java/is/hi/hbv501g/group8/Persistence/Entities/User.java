@@ -163,7 +163,7 @@ public class User {
     }
 
     /**
-     * Description: Setter for which account type, admin/user
+     * Description: Setter for which account type, admin/user.
      *
      * @param accountType int
      */
