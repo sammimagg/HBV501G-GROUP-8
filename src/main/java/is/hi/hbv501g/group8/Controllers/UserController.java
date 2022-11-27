@@ -169,56 +169,23 @@ public class UserController {
      * @return profile A view for profile
      */
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String getProfile(Model model, HttpSession session, User user){
+    public ModelAndView getProfile(Model model, HttpSession session, User user){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null || sessionUser.getAccounttype() != 0) {
-            return "redirect:/login";
-        }
-        loadUserComponent(sessionUser,model);
-        model.addAttribute("activePage", "setting");
-
-        model.addAttribute("firstName",employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
-        model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
-        model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
-        model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
-        model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
-        model.addAttribute("startDate", employeeService.findBySSN(sessionUser.getSSN()).getStartDate());
-        // VOID
-        employeeService.findBySSN(sessionUser.getSSN()).updateRemainingVacationDays();
-        employeeService.findBySSN(sessionUser.getSSN()).updateRemainingSickDays();
-        model.addAttribute("sickDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingSickDays());
-        model.addAttribute("vacationDays", employeeService.findBySSN(sessionUser.getSSN()).getRemainingVacationDays());
-
-        return "profile";
-    }
-    /**
-     * Handler for POST requests on /profile
-     *
-     * Fetches relevant information about User from database.
-     * Displays said information using Model
-     *
-     * @param model Model
-     * @param session HttpSession
-     * @param user User
-     * @return profile A view for profile
-     */
-    @RequestMapping(value = "/profile", method = RequestMethod.POST)
-    public String upateProfile(Model model, HttpSession session, User user){
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null || sessionUser.getAccounttype() != 0) {
-            return "redirect:/login";
-        }
+        model.addAttribute("activePage", "settings");
         loadUserComponent(sessionUser,model);
 
-        model.addAttribute("firstName",employeeService.findBySSN(sessionUser.getSSN()).getFirstName());
-        model.addAttribute("lastName",employeeService.findBySSN(sessionUser.getSSN()).getLastName());
-        model.addAttribute("phoneNumber",employeeService.findBySSN(sessionUser.getSSN()).getPhoneNumber());
-        model.addAttribute("company",employeeService.findBySSN(sessionUser.getSSN()).getCompany());
-        model.addAttribute("jobtitle",employeeService.findBySSN(sessionUser.getSSN()).getJobTitle());
-        model.addAttribute("activePage", "setting");
 
-        return "profile";
+        ModelAndView editView = new ModelAndView("profile");
+        Employee employee = employeeService.findBySSN(sessionUser.getSSN());
+        employee.setSsnEmployee(employee.getSSN());
+        editView.addObject("employee",employee);
+
+
+        return editView;
     }
+
+
+
     /**
      * Handler for GET requests on /employees
      *
@@ -325,7 +292,7 @@ public class UserController {
     @RequestMapping("/edit/{ssn}")
     public ModelAndView showEditUserPage(@PathVariable(name= "ssn") String ssn, HttpSession session, User user,Model model) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-
+        model.addAttribute("activePage", "employees");
         loadUserComponent(sessionUser,model);
 
         ModelAndView editView = new ModelAndView("edit-employees");

@@ -50,15 +50,44 @@ public class EmployeeController {
         if(ensureAuthorization(session)) return "redirect:/login";
 
         // Update Employee
-        Employee workingPloyee = employeeService.findBySSN(employee.getSSN());
+        Employee workingPloyee = employeeService.findBySSN(employee.getSsnEmployee());
         workingPloyee.setFirstName(employee.getFirstName());
         workingPloyee.setLastName(employee.getLastName());
         workingPloyee.setEmail(employee.getEmail());
         workingPloyee.setPhoneNumber(employee.getPhoneNumber());
         workingPloyee.setAccounttype(employee.getAccounttype());
+        workingPloyee.setCompany(employee.getCompany());
+        workingPloyee.setJobTitle(employee.getJobTitle());
+        workingPloyee.setSickDaysUsed(employee.getSickDaysUsed());
+        workingPloyee.setVacationDaysUsed(employee.getVacationDaysUsed());
         employeeService.save(workingPloyee);
 
         return "redirect:/employees";
+    }
+    /**
+     * Handler for POST requests on /save-profile
+     *
+     * Edits employee information
+     *
+     * @param session HttpSession
+     * @param model Model
+     * @param employee Employee
+     * @return redirect to user profile
+     */
+    @RequestMapping(value = "/save-profile", method = RequestMethod.POST)
+    public String submitChangesProfile(Model model, Employee employee, HttpSession session) {
+
+        if(ensureAuthorization(session)) return "redirect:/login";
+
+        // Update Employee
+        Employee workingPloyee = employeeService.findBySSN(employee.getSsnEmployee());
+        workingPloyee.setFirstName(employee.getFirstName());
+        workingPloyee.setLastName(employee.getLastName());
+        workingPloyee.setEmail(employee.getEmail());
+        workingPloyee.setPhoneNumber(employee.getPhoneNumber());
+        employeeService.save(workingPloyee);
+
+        return "redirect:/profile";
     }
 
     /**

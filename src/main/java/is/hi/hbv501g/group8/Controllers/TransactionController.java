@@ -146,7 +146,8 @@ public class TransactionController {
         LocalDate currentDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
 
         for (Transaction row : transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), currentDate.atStartOfDay(), currentDate.plusMonths(1).atStartOfDay())) {
-            totalHours += row.getDuration();
+            if(row.isFinished() == true)
+                totalHours += row.getDuration();
         }
 
         String total = (int) (totalHours / 60) + ":" + (int) (totalHours % 60) + " h";

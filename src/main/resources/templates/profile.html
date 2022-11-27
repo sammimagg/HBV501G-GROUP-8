@@ -16,18 +16,18 @@
         <main>
             <h2>Profile</h2>
             <div class="container">
-                <form>
+                <form method="post" th:action="@{/save-profile}" th:object="${employee}">
                     <div class="row">
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>First Name</label>
-                                <input type="text" th:value="${firstName}">
+                                <input type="text"  th:field="*{firstName}">
                             </div>
                         </div>
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Last Name</label>
-                                <input type="text" th:value="${lastName}">
+                                <input type="text" th:field="*{lastName}">
                             </div>
                         </div>
                     </div>
@@ -35,13 +35,13 @@
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Email</label>
-                                <input type="text">
+                                <input type="text" th:field="*{email}">
                             </div>
                         </div>
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Phone number</label>
-                                <input type="text" th:value="${phoneNumber}">
+                                <input type="text" th:field="*{phoneNumber}" >
                             </div>
                         </div>
                     </div>
@@ -49,13 +49,13 @@
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>SSN</label>
-                                <input type="text" readonly>
+                                <input type="text" th:field="*{ssnEmployee}" readonly>
                             </div>
                         </div>
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Username</label>
-                                <input type="text" readonly>
+                                <input type="text" th:field="*{username}" readonly>
                             </div>
                         </div>
                     </div>
@@ -63,13 +63,13 @@
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Company</label>
-                                <input type="text" th:value="${company}" readonly>
+                                <input type="text" th:field="*{company}" readonly>
                             </div>
                         </div>
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Jobtitle</label>
-                                <input type="text" th:value="${jobtitle}" readonly>
+                                <input type="text" th:field="*{jobTitle}" readonly>
                             </div>
                         </div>
                     </div>
@@ -77,13 +77,13 @@
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Sick days</label>
-                                <input type="text" th:value="${sickDays}" readonly>
+                                <input type="text" th:field="*{sickDaysUsed}" readonly>
                             </div>
                         </div>
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Vacation days</label>
-                                <input type="text" th:value="${vacationDays}" readonly>
+                                <input type="text" th:field="*{vacationDaysUsed}" readonly>
                             </div>
                         </div>
                     </div>
@@ -91,26 +91,17 @@
                         <div class="col col-6">
                             <div class="flex-column">
                                 <label>Start Date</label>
-                                <input type="text" th:value="${startDate}" readonly>
+                                <input type="text" th:field="*{startDate}" readonly>
                             </div>
                         </div>
                         <div class="col col-6">
                             <div class="flex-column">
+                                <label style="height: 25px;"></label>
                                 <input class="filled-button-green" type="submit" value="Save">
                             </div>
                         </div>
                     </div>
                 </form>
-            </div>
-
-            <div class="row">
-                <div class="col col-12">
-
-
-
-
-
-                </div>
             </div>
         </main>
     </body>
