@@ -1,3 +1,14 @@
+/**
+ * Driving Log Controller
+ *
+ * Description: Controller for maintaining a driving log for employees 
+ *
+ *
+ * @author Kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ */
+
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
@@ -31,7 +42,18 @@ public class DrivingLogController {
         this.drivingService = drivingService;
     }
 
-
+    /**
+     * Handler for GET requests on /drivinglog
+     *
+     * Displays the driving log for the logged in user, for the current tímabil.
+     *
+     * @param driving Driving
+     * @param user User
+     * @param session HttpSession
+     * @param model Model
+     * @param dateHelper DateHelper
+     * @return clock A view for clocking in
+     */
     @RequestMapping(value="/drivinglog", method = RequestMethod.GET)
     public String drivingGET(Driving driving, User user, HttpSession session, Model model, DateHelper dateHelper) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -56,6 +78,18 @@ public class DrivingLogController {
         return "drivinglog";
     }
 
+    /**
+     * Handler for post requests on /drivinglog
+     *
+     * Fetches a different tímabil of the log
+     *
+     * @param driving Driving
+     * @param user User
+     * @param session HttpSession
+     * @param model Model
+     * @param dateHelper DateHelper
+     * @return clock A view for clocking in
+     */
     @RequestMapping(value="/drivinglog", method = RequestMethod.POST)
     public String monthPost(Driving driving, User user, HttpSession session, Model model, DateHelper dateHelper) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -77,7 +111,17 @@ public class DrivingLogController {
     }
 
 
-
+    /**
+     * Handler for post requests on /drivinglog/new
+     *
+     * Appends a new driving session to the relevant log
+     *
+     * @param driving Driving
+     * @param user User
+     * @param session HttpSession
+     * @param model Model
+     * @return clock A view for clocking in
+     */
     @RequestMapping(value="/drivinglog/new", method = RequestMethod.POST)
     public String drivingPOST(Driving driving, User user, HttpSession session, Model model){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
