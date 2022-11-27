@@ -34,6 +34,18 @@ public class EmployeeController {
         this.userService = userService;
     }
 
+    /**
+     * Handler for POST requests on /save
+     *
+     * Edits employee information
+     *
+     * @param driving Driving
+     * @param user User
+     * @param session HttpSession
+     * @param model Model
+     * @param dateHelper DateHelper
+     * @return clock A view for clocking in
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String submitChangesEmployee(Model model, Employee employee, HttpSession session) {
 

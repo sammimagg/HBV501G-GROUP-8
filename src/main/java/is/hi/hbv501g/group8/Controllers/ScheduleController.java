@@ -1,3 +1,16 @@
+/**
+ * Schedule Controller
+ *
+ * Description: Controller for everything to do with
+ *              Work schedule! :)
+ *
+ * @// TODO: 22.10.2022
+ *
+ * @author Kristófer Breki Gylfason - kbg15@hi.is
+ * @author Halldór Jens Vilhjálsson - hjv6@hi.is
+ * @author Samúel Magnússon - sam38@hi.is
+ */
+
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.*;
@@ -31,6 +44,16 @@ public class ScheduleController {
         this.employeeService = employeeService;
         this.scheduleService = scheduleService;
     }
+
+    /**
+     * Handler for POST requests on schedule-admin
+     *
+     * 
+     *
+     * @param model Model
+     * @param 
+     * @return clock A view for clocking in
+     */
     @RequestMapping(value = "schedule-admin", method = RequestMethod.POST)
     public String postScheduleAdmin(Model model, HttpSession session, User user,  TimeAndDate timeAndDate) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");

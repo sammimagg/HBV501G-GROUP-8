@@ -7,7 +7,7 @@
  *
  * @// TODO: 22.10.2022
  *
- * @author kristófer Breki Gylfason - kbg15@hi.is
+ * @author Kristófer Breki Gylfason - kbg15@hi.is
  * @author Halldór Jens Vilhjálsson - hjv6@hi.is
  * @author Samúel Magnússon - sam38@hi.is
  */
