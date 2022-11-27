@@ -149,12 +149,12 @@ public class TransactionController {
             totalHours += row.getDuration();
         }
 
-        double ttlHrs = totalHours / 60.0;
+        String total = (int) (totalHours / 60) + ":" + (int) (totalHours % 60) + " h";
 
         model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),currentDate, currentDate.plusMonths(1)));
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
-        model.addAttribute("totalHours", ttlHrs);
+        model.addAttribute("totalHours", total);
 
         return "listview";
     }
@@ -186,13 +186,13 @@ public class TransactionController {
         for (Transaction row : transactionService.findAllBySSNAndClockInBetween(sessionUser.getSSN(), dateHelper.getDate1().atStartOfDay(), dateHelper.getDate2().atStartOfDay())) {
             totalHours += row.getDuration();
         }
-        double ttlHrs = totalHours / 60.0;
 
+        String total = (int) (totalHours / 60) + ":" + (int) (totalHours % 60) + " h";
 
         model.addAttribute("transactions", getTransactionList(sessionUser.getSSN(),dateHelper.getDate1(),dateHelper.getDate2()));
         model.addAttribute("username", sessionUser.getUsername().toUpperCase() + " - Overview");
         model.addAttribute("status","approved"); // Setur status merki á Transaction listan.
-        model.addAttribute("totalHours", ttlHrs);
+        model.addAttribute("totalHours", total);
 
         return "listview";
     }

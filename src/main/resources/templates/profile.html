@@ -14,17 +14,102 @@
     <body class="body-sidebar">
         <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
         <main>
+            <h2>Profile</h2>
+            <div class="container">
+                <form>
+                    <div class="row">
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>First Name</label>
+                                <input type="text" th:value="${firstName}">
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Last Name</label>
+                                <input type="text" th:value="${lastName}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Email</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Phone number</label>
+                                <input type="text" th:value="${phoneNumber}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>SSN</label>
+                                <input type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Username</label>
+                                <input type="text" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Company</label>
+                                <input type="text" th:value="${company}" readonly>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Jobtitle</label>
+                                <input type="text" th:value="${jobtitle}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Sick days</label>
+                                <input type="text" th:value="${sickDays}" readonly>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Vacation days</label>
+                                <input type="text" th:value="${vacationDays}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <label>Start Date</label>
+                                <input type="text" th:value="${startDate}" readonly>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="flex-column">
+                                <input class="filled-button-green" type="submit" value="Save">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="row">
                 <div class="col col-12">
-                    <h1>Profile</h1>
-                    <p th:text="'First Name: ' +${firstName}">First name</p>
-                    <p th:text="'Last Name: ' +${lastName}">Last name</p>
-                    <p th:text="'Phone number: ' +${phoneNumber}">Phone number</p>
-                    <p th:text="'Company: ' +${company}">Company</p>
-                    <p th:text="'Jobtitle: ' +${jobtitle}">Jobtitle</p>
-                    <p th:text="'Start Date: ' +${startDate}">startDate</p>
-                    <p th:text="'Sick Days: ' +${sickDays}">sickDays</p>
-                    <p th:text="'Vacation: ' + ${vacationDays}">vacationDays</p>
+
+
+
+
+
                 </div>
             </div>
         </main>
