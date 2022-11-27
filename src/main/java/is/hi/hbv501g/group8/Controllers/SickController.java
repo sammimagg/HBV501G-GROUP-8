@@ -43,6 +43,17 @@ public class SickController {
         this.transactionService = transactionService;
     }
 
+    /**
+     * Handler for GET requests on sickandvacation
+     *
+     * Retrievs a component
+     *
+     * @param model Model
+     * @param user User
+     * @param deviation Deviation
+     * @param session HttpSession
+     * @return sickandvacation HTML view
+     */
     @RequestMapping(value="/sickandvacation", method = RequestMethod.GET)
     public String getSickAndVacation(Model model, User user, HttpSession session, Deviation deviation){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -54,7 +65,18 @@ public class SickController {
         return "sickandvacation";
     }
 
-
+    /**
+     * Handler for POST requests on sickandvacation
+     *
+     * Appends a new Deviation for relevant Employee.
+     * Also creates a new "empty" @see Transaction for every day that's deviated.
+     *
+     * @param model Model
+     * @param user User
+     * @param deviation Deviation
+     * @param session HttpSession
+     * @return sickandvacation HTML view
+     */
     @RequestMapping(value="/sickandvacation", method = RequestMethod.POST)
     public String postSickAndVacation(Model model, User user, HttpSession session, Deviation deviation){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
