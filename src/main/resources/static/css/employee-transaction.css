@@ -4,10 +4,12 @@
     min-width: 10em;
 }
 .employee-transaction-list-row-input-date {
-    width: 110px;
+    width: 122px;
+    height: 30px !important;
 }
 .employee-transaction-list-row-input-time {
-    width: 60px;
+    width: 69px;
+    height: 30px !important;
 }
 .employee-transaction-table{
     width: 100%;

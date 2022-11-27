@@ -32,37 +32,43 @@
         <div class="col col-2">
           <p>Requested Time</p>
         </div>
-        <div class="col col-2">
+        <div class="col col-1">
           <p>Work Time</p>
         </div>
-        <div class="col col-2">
+        <div class="col col-3">
           <p>Status</p>
         </div>
       </div>
+
       <div class="table-content row" th:switch="${reviews}">
         <p th:case="null">No transactions need to be reviewed!</p>
-        <div1 th:case="*">
-          <div>
-            <div>
-              <div  th:each="review : ${reviews}" th:id="${review.getID}">
-                <div >
-                  <p th:text="${review.SSN}"></p>
-                  <p th:text="${review.clockInDate}"></p>
-                  <p th:text="${review.originalClockInTime} + ' - ' + ${review.originalClockOutTime}"></p>
-                  <p th:text="${review.changedClockInTime} + ' - ' + ${review.changedClockOutTime}"></p>
-                  <form class="review-approve" action="#" th:action="@{/reviews}" th:object="${transactionReview}" method="POST">
-                    <input type="hidden" name="ID" th:value="${review.ID}">
-                    <select class="eitthvad" th:field="*{status}">
-                      <option value="approve">Approve</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                    <input class="default-save-input" type="submit" value="Submit">
-                  </form>
-                </div>
-              </div>
-            </div>
+        <row class="row" th:case="*" th:each="review : ${reviews}" th:id="${review.getID}">
+          <div class="col col-2">
+            <p th:text="${review.SSN}"></p>
           </div>
-        </div1>
+          <div class="col col-2">
+            <p th:text="${review.clockInDate}"></p>
+          </div>
+          <div class="col col-2">
+            <p th:text="${review.originalClockInTime} + ' - ' + ${review.originalClockOutTime}"></p>
+          </div>
+          <div class="col col-2">
+            <p th:text="${review.changedClockInTime} + ' - ' + ${review.changedClockOutTime}"></p>
+          </div>
+          <div class="col col-1">
+
+          </div>
+          <div class="col col-3">
+            <form class="form-list" action="#" th:action="@{/reviews}" th:object="${transactionReview}" method="POST">
+              <input type="hidden" name="ID" th:value="${review.ID}">
+              <select class="eitthvad" th:field="*{status}">
+                <option value="approve">Approve</option>
+                <option value="reject">Reject</option>
+              </select>
+              <input style="height: 30px;" type="submit" value="Submit">
+            </form>
+          </div>
+        </row>
       </div>
     </main>
   </body>
