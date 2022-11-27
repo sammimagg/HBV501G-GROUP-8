@@ -74,15 +74,17 @@ select {
 .row {
     display: flex;
     flex-wrap: wrap;
- }
-
-.col {
-    padding-left: 2em;
-    padding-right: 2em;
     width: 100%;
+    min-height: 50px;
+}
+.col {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+.margin-col {
     margin-bottom: 2em;
 }
-
 
 .col-1 {
     width: 8.33333%; }
@@ -473,23 +475,41 @@ main{
 .icon-edit-grey {
     background-image: url(icon/edit.svg);
     background-repeat:no-repeat;
-    height: 25em;
+    height: 25px;
 }
 .icon-pending-yellow {
     background-image: url(icon/pending-yellow.svg);
     background-repeat:no-repeat;
-    height: 25em;
+    height: 25px;
 }
 .icon-approved-green {
     background-image: url(icon/approved-green.svg);
     background-repeat:no-repeat;
-    height: 25em;
+    height: 25px;
 }
 .icon-request-red {
     background-image: url(icon/request-red.svg);
     background-repeat:no-repeat;
-    height: 25em;
+    height: 25px;
 }
+
+.icon-schedule-grey {
+    background-image: url(icon/schedule-grey.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+.icon-schedule-green {
+    background-image: url(icon/schedule-green.svg);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 25px;
+    margin-top: 12.5px;
+}
+
+
+
 .plus-bubble-button-green {
     background-image: url(icon/plus-bubble-button-green.svg);
     background-repeat:no-repeat;
@@ -591,7 +611,7 @@ main{
     justify-content: center;
     flex: auto;
 }
-.default-table-row button{
+.transparent-button{
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
@@ -599,23 +619,7 @@ main{
     overflow: hidden;
     outline: none;
 }
-.default-table-row{
-    border: 1px solid #D4D4D4;
-    filter: drop-shadow(0px 1px 1px #DFDFDF);
-    border-radius: 5px;
-    margin-bottom: 0.5em;
-    padding-top: 12.5px;
-    padding-bottom: 12.5px;
-}
-.default-table-inner-row{
-    display: flex;
-    height: 25px;
-    margin-left: 1em;
-}
-.default-table-header{
-    padding-left: 1em;
-    display: flex;
-}
+
 .logout{
     position: absolute;
     display: flex;
@@ -631,4 +635,33 @@ main{
 li:hover{
     background-color: #F2F2F2;
 }
+
+.table-header{
+    margin-bottom: -1.5em;
+}
+.table-content {
+    border: 1px solid #D4D4D4;
+    filter: drop-shadow(0px 1px 1px #DFDFDF);
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+}
+.table-content p{
+ padding-top: 14px;
+}
+.table-content button {
+    margin-top: 11px;
+}
+.table-content input{
+    margin-top: 10px;
+}
+.status {
+    padding-top: 12px;
+}
+
+main{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+
 

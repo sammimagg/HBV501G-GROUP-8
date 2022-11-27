@@ -15,23 +15,41 @@
       <div class="row">
         <div class="col col-12">
           <h2>Employees</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-12">
           <div>
-            <div class="default-table-header employees-spacing">
-              <p class="">Name</p>
-              <p class="">Phone number</p>
-              <p class="">Role</p>
-              <p class=""></p>
+            <div class="table-header row">
+              <div class="col col-4">
+                <p>Name</p>
+              </div>
+              <div class="col col-4">
+                <p>Phone number</p>
+              </div>
+              <div class="col col-4">
+                <p>Role</p>
+              </div>
+              <div class="col col-4">
+                <p></p>
+              </div>
             </div>
-            <div class="default-table-list">
-              <div class="default-table-row user-profile-row" th:each="employee : ${employees}">
-                <div class="default-table-inner-row employees-spacing">
-                  <p th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
-                  <p th:text="${employee.phoneNumberEmployee}">8458094</p>
-                  <p th:text="${employee.employeeAccountType}">Admin</p>
+            <div class="table-content row" th:each="employee : ${employees}">
+              <div class="col col-4">
+                <p th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
+              </div>
+              <div class="col col-4">
+                <p th:text="${employee.phoneNumberEmployee}">8458094</p>
+              </div>
+              <div class="col col-2">
+                <p th:text="${employee.employeeAccountType}">Admin</p>
+              </div>
+              <div class="col col-2">
+                <button class="transparent-button" >
                   <a th:href="@{'/edit/' + ${employee.ssnEmployee}}">
                     <svg class="icon-edit-grey" height="25" width="25"></svg>
                   </a>
-                </div>
+                </button>
               </div>
             </div>
           </div>

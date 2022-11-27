@@ -19,6 +19,12 @@
                     <p>Time & Attendance</p>
                 </a>
             </li>
+            <li th:class="${activePage == 'schedule'} ? 'li-active' : 'li-inactive'">
+                <a href="schedule" class="">
+                    <svg th:class="${activePage == 'schedule'} ? 'icon-schedule-green' : 'icon-schedule-grey'"></svg>
+                    <p>Schedule</p>
+                </a>
+            </li>
             <li th:class="${activePage == 'drivingLog'} ? 'li-active' : 'li-inactive'">
                 <a href="drivinglog" class="">
                     <svg th:class="${activePage == 'drivingLog'} ? 'icon-driving-log-green' : 'icon-driving-log-grey'"></svg>

@@ -13,39 +13,46 @@
   </head>
   <body class="body-sidebar">
     <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
-    <main >
+    <main>
       <div class="row">
         <div class="col col-12">
-            <h2>Real-Time Insights</h2>
-
-            <div class=" total-worked-hour">
-              <div class="total-worked-hour-inner-left">
-                <p style="color: #7A7A7A;">Work Time</p>
-                <p style="font-size: 2rem;">20:00 h</p>
-              </div>
-              <div class="total-worked-hour-inner-right">
-                <p style="color: #7A7A7A;">Total</p>
-              </div>
+          <h2>Real-Time Insights</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-12">
+          <div>
+            <div>
+              <p style="color: #7A7A7A;">Work Time</p>
+              <p style="font-size: 2rem;">20:00 h</p>
             </div>
             <div>
-              <div class="default-table-header real-time-insights-spacing">
-                <p>Employee Name</p>
-                <p>Clock-in</p>
-                <p >Clock-out</p>
-                <p>Work time</p>
-              </div>
-              <div class="default-table-list">
-                <div th:each="employee : ${employees}" th:class="${employee.status == 'onDuty'} ? 'default-table-row user-profile-row ' : 'offline default-table-row user-profile-row'">
-                  <div class="default-table-inner-row real-time-insights-row real-time-insights-spacing">
-                    <div>
-                      <p th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
-                      <p th:if="${employee.status != 'onDuty'}">Deactive</p>
-                    </div>
-                </div>
-            </div>
-              </div>
+              <p style="color: #7A7A7A;">Total</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="table-header row">
+          <div class="col col-3">
+            <p>Employee Name</p>
+          </div>
+          <div class="col col-3">
+            <p>Clock-in</p>
+          </div>
+          <div class="col col-3">
+            <p >Clock-out</p>
+          </div>
+          <div class="col col-3">
+            <p>Work time</p>
+          </div>
+        </div>
+        <div th:each="employee : ${employees}" th:class="${employee.status == 'onDuty'} ? 'table-content row ' : 'offline table-content row'">
+          <div class="col col-4">
+            <p th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}">Name</p>
+            <p th:if="${employee.status != 'onDuty'}">Deactive</p>
+          </div>
+        </div>
       </div>
     </main>
   </body>

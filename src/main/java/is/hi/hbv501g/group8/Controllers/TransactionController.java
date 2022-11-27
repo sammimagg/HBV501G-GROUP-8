@@ -11,11 +11,9 @@
 package is.hi.hbv501g.group8.Controllers;
 
 import is.hi.hbv501g.group8.Persistence.Entities.*;
-import is.hi.hbv501g.group8.Persistence.Repositories.UserRepository;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
-import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,19 +22,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class TransactionController {
@@ -210,13 +202,13 @@ public class TransactionController {
      *
      * @param model Model
      * @param user User
-     * @param rr RequestReview
+     * @param timeAndDate RequestReview
      * @param dateHelper DateHelper
      * @param session HttpSession
      * @return listview A view for listview
      */
     @RequestMapping(value="/edit", method = RequestMethod.POST)
-    public String edit(Model model, User user, RequestReview rr,DateHelper dateHelper, HttpSession session){
+    public String edit(Model model, User user, TimeAndDate timeAndDate, DateHelper dateHelper, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser == null) {
             return "redirect:/login";
@@ -224,22 +216,23 @@ public class TransactionController {
         loadUserComponent(sessionUser,model);
         model.addAttribute("activePage", "timeAndAttendace");
 
-        Transaction orginalTransaction =transactionService.findByID(Long.parseLong(rr.getId()));
+        Transaction orginalTransaction =transactionService.findByID(Long.parseLong(timeAndDate.getId()));
         orginalTransaction.setStatus("request");
 
         DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter TIMEFORMATTER = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDate dateFrom = LocalDate.parse(rr.getDate(),DATEFORMATTER);
-        LocalTime timeFrom = LocalTime.parse(rr.getTimeIn(),TIMEFORMATTER);
-        LocalDate dateTo = LocalDate.parse(rr.getDate(),DATEFORMATTER);
-        LocalTime timeTo = LocalTime.parse(rr.getTimeOut(),TIMEFORMATTER);
+        LocalDate dateFrom = LocalDate.parse(timeAndDate.getDateOne(),DATEFORMATTER);
+        LocalTime timeFrom = LocalTime.parse(timeAndDate.getTimeOne(),TIMEFORMATTER);
+
+        LocalDate dateTo = LocalDate.parse(timeAndDate.getDateOne(),DATEFORMATTER);
+        LocalTime timeTo = LocalTime.parse(timeAndDate.getTimeTwo(),TIMEFORMATTER);
 
         LocalDateTime dateTimeFrom = LocalDateTime.of(dateFrom,timeFrom);
         LocalDateTime dateTimeTo = LocalDateTime.of(dateTo,timeTo);
 
-        TransactionReview exists = transactionReviewService.findByID(Long.parseLong(rr.getId()));
+        TransactionReview exists = transactionReviewService.findByID(Long.parseLong(timeAndDate.getId()));
         if(exists == null){
-            TransactionReview newTransaction = new TransactionReview(Long.parseLong(rr.getId()),
+            TransactionReview newTransaction = new TransactionReview(Long.parseLong(timeAndDate.getId()),
                     user.getSSN(),
                     "pending",
                     dateTimeFrom,
@@ -274,7 +267,7 @@ public class TransactionController {
      * @return listview A view for listview
      */
     @RequestMapping(value="/edit", method = RequestMethod.GET)
-    public String geteditTransaction(Model model, User user,DateHelper dateHelper, RequestReview rr, HttpSession session){
+    public String geteditTransaction(Model model, User user, DateHelper dateHelper, TimeAndDate rr, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser == null) {
             return "redirect:/login";

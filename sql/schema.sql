@@ -79,10 +79,8 @@ CREATE TABLE IF NOT EXISTS Deviations (
 CREATE TABLE IF NOT EXISTS Schedule (
     ID SERIAL PRIMARY KEY,
     SSN VARCHAR(10),
-    date_from date,
-    date_to date,
-    time_from TIMESTAMP,
-    time_to TIMESTAMP
+    date_and_time_from TIMESTAMP WITH TIME ZONE,
+    date_and_time_to TIMESTAMP WITH TIME ZONE
 );
 
 

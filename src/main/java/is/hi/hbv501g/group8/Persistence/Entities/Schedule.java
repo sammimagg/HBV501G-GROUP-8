@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -17,9 +18,8 @@ public class Schedule {
     private long ID;
     private String SSN;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateFrom, dateTo;
-    @DateTimeFormat(pattern = "HH:mm")
-    private LocalTime timeFrom, timeTo;
+    private LocalDateTime dateAndTimeFrom, dateAndTimeTo;
+
 
         public void Transaction() {
 
@@ -43,36 +43,20 @@ public class Schedule {
         this.ID = ID;
     }
 
-    public LocalDate getDateFrom() {
-        return dateFrom;
+    public LocalDateTime getDateAndTimeFrom() {
+        return dateAndTimeFrom;
     }
 
-    public void setDateFrom(LocalDate dateFrom) {
-        this.dateFrom = dateFrom;
+    public LocalDateTime getDateAndTimeTo() {
+        return dateAndTimeTo;
     }
 
-    public LocalTime getTimeFrom() {
-        return timeFrom;
+    public void setDateAndTimeFrom(LocalDateTime dateAndTimeFrom) {
+        this.dateAndTimeFrom = dateAndTimeFrom;
     }
 
-    public void setTimeFrom(LocalTime timeFrom) {
-        this.timeFrom = timeFrom;
-    }
-
-    public LocalDate getDateTo() {
-        return dateTo;
-    }
-
-    public void setDateTo(LocalDate dateTo) {
-        this.dateTo = dateTo;
-    }
-
-    public LocalTime getTimeTo() {
-        return timeTo;
-    }
-
-    public void setTimeTo(LocalTime timeTo) {
-        this.timeTo = timeTo;
+    public void setDateAndTimeTo(LocalDateTime dateAndTimeTo) {
+        this.dateAndTimeTo = dateAndTimeTo;
     }
 
     public String getSSN() {

@@ -18,23 +18,23 @@
             <div class="row">
                 <div class="col col-12">
                     <h1>Make schedule</h1>
-                    <form th:action="@{/schedule-admin}" th:object="${schedule}"  method="POST">
+                    <form th:action="@{/schedule-admin}" th:object="${TimeAndDate}"  method="POST">
                         <div>
-                            <select name="employee" id="employee">
-                                <option th:each="employee : ${employees}" th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}"></option>
+                            <select name="id">
+                                <option th:each="employee : ${employees}" th:text="${employee.firstNameOfEmployee} + ' ' + ${employee.lastNameOfEmployee}" th:value="${employee.ssnEmployee}"></option>
                             </select>
                         </div>
                         <div>
                             <p>Start Date:</p>
-                            <input type="text" name="dateFrom"  placeholder="yyyy-mm-dd"/>
+                            <input type="text" name="dateOne"  placeholder="yyyy-mm-dd"   required/>
                             <p>End Date:</p>
-                            <input type="text" name="dateTo"  placeholder="yyyy-mm-dd"/>
+                            <input type="text" name="dateTwo"  placeholder="yyyy-mm-dd" required/>
                         </div>
                         <div>
                             <p>Start Time</p>
-                            <input type="text"  placeholder="HH-mm">
+                            <input type="text" name="timeOne" placeholder="HH-mm" required>
                             <p>End Time</p>
-                            <input type="text"  placeholder="HH-mm">
+                            <input type="text" name="timeTwo" placeholder="HH-mm" required>
                             <input type="submit" value="Save">
                         </div>
                     </form>

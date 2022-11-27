@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+    <head th:switch="${username}">
+        <meta charset="UTF-8">
+        <!--suppress HtmlUnknownAttribute -->
+        <title th:case="null">Log in to see worked hours</title>
+        <!--suppress HtmlUnknownAttribute, HtmlUnknownAttribute -->
+        <title th:case="*" th:text="${username}"></title>
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+        <link th:href="@{/css/employee-transaction.css}" rel="stylesheet"/>
+    </head>
+    <body class="body-sidebar">
+        <nav th:replace="${userRole == 0} ? ~{fragments/menu-admin :: menu} : ~{fragments/menu-user :: menu} "></nav>
+        <main>
+            <row class="table-header row">
+                <div class="col col-3">
+                    <p>Date From</p>
+                </div>
+                <div class="col col-3">
+                    <p>Date To</p>
+                </div>
+                <div class="col col-3">
+                    <p>Time From</p>
+                </div>
+                <div class="col col-3">
+                    <p>Time To</p>
+                </div>
+            </row>
+            <row class="table-content row" th:each="TimeAndDate : ${TimeAndDate}" >
+                <div class="col col-3">
+                    <p th:text="${TimeAndDate.dateOne}"></p>
+                </div>
+                <div class="col col-3">
+                    <p th:text="${TimeAndDate.dateTwo}"></p>
+                </div>
+                <div class="col col-3">
+                    <p th:text="${TimeAndDate.timeOne}"></p>
+                </div>
+                <div class="col col-3">
+                    <p th:text="${TimeAndDate.timeTwo}"></p>
+                </div>
+            </row>
+        </main>
+    </body>
+</html>

@@ -12,20 +12,16 @@
  */
 package is.hi.hbv501g.group8.Controllers;
 
-import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
 import is.hi.hbv501g.group8.Persistence.Entities.Employee;
-import is.hi.hbv501g.group8.Persistence.Entities.RequestReview;
 import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 public class EmployeeController {

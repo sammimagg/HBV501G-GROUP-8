@@ -1,9 +1,6 @@
 package is.hi.hbv501g.group8.Controllers;
 
-import is.hi.hbv501g.group8.Persistence.Entities.DateHelper;
-import is.hi.hbv501g.group8.Persistence.Entities.Employee;
-import is.hi.hbv501g.group8.Persistence.Entities.Schedule;
-import is.hi.hbv501g.group8.Persistence.Entities.User;
+import is.hi.hbv501g.group8.Persistence.Entities.*;
 import is.hi.hbv501g.group8.Services.DeviationService;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.ScheduleService;
@@ -15,7 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Formatter;
 import java.util.List;
 
 @Controller
@@ -30,18 +32,38 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
     @RequestMapping(value = "schedule-admin", method = RequestMethod.POST)
-    public String postRequest(Model model, HttpSession session, User user, DateHelper dateHelper) {
+    public String postScheduleAdmin(Model model, HttpSession session, User user,  TimeAndDate timeAndDate) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser == null) {
             return "redirect:/login";
         }
+        System.out.println(timeAndDate.getDateOne() + " " + timeAndDate.getTimeTwo());
+        System.out.println(timeAndDate.getId());
 
-        //scheduleService.save(schedule);
+        Schedule schedule = new Schedule();
+        schedule.setSSN(timeAndDate.getId());
+        // Formatter of String
+        DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter TIMEFORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+        // Format string to date and time
+        LocalDate dateOne = LocalDate.parse(timeAndDate.getDateOne(),DATEFORMATTER);
+        LocalTime timeOne = LocalTime.parse(timeAndDate.getTimeOne(),TIMEFORMATTER);
+        // Format string to date and time
+        LocalDate dateTwo = LocalDate.parse(timeAndDate.getDateTwo(),DATEFORMATTER);
+        LocalTime timeTwo = LocalTime.parse(timeAndDate.getTimeTwo(),TIMEFORMATTER);
+        // Make date and time
+        LocalDateTime dateTimeFrom = LocalDateTime.of(dateOne,timeOne);
+        LocalDateTime dateTimeTo = LocalDateTime.of(dateTwo, timeTwo);
+        // Make new schedule
+        schedule.setDateAndTimeFrom(dateTimeFrom);
+        schedule.setDateAndTimeTo(dateTimeTo);
+        // Save new schedule
+        scheduleService.save(schedule);
 
         return "redirect:/schedule-admin";
     }
     @RequestMapping(value = "schedule-admin", method = RequestMethod.GET)
-    public String getRequest(Model model, HttpSession session, User user, DateHelper dateHelper) {
+    public String getScheduleAdmin(Model model, HttpSession session, User user, TimeAndDate timeAndDate) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser == null) {
             return "redirect:/login";
@@ -51,7 +73,30 @@ public class ScheduleController {
 
         return "schedule-admin";
     }
+    @RequestMapping(value = "schedule", method = RequestMethod.GET)
+    public String getSchedule(Model model,HttpSession session, User user){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null) {
+            return "redirect:/login";
+        }
+        loadUserComponent(sessionUser,model);
+        model.addAttribute("activePage", "schedule");
+        List<Schedule> allSchedule = scheduleService.findAllBySSN(sessionUser.getSSN());
+        ArrayList<TimeAndDate> allTimeAndDate = new ArrayList<TimeAndDate>();
 
+        for(int i = 0; i< allSchedule.size(); i++){
+            TimeAndDate timeAndDate = new TimeAndDate();
+            timeAndDate.setTimeOne(allSchedule.get(i).getDateAndTimeFrom().toLocalTime().toString());
+            timeAndDate.setTimeTwo(allSchedule.get(i).getDateAndTimeTo().toLocalTime().toString());
+            timeAndDate.setDateOne(allSchedule.get(i).getDateAndTimeFrom().toLocalDate().toString());
+            timeAndDate.setDateTwo(allSchedule.get(i).getDateAndTimeTo().toLocalDate().toString());
+            allTimeAndDate.add(i,timeAndDate);
+        }
+
+        model.addAttribute("TimeAndDate",allTimeAndDate);
+
+        return "schedule";
+    }
     public List<Employee> getEmployeeList() {
         List<Employee> allEmployees;
         allEmployees = employeeService.findAll();
@@ -59,6 +104,7 @@ public class ScheduleController {
         for(Employee row : allEmployees) {
             row.setFirstNameOfEmployee(row.getFirstName());
             row.setLastNameOfEmployee(row.getLastName());
+            row.setSsnEmployee(row.getSSN());
         }
         return allEmployees;
     }

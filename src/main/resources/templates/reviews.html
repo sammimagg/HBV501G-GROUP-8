@@ -17,43 +17,52 @@
       <div class="row">
         <div class="col col-12">
           <h2>Request Revies</h2>
-          <div th:switch="${reviews}">
-            <h2 th:case="null">No transactions need to be reviewed!</h2>
-            <div th:case="*">
-              <h3>Transaction</h3>
-              <div class="employee-transaction-table">
-                <div class="default-table-header">
-                  <p class="employee-transaction-list-row">Employee</p>
-                  <p class="employee-transaction-list-row">Date</p>
-                  <p class="employee-transaction-list-row">Original Time</p>
-                  <p class="employee-transaction-list-row">Requested Time</p>
-                  <p class="employee-transaction-list-row">Work Time</p>
-                  <p class="employee-transaction-list-row">Status</p>
-                  <p class="employee-transaction-list-row"></p>
-                  <p class="employee-transaction-list-row"></p>
-                </div>
-                <div class="default-table-list">
-                  <div class="default-table-row" th:each="review : ${reviews}" th:id="${review.getID}">
-                    <div class="default-table-inner-row">
-                      <p class="employee-transaction-list-row" th:text="${review.SSN}"></p>
-                      <p class="employee-transaction-list-row" th:text="${review.clockInDate}"></p>
-                      <p class="employee-transaction-list-row" th:text="${review.originalClockInTime} + ' - ' + ${review.originalClockOutTime}"></p>
-                      <p class="employee-transaction-list-row" th:text="${review.changedClockInTime} + ' - ' + ${review.changedClockOutTime}"></p>
-                      <form class="review-approve" action="#" th:action="@{/reviews}" th:object="${transactionReview}" method="POST">
-                        <input type="hidden" name="ID" th:value="${review.ID}">
-                        <select class="eitthvad" th:field="*{status}">
-                          <option value="approve">Approve</option>
-                          <option value="reject">Reject</option>
-                        </select>
-                        <input class="default-save-input" type="submit" value="Submit">
-                      </form>
-                    </div>
-                  </div>
+        </div>
+      </div>
+      <div class="table-header row">
+        <div class="col col-2">
+          <p>Employee</p>
+        </div>
+        <div class="col col-2">
+          <p>Date</p>
+        </div>
+        <div class="col col-2">
+          <p>Original Time</p>
+        </div>
+        <div class="col col-2">
+          <p>Requested Time</p>
+        </div>
+        <div class="col col-2">
+          <p>Work Time</p>
+        </div>
+        <div class="col col-2">
+          <p>Status</p>
+        </div>
+      </div>
+      <div class="table-content row" th:switch="${reviews}">
+        <p th:case="null">No transactions need to be reviewed!</p>
+        <div1 th:case="*">
+          <div>
+            <div>
+              <div  th:each="review : ${reviews}" th:id="${review.getID}">
+                <div >
+                  <p th:text="${review.SSN}"></p>
+                  <p th:text="${review.clockInDate}"></p>
+                  <p th:text="${review.originalClockInTime} + ' - ' + ${review.originalClockOutTime}"></p>
+                  <p th:text="${review.changedClockInTime} + ' - ' + ${review.changedClockOutTime}"></p>
+                  <form class="review-approve" action="#" th:action="@{/reviews}" th:object="${transactionReview}" method="POST">
+                    <input type="hidden" name="ID" th:value="${review.ID}">
+                    <select class="eitthvad" th:field="*{status}">
+                      <option value="approve">Approve</option>
+                      <option value="reject">Reject</option>
+                    </select>
+                    <input class="default-save-input" type="submit" value="Submit">
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div1>
       </div>
     </main>
   </body>
