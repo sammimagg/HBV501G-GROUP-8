@@ -48,11 +48,13 @@ public class ScheduleController {
     /**
      * Handler for POST requests on schedule-admin
      *
-     * 
+     * Creates a new schedule for selected employee
      *
      * @param model Model
-     * @param 
-     * @return clock A view for clocking in
+     * @param user User
+     * @param timeAndDate timeAndDate
+     * @param session HttpSession
+     * @return redirect
      */
     @RequestMapping(value = "schedule-admin", method = RequestMethod.POST)
     public String postScheduleAdmin(Model model, HttpSession session, User user,  TimeAndDate timeAndDate) {
@@ -85,6 +87,18 @@ public class ScheduleController {
 
         return "redirect:/schedule-admin";
     }
+
+        /**
+     * Handler for GET requests on schedule-admin
+     *
+     * Retrieves a list of relevant employees
+     *
+     * @param model Model
+     * @param user User
+     * @param timeAndDate timeAndDate
+     * @param session HttpSession
+     * @return schedule-admin HTML page
+     */
     @RequestMapping(value = "schedule-admin", method = RequestMethod.GET)
     public String getScheduleAdmin(Model model, HttpSession session, User user, TimeAndDate timeAndDate) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -96,6 +110,17 @@ public class ScheduleController {
 
         return "schedule-admin";
     }
+
+    /**
+     * Handler for GET requests on schedule
+     *
+     * Fetches a schedule for relevant employee
+     *
+     * @param model Model
+     * @param user User
+     * @param session HttpSession
+     * @return schedule HTML page
+     */
     @RequestMapping(value = "schedule", method = RequestMethod.GET)
     public String getSchedule(Model model,HttpSession session, User user){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -120,6 +145,12 @@ public class ScheduleController {
 
         return "schedule";
     }
+
+    /**
+     * Function that retrieves all employees
+     *
+     * @return employees ArrayList<Employee>
+     */
     public List<Employee> getEmployeeList() {
         List<Employee> allEmployees;
         allEmployees = employeeService.findAll();
