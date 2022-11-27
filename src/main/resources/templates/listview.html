@@ -34,7 +34,7 @@
             <input type="date" name="startDate" id="startDate" th:field="*{date1}" />
             <label>To</label>
             <input type="date" name="endDate" id="endDate" th:field="*{date2}" />
-            <input type="submit" value="Search"/>
+            <input class="filled-button-green" type="submit" value="Search"/>
           </form>
         </div>
       </div>
@@ -92,7 +92,7 @@
                   </button>
                 </div>
               </div>
-              <form class="row" action="#" th:action="@{/edit}" th:object="${TimeAndDate}" method="post"  style="display: none" th:id="'row-' + ${transaction.getID}">
+              <form class="row form-list" action="#" th:action="@{/edit}" th:object="${TimeAndDate}" method="post"  style="display: none" th:id="'row-' + ${transaction.getID}">
                 <div class="col col-2">
                   <input type="hidden" name="id" th:value="${transaction.getID}">
                   <input class="employee-transaction-list-row-input-date" type="text" placeholder="yyyy-mm-dd" name="dateOne" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required/>
@@ -104,7 +104,7 @@
                   <input class="employee-transaction-list-row-input-time"  type="text" placeholder="hh:mm" name="timeTwo" required />
                 </div>
                 <div class="col col-2">
-                  <input value="Save" type="submit" name="button"/>
+                  <input style="height: 30px;" value="Save" type="submit" name="button"/>
                 </div>
                 <div class="col col-1"></div>
                 <div class="col col-1">

@@ -7,7 +7,18 @@ input{
     font-weight: 500;
     font-size: 1em;
     border-radius: 5px;
+    height: 50px;
+    padding-left: 6px;
 
+}
+select{
+    border: none;
+    font-style: normal;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 1em;
+    border-radius: 5px;
+    height: 50px;
 }
 h1 {
     font-size: 35px;
@@ -41,17 +52,20 @@ body {
 label{
     font-family: 'poppins';
     margin-top: 1em;
+    color: #353535;
 }
 
 select {
     margin-top: 0.5em;
     padding-left: 1em;
-    background-color: white;
+    background-color: #F6F6F6;
     height: 3em;
     border-radius: 5px;
-    border: 1px solid #000000;
+    border: 1px solid #F6F6F6;
 }
-
+.container{
+    margin-bottom: 2em;
+}
 .grid-with-sidebar {
     overflow: hidden;
     width: 100%;
@@ -323,6 +337,7 @@ li p{
 
 .li-active{
     border-left: 5px solid #1AEAB6;
+    background-color: #f8f8f8;
 }
 .li-inactive{
     border-left: 5px solid #ffffff;
@@ -340,6 +355,14 @@ li p{
 main{
     width: 100%;
 }
+.form-list input{
+    height: 30px !important;
+    width: 120px !important;
+}
+.form-list select{
+    height: 30px !important;
+}
+
 /*************   Icons  *********************/
 /* Real time insight icon*/
 .icon-real-time-insights-grey {
@@ -569,21 +592,22 @@ main{
 
 
 
-.default-cancel-input {
+.outline-button-green {
     border: 1px solid #1AEAB6 !important;
     text-align: center;
     color: #1AEAB6;
-    height: 50px;
+    min-height: 50px;
     min-width: 200px;
     background-color: white !important;
 
 }
-.default-save-input {
+.filled-button-green {
     background-color: #1AEAB6 !important;
     border: 1px solid #1AEAB6 !important;
     text-align: center;
     color: white;
-    min-width: 200px;
+    width: 200px;
+    height: 50px;
     margin-right:0.5em
 
 }

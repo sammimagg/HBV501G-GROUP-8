@@ -133,6 +133,8 @@ public class DrivingLogController {
 
         driving.setSSN(sessionUser.getSSN());
         driving.setDags(LocalDate.now());
+
+
         drivingService.save(driving);
         return "redirect:/drivinglog";
 
