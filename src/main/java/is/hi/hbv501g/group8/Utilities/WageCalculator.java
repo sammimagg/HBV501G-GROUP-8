@@ -1,3 +1,10 @@
+/**
+* Package which handles calculation for wage estimates
+* and splitting worked hours into DV, EV, NV, YF
+* 
+* @depreceted
+*/
+
 package is.hi.hbv501g.group8.Utilities;
 
 import java.time.Duration;
@@ -49,6 +56,9 @@ public class WageCalculator {
         return overtime;
     }
 
+    /*
+    * Try #1, did not work
+    */
     public String estimateWages(LocalTime shift_start, LocalTime shift_end) {
         double totalCost = 0.0;
         double hoursYV = 0.0;
@@ -83,6 +93,11 @@ public class WageCalculator {
         return String.format("DV: %.2f - EV: %.2f - NV: %.2f - YV: %.2f - TTL: %.2f", hoursDV, hoursEV, hoursNV, hoursYV, totalHours);
     }
 
+    /*
+    * Function that is SUPPOSED to split hours into DV, NV, EV, YF
+    * Does not work as intended, but quite close to it!
+    * @see WageCalculatorTest.java
+    */
     public String splitHours(LocalTime shift_start, LocalTime shift_end){
         // 00 - 08: 0 - 480
         // 08 - 16: 480 - 960
