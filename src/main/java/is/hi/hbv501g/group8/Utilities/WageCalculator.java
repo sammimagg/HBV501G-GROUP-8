@@ -99,39 +99,6 @@ public class WageCalculator {
     * @see WageCalculatorTest.java
     */
     public String splitHours(LocalTime shift_start, LocalTime shift_end){
-        // 00 - 08: 0 - 480
-        // 08 - 16: 480 - 960
-        // 16 - 24: 960 - 1440
-
-        double hDV, hEV, hNV, hYV, totalHours;
-        int mDV = 0, mEV = 0, mNV = 0, mYV;
-        int start = shift_start.getHour() * 60 + shift_start.getMinute();
-        int end = shift_end.getHour() * 60 + shift_end.getMinute();
-
-        int totalMinutes = end-start;
-        totalHours = totalMinutes/60.0;
-        hYV = Math.max(((end-start) / 60.0) - 12, 0);
-        // If end < start:
-        // Loopa loopa frá byrjunartíma að miðnætti
-        // breyta byrjunartíma í 0000
-        // halda áfarm niður:
-        int ptr = start;
-        /*
-         *   Fyrir: ptr = start <= end
-         *   Eftir: ptr > end, stöðugildi DV, EV, NV og YV hækka
-         */
-        while(ptr <= end){
-            if(ptr < 480) mNV++;
-            if(ptr >= 480 && ptr < 960) mDV++;
-            if(ptr >= 960 && ptr < 1440) mEV++;
-            ptr++;
-        }
-
-        // Formatting
-        hDV = mDV/60.0;
-        hNV = mNV/60.0;
-        hEV = mEV/60.0;
-
-        return String.format("DV: %.2f - EV: %.2f - NV: %.2f - YV: %.2f - TTL: %.2f", hDV, hEV, hNV, hYV, totalHours);
+        return "";
     }
 }
