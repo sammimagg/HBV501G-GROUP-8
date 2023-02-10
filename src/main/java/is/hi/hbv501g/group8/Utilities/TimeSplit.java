@@ -16,20 +16,18 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.min;
+
 public class TimeSplit {
 
     // Dagvinna
-    private int dayStartHour = 8;
-    private int dayEndHour = 16;
+    private int dayStartHour;
+    private int eveningStartHour;
 
-    // Eftirvinna
-    private int eveningStartHour = 16;
-    private int eveningEndHour = 24;
-
-    // Næturvinna
-    private int nightStartHour = 0;
-    private int nightEndHour = 8;
-
+    public TimeSplit(int dayStartHour, int eveningStartHour) {
+        this.dayStartHour = dayStartHour;
+        this.eveningStartHour = eveningStartHour;
+    }
 
     /**
      * Main function which calculates and maps results.
@@ -38,7 +36,7 @@ public class TimeSplit {
      * @param shift_end LocalDateTime Ending time of shift
      * @return hours_split Map<String, Double>
      */
-    public static Map<String, Double> getTimeSplit(LocalDateTime shift_start, LocalDateTime shift_end) {
+    public Map<String, Double> getTimeSplit(LocalDateTime shift_start, LocalDateTime shift_end) {
         // Input Data
         long totalMinutes = ChronoUnit.MINUTES.between(shift_start, shift_end);
 
@@ -49,48 +47,67 @@ public class TimeSplit {
         double nightHours = 0;
         double overTime = 0;
 
-        return null;
+        // Allocating extra minutes
+        int minutes_shift_start = 60 - shift_start.getMinute();
+        int minutes_shift_end = shift_end.getMinute();
+
+        if ( shift_start.getHour() < dayStartHour ) {
+            nightHours += minutes_shift_start / 60.0;
+        } else if ( shift_start.getHour() < eveningStartHour ) {
+            dayHours += minutes_shift_start / 60.0;
+        } else {
+            eveningHours += minutes_shift_start / 60.0;
+        }
+        LocalDateTime new_shift_start = shift_start.withMinute(0).plusHours(1);
+
+        if (shift_start.getMinute() > 0) {
+            new_shift_start = new_shift_start.plusHours(1);
+        }
+
+        if ( shift_end.getHour() < dayStartHour ) {
+            nightHours += minutes_shift_end / 60.0;
+        } else if ( shift_end.getHour() < eveningStartHour ) {
+            dayHours += minutes_shift_end / 60.0;
+        } else {
+            eveningHours += minutes_shift_end / 60.0;
+        }
+
+        LocalDateTime new_shift_end = shift_end.withMinute(0);
+
+        // Now we only need to calculate whole hours!
+        while( new_shift_start.isBefore(new_shift_end)) {
+            if ( new_shift_start.getHour() < dayStartHour ) {
+                nightHours += 1;
+            } else if ( new_shift_start.getHour() < eveningStartHour ) {
+                dayHours += 1;
+            } else {
+                eveningHours += 1;
+            }
+            new_shift_start = new_shift_start.plusHours(1);
+        }
+
+        if ( dayHours + eveningHours + nightHours > 8) {
+            overTime += min((dayHours + eveningHours + nightHours) - 8, dayHours);
+            dayHours -= min((dayHours + eveningHours + nightHours) - 8, dayHours);
+        }
+
+        if ( dayHours + eveningHours + nightHours > 8) {
+            overTime += min((dayHours + eveningHours + nightHours) - 8, eveningHours);
+            eveningHours -= min((dayHours + eveningHours + nightHours) - 8, eveningHours);
+        }
+
+        if ( dayHours + eveningHours + nightHours > 8) {
+            overTime += min((dayHours + eveningHours + nightHours) - 8, nightHours);
+            nightHours -= min((dayHours + eveningHours + nightHours) - 8, nightHours);
+        }
+
+
+        timeSplit.put("DV", dayHours);
+        timeSplit.put("EV", eveningHours);
+        timeSplit.put("NV", nightHours);
+        timeSplit.put("YV", overTime);
+
+        //System.out.println(dayHours + ", " + eveningHours + ", " + nightHours + ", " + overTime);
+        return timeSplit;
     }
 }
-
-/**
- * import java.time.LocalDateTime;
- * import java.time.temporal.ChronoUnit;
- * import java.util.HashMap;
- * import java.util.Map;
- *
- * public class TimeSplit {
- *     public static Map<String, Long> getTimeSplit(LocalDateTime start, LocalDateTime end) {
- *         Map<String, Long> timeSplit = new HashMap<>();
- *         long totalMinutes = ChronoUnit.MINUTES.between(start, end);
- *         long totalHours = totalMinutes / 60;
- *         int dayStartHour = 8;
- *         int dayEndHour = 17;
- *         int nightStartHour = 17;
- *         int nightEndHour = 24;
- *         long dayHours = 0;
- *         long nightHours = 0;
- *         long afterHours = 0;
- *         long overtime = 0;
- *         for (int i = 0; i < totalHours; i++) {
- *             int hour = start.plusHours(i).getHour();
- *             if (hour >= dayStartHour && hour < dayEndHour) {
- *                 dayHours++;
- *             } else if (hour >= nightStartHour && hour < nightEndHour) {
- *                 nightHours++;
- *             } else {
- *                 afterHours++;
- *             }
- *         }
- *         if (dayHours > 8) {
- *             overtime = dayHours - 8;
- *             dayHours = 8;
- *         }
- *         timeSplit.put("Day Hours", dayHours);
- *         timeSplit.put("Night Hours", nightHours);
- *         timeSplit.put("After Hours", afterHours);
- *         timeSplit.put("Overtime", overtime);
- *         return timeSplit;
- *     }
- * }
- */
