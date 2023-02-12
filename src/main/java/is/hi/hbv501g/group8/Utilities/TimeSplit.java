@@ -11,6 +11,7 @@
 
 package is.hi.hbv501g.group8.Utilities;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class TimeSplit {
     // Dagvinna
     private int dayStartHour;
     private int eveningStartHour;
+    private static final DecimalFormat decFormat = new DecimalFormat("0.00");
 
     public TimeSplit(int dayStartHour, int eveningStartHour) {
         this.dayStartHour = dayStartHour;
@@ -59,10 +61,6 @@ public class TimeSplit {
             eveningHours += minutes_shift_start / 60.0;
         }
         LocalDateTime new_shift_start = shift_start.withMinute(0).plusHours(1);
-
-        if (shift_start.getMinute() > 0) {
-            new_shift_start = new_shift_start.plusHours(1);
-        }
 
         if ( shift_end.getHour() < dayStartHour ) {
             nightHours += minutes_shift_end / 60.0;
@@ -102,12 +100,12 @@ public class TimeSplit {
         }
 
 
-        timeSplit.put("DV", dayHours);
-        timeSplit.put("EV", eveningHours);
-        timeSplit.put("NV", nightHours);
-        timeSplit.put("YV", overTime);
+        timeSplit.put("DV", Double.valueOf(decFormat.format(dayHours)));
+        timeSplit.put("EV", Double.valueOf(decFormat.format(eveningHours)));
+        timeSplit.put("NV", Double.valueOf(decFormat.format(nightHours)));
+        timeSplit.put("YV", Double.valueOf(decFormat.format(overTime)));
 
-        //System.out.println(dayHours + ", " + eveningHours + ", " + nightHours + ", " + overTime);
+        System.out.println(dayHours + ", " + eveningHours + ", " + nightHours + ", " + overTime);
         return timeSplit;
     }
 }
