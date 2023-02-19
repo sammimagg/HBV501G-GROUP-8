@@ -4,16 +4,17 @@
 
 package is.hi.hbv501g.group8.RESTControllers;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import is.hi.hbv501g.group8.Persistence.Entities.Employee;
+import is.hi.hbv501g.group8.Persistence.Entities.SessionUser;
 import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import is.hi.hbv501g.group8.Persistence.Entities.ViewTransactionUserDAO;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,6 +33,34 @@ public class TransactionRestController {
         this.transactionReviewService = transactionReviewService;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String clockIn(@RequestBody SessionUser sessionUser){
+        String ssn = sessionUser.getSsn();
+        System.out.println(ssn);
+        System.out.println(sessionUser.getAuthToken());
+        Transaction exists = transactionService.findBySSNAndFinished(ssn, false);
+        Employee temp = employeeService.findBySSN(ssn);
+
+        if(temp == null) {
+            return "SSN is not registered";
+        }
+        if(exists == null) {
+            Transaction newTransaction = new Transaction();
+            newTransaction.setClockIn(LocalDateTime.now());
+            newTransaction.setFinished(false);
+            newTransaction.setSSN(ssn);
+            transactionService.save(newTransaction);
+            return "Welcome ...";
+        }
+        else {
+            exists.setClockOut(LocalDateTime.now());
+            exists.setStatus("pending");
+            exists.setFinished(true);
+            transactionService.save(exists);
+            return "Thank you have. Have a nice day!";
+        }
+    }
 
     /**
      * Handler for GET requests on /list
