@@ -14,7 +14,10 @@ import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,30 +39,27 @@ public class TransactionRestController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String clockIn(@RequestBody SessionUser sessionUser){
-        String ssn = sessionUser.getSsn();
-        System.out.println(ssn);
-        System.out.println(sessionUser.getAuthToken());
-        Transaction exists = transactionService.findBySSNAndFinished(ssn, false);
-        Employee temp = employeeService.findBySSN(ssn);
-
+        Transaction exists = transactionService.findBySSNAndFinished(sessionUser.getSsn(), false);
+        Employee temp = employeeService.findBySSN(sessionUser.getSsn());
+        System.out.println("test");
         if(temp == null) {
-            return "SSN is not registered";
+            return "SSN is not registered!";
         }
+
         if(exists == null) {
-            Transaction newTransaction = new Transaction();
-            newTransaction.setClockIn(LocalDateTime.now());
-            newTransaction.setFinished(false);
-            newTransaction.setSSN(ssn);
-            transactionService.save(newTransaction);
-            return "Welcome ...";
+            Transaction transaction = new Transaction();
+            transaction.setSSN(sessionUser.getSsn());
+            transaction.setClockIn(LocalDateTime.now());
+            transaction.setFinished(false);
+            transactionService.save(transaction);
+            return "Welcome, " + temp.getFirstName();
         }
-        else {
-            exists.setClockOut(LocalDateTime.now());
-            exists.setStatus("pending");
-            exists.setFinished(true);
-            transactionService.save(exists);
-            return "Thank you have. Have a nice day!";
-        }
+
+        exists.setClockOut(LocalDateTime.now());
+        exists.setStatus("pending");
+        exists.setFinished(true);
+        transactionService.save(exists);
+        return "Thank you have. Have a nice day, "+temp.getFirstName()+"!";
     }
 
     /**
