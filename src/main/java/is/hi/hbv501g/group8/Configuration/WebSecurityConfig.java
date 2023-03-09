@@ -36,7 +36,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/api/**").authenticated()
+                        //.antMatchers("/api/**").authenticated() # Development
                         .anyRequest().permitAll());
 
         http.cors().and().csrf().disable();
