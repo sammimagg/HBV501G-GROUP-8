@@ -88,18 +88,6 @@ public class User {
     }
 
     /**
-     * Description: Getter for what type of account it will be, admin/employee or user
-     *
-     * @return Admin, User
-     */
-    public String getEmployeeAccountType() {
-        if(employeeAccountType == 0)
-            return "Admin";
-        else
-            return "User";
-    }
-
-    /**
      * Description: Setter for SSN of user
      *
      * @param ssn String

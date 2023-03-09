@@ -3,13 +3,13 @@ package is.hi.hbv501g.group8.RESTControllers;
 import is.hi.hbv501g.group8.Persistence.Entities.Employee;
 import is.hi.hbv501g.group8.Persistence.Entities.RealTimeInsightDAO;
 import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
+import is.hi.hbv501g.group8.Persistence.Entities.User;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,25 @@ public class EmployeeRestController {
         this.userService = userService;
         this.employeeService = employeeService;
         this.transactionService = transactionService;
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Employee EmployeeGET(@RequestBody User user) {
+        return employeeService.findBySSN(user.getSSN());
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public HttpStatus EmployeeGET(@RequestBody Employee employee) {
+        System.out.println("test");
+        Employee employee_to_change = employeeService.findBySSN(employee.getSSN());
+        if (employee_to_change == null) return HttpStatus.BAD_REQUEST;
+        employee_to_change = employee;
+        employeeService.save(employee_to_change);
+        System.out.println("test");
+
+        return HttpStatus.ACCEPTED;
+
     }
 
     @RequestMapping(value = "/rti", method = RequestMethod.GET)
@@ -47,8 +66,11 @@ public class EmployeeRestController {
             reval.add(append_to_array);
         }
 
-        System.out.println("test");
-
         return reval;
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<Employee> EmployeeListGET() {
+        return employeeService.findAll();
     }
 }
