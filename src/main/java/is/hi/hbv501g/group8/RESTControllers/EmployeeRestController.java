@@ -55,7 +55,7 @@ public class EmployeeRestController {
         
         for ( Employee empl : employee_list) {
             RealTimeInsightDAO append_to_array = new RealTimeInsightDAO(empl, false);
-
+            empl.setPassword(null);
             // Athuga hvort notandi sé innstimplaður
             Transaction currentTransaction = transactionService.findBySSNAndFinished(empl.getSSN(), false);
             if (currentTransaction != null) {
