@@ -100,6 +100,9 @@ public class ReviewController {
         model.addAttribute("activePage", "requestReview");
 
         List<TransactionReview> pendingReview = transactionReviewService.findAllByStatus("pending");
+        for (TransactionReview r : pendingReview) {
+            System.out.println(r.getSSN());
+        }
         model.addAttribute("reviews", pendingReview);
 
         return "reviews";
