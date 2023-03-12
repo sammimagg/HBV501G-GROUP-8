@@ -8,6 +8,8 @@ public class RealTimeInsightDAO {
     private LocalDateTime clock_in_time;
     private boolean clocked_in;
 
+    private Transaction last_transaction;
+
     public RealTimeInsightDAO(Employee employee, boolean clocked_in) {
         this.employee = employee;
         this.clocked_in = clocked_in;
@@ -35,6 +37,14 @@ public class RealTimeInsightDAO {
 
     public void setClocked_in(boolean clocked_in) {
         this.clocked_in = clocked_in;
+    }
+
+    public Transaction getLast_transaction() {
+        return last_transaction;
+    }
+
+    public void setLast_transaction(Transaction last_transaction) {
+        this.last_transaction = last_transaction;
     }
 }
 

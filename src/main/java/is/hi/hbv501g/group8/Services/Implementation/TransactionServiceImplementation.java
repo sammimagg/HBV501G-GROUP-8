@@ -56,4 +56,9 @@ public class TransactionServiceImplementation implements TransactionService {
     public List<Transaction> findAllBySSNAndClockInBetween(String ssn, LocalDateTime startDate, LocalDateTime endDate) {
         return transactionRepository.findAllBySSNAndClockInBetween(ssn, startDate, endDate);
     }
+
+    @Override
+    public Transaction findFirstBySSNOrderByIDDesc(String ssn) {
+        return transactionRepository.findFirstBySSNOrderByIDDesc(ssn);
+    }
 }
