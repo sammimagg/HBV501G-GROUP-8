@@ -14,6 +14,5 @@ public interface DrivingService {
     List<Driving> findAllBySSN(String ssn);
 
     List<Driving> findAllBySSNAndDagsBetween(String ssn, LocalDate startDate, LocalDate endDate);
-
-
+    Driving findBySSNAndDags(String ssn, LocalDate dags);
 }

@@ -63,4 +63,9 @@ public class DrivingServiceImplementation implements DrivingService {
     public List<Driving> findAllBySSNAndDagsBetween(String ssn, LocalDate startDate, LocalDate endDate) {
         return drivingRepository.findAllBySSNAndDagsBetween(ssn, startDate, endDate);
     }
+
+    @Override
+    public Driving findBySSNAndDags(String ssn, LocalDate dags) {
+        return drivingRepository.findBySSNAndDags(ssn, dags);
+    }
 }

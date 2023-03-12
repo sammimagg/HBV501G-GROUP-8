@@ -13,5 +13,6 @@ public interface DrivingRepository extends JpaRepository<Driving, String> {
     List<Driving> findAllBySSN(String ssn);
 
     List<Driving> findAllBySSNAndDagsBetween(String ssn, LocalDate startDate, LocalDate endDate);
+    Driving findBySSNAndDags(String ssn, LocalDate dags);
 
 }
