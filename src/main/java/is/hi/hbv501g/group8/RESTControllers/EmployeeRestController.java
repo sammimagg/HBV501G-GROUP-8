@@ -1,9 +1,6 @@
 package is.hi.hbv501g.group8.RESTControllers;
 
-import is.hi.hbv501g.group8.Persistence.Entities.Employee;
-import is.hi.hbv501g.group8.Persistence.Entities.RealTimeInsightDAO;
-import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
-import is.hi.hbv501g.group8.Persistence.Entities.User;
+import is.hi.hbv501g.group8.Persistence.Entities.*;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import is.hi.hbv501g.group8.Services.UserService;
@@ -31,7 +28,7 @@ public class EmployeeRestController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Employee EmployeeGET(@RequestBody SessionUser sessionUser) {
-        return employeeService.findBySSN(sessionUser.getSSN());
+        return employeeService.findBySSN(sessionUser.getSsn());
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
