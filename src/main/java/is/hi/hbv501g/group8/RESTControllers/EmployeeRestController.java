@@ -30,8 +30,8 @@ public class EmployeeRestController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Employee EmployeeGET(@RequestBody User user) {
-        return employeeService.findBySSN(user.getSSN());
+    public Employee EmployeeGET(@RequestBody SessionUser sessionUser) {
+        return employeeService.findBySSN(sessionUser.getSSN());
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
