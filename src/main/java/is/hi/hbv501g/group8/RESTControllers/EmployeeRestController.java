@@ -6,6 +6,7 @@ import is.hi.hbv501g.group8.Services.TransactionService;
 import is.hi.hbv501g.group8.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,8 +28,10 @@ public class EmployeeRestController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Employee EmployeeGET(@RequestBody SessionUser sessionUser) {
-        return employeeService.findBySSN(sessionUser.getSsn());
+    public ResponseEntity<Employee> EmployeeGET(@RequestBody SessionUser sessionUser) {
+        System.out.println("test");
+        Employee emp = employeeService.findBySSN(sessionUser.getSsn());
+        return ResponseEntity.ok().body(emp);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
