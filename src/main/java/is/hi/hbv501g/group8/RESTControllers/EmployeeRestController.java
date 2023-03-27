@@ -26,8 +26,8 @@ public class EmployeeRestController {
         this.transactionService = transactionService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Employee EmployeeGET(@RequestBody SessionUser sessionUser) {
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    public Employee EmployeePUT(@RequestBody SessionUser sessionUser) {
         System.out.println("test");
         return employeeService.findBySSN(sessionUser.getSsn());
     }
