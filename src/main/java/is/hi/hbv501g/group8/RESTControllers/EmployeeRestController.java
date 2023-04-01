@@ -34,9 +34,9 @@ public class EmployeeRestController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public HttpStatus EmployeeGET(@RequestBody Employee employee) {
+    public HttpStatus EmployeeGET(@RequestBody Employee emp) {
 
-        Employee employee_to_change = employeeService.findBySSN(employee.getSSN());
+        Employee employee_to_change = employeeService.findBySSN(emp.getSSN());
         if (employee_to_change == null) return HttpStatus.BAD_REQUEST;
 
         employee_to_change.setUsername(emp.getUsername);
