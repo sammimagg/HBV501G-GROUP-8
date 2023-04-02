@@ -3,6 +3,7 @@ package is.hi.hbv501g.group8.Persistence.Entities;
 public class AuthResponse {
     private String username;
     private String accessToken;
+    private String ssn;
 
     public AuthResponse() {
     }
@@ -26,5 +27,13 @@ public class AuthResponse {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public String getSSN() {
+        return ssn;
+    }
+
+    public void setSSN(String ssn) {
+        this.ssn = ssn;
     }
 }
