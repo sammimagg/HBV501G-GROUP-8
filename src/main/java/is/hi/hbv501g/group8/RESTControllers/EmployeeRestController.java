@@ -38,13 +38,19 @@ public class EmployeeRestController {
 
         Employee employee_to_change = employeeService.findBySSN(emp.getSSN());
         if (employee_to_change == null) return HttpStatus.BAD_REQUEST;
-        System.out.println(emp.toString());
+        System.out.println(emp.getSSN());
         employee_to_change.setUsername(emp.getUsername());
         employee_to_change.setEmail(emp.getEmail());
         employee_to_change.setFirstName(emp.getFirstName());
         employee_to_change.setLastName(emp.getLastName());
         employee_to_change.setPhoneNumber(emp.getPhoneNumber());
         employee_to_change.setJobTitle(emp.getJobTitle());
+        System.out.println("usr: " + emp.getUsername() +
+                "emil: " + emp.getEmail() +
+                "first: " + emp.getFirstName() +
+                "last: " + emp.getLastName() +
+                "phone: " + emp.getPhoneNumber() +
+                "job: " + emp.getJobTitle());
 
         employeeService.save(employee_to_change);
 
