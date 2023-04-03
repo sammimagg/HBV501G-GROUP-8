@@ -38,7 +38,7 @@ public class EmployeeRestController {
 
         Employee employee_to_change = employeeService.findBySSN(emp.getSSN());
         if (employee_to_change == null) return HttpStatus.BAD_REQUEST;
-
+        System.out.println(emp.toString());
         employee_to_change.setUsername(emp.getUsername());
         employee_to_change.setEmail(emp.getEmail());
         employee_to_change.setFirstName(emp.getFirstName());
