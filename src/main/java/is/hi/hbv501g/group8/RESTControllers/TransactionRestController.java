@@ -13,6 +13,7 @@ import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -33,13 +34,12 @@ public class TransactionRestController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public String clockIn(@RequestBody SessionUser sessionUser){
+    public ResponseEntity<?> clockIn(@RequestBody SessionUser sessionUser){
         Transaction exists = transactionService.findBySSNAndFinished(sessionUser.getSsn(), false);
         Employee temp = employeeService.findBySSN(sessionUser.getSsn());
         System.out.println("test");
         if(temp == null) {
-            return "SSN is not registered!";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SSN is not registered!");
         }
 
         if(exists == null) {
@@ -48,14 +48,14 @@ public class TransactionRestController {
             transaction.setClockIn(LocalDateTime.now());
             transaction.setFinished(false);
             transactionService.save(transaction);
-            return "Welcome, " + temp.getFirstName();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(temp.getFirstName());
         }
 
         exists.setClockOut(LocalDateTime.now());
         exists.setStatus("pending");
         exists.setFinished(true);
         transactionService.save(exists);
-        return "Thank you have. Have a nice day, "+temp.getFirstName()+"!";
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(temp.getFirstName());
     }
 
     /**

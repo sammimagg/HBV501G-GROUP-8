@@ -48,7 +48,7 @@ public class UserRestController {
         }
         employeeDefaultValues(newEmployee);
         employeeService.save(newEmployee);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     private void employeeDefaultValues(Employee newEmployee) {
