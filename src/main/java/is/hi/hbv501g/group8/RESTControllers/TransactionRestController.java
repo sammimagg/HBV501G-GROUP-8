@@ -12,10 +12,12 @@ import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -48,27 +50,14 @@ public class TransactionRestController {
             transaction.setClockIn(LocalDateTime.now());
             transaction.setFinished(false);
             transactionService.save(transaction);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(temp.getFirstName());
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body("G'day! " + temp.getFirstName());
         }
 
         exists.setClockOut(LocalDateTime.now());
         exists.setStatus("pending");
         exists.setFinished(true);
         transactionService.save(exists);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(temp.getFirstName());
-    }
-
-    /**
-     * Handler for GET requests on /list
-     *
-     *  Returns transaction for active user spanning from date 1 to date 2.
-     *  By default, it's the current month.
-     */
-    @GetMapping(value = "/list")
-    public ViewTransactionUserDAO displayTransactions() {
-        ViewTransactionUserDAO reval = new ViewTransactionUserDAO();
-
-        return reval;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("G'bye! " + temp.getFirstName());
     }
 
     /**
@@ -77,17 +66,21 @@ public class TransactionRestController {
      *  Returns transaction for active user spanning from date 1 to date 2.
      *  By default, it's the current month.
      */
-    @GetMapping(value = "/list/{ssn}")
-    public ViewTransactionUserDAO tempDisplayTransactions(@PathVariable("ssn") String ssn) {
+    @RequestMapping(value="/list", method = RequestMethod.PUT)
+    public ViewTransactionUserDAO tempDisplayTransactions(@RequestBody String ssn,
+                                                          @RequestBody(required = false) LocalDate dateFrom,
+                                                          @RequestBody(required = false) LocalDate dateTo) {
         ViewTransactionUserDAO reval = new ViewTransactionUserDAO();
 
         // Date Configuration
-        LocalDateTime shortDate = LocalDateTime.now();
-        LocalDateTime dateFrom = LocalDateTime.of(shortDate.getYear(), shortDate.getMonth(), 1, 0, 0);
-        LocalDateTime dateTo = dateFrom.plusMonths(1);
+        if(dateFrom == null || dateTo == null) {
+        LocalDate shortDate = LocalDate.now();
+        dateFrom = LocalDate.of(shortDate.getYear(), shortDate.getMonth(), 1);
+        dateTo = dateFrom.plusMonths(1);
+        }
 
         // Transaction Data
-        List<Transaction> transactionList = transactionService.findAllBySSNAndClockInBetween(ssn, dateFrom, dateTo);
+        List<Transaction> transactionList = transactionService.findAllBySSNAndClockInBetween(ssn, dateFrom.atStartOfDay(), dateTo.atStartOfDay());
         double revalTotal = 0;
         for (Transaction tmp : transactionList) {
             revalTotal += tmp.getDuration() / 60.0;
