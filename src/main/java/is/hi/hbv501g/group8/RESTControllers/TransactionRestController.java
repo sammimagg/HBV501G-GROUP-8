@@ -4,10 +4,7 @@
 
 package is.hi.hbv501g.group8.RESTControllers;
 
-import is.hi.hbv501g.group8.Persistence.Entities.Employee;
-import is.hi.hbv501g.group8.Persistence.Entities.SessionUser;
-import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
-import is.hi.hbv501g.group8.Persistence.Entities.ViewTransactionUserDAO;
+import is.hi.hbv501g.group8.Persistence.Entities.*;
 import is.hi.hbv501g.group8.Services.EmployeeService;
 import is.hi.hbv501g.group8.Services.TransactionReviewService;
 import is.hi.hbv501g.group8.Services.TransactionService;
@@ -67,29 +64,37 @@ public class TransactionRestController {
      *  By default, it's the current month.
      */
     @RequestMapping(value="/list", method = RequestMethod.PUT)
-    public ViewTransactionUserDAO tempDisplayTransactions(@RequestBody String ssn,
-                                                          @RequestBody(required = false) LocalDate dateFrom,
-                                                          @RequestBody(required = false) LocalDate dateTo) {
+    public ResponseEntity<ViewTransactionUserDAO> tempDisplayTransactions(@RequestBody TransHelper transHelper) {
         ViewTransactionUserDAO reval = new ViewTransactionUserDAO();
 
         // Date Configuration
-        if(dateFrom == null || dateTo == null) {
-        LocalDate shortDate = LocalDate.now();
-        dateFrom = LocalDate.of(shortDate.getYear(), shortDate.getMonth(), 1);
-        dateTo = dateFrom.plusMonths(1);
+        if(transHelper.getDateFrom() == null || transHelper.getDateTo() == null) {
+            LocalDate shortDate = LocalDate.now();
+            transHelper.setDateFrom(LocalDate.of(shortDate.getYear(), shortDate.getMonth(), 1));
+            transHelper.setDateTo(transHelper.getDateFrom().plusMonths(1));
         }
 
+        System.out.println("Debug: SSN: " + transHelper.getSsn() + "Date:"
+                + transHelper.getDateFrom().toString() + " to "
+                + transHelper.getDateTo().toString());
+
         // Transaction Data
-        List<Transaction> transactionList = transactionService.findAllBySSNAndClockInBetween(ssn, dateFrom.atStartOfDay(), dateTo.atStartOfDay());
+        List<Transaction> transactionList = transactionService.findAllBySSNAndClockInBetween(
+                transHelper.getSsn(),
+                transHelper.getDateFrom().atStartOfDay(),
+                transHelper.getDateTo().atStartOfDay()
+        );
         double revalTotal = 0;
         for (Transaction tmp : transactionList) {
+            System.out.println(tmp.getSSN());
             revalTotal += tmp.getDuration() / 60.0;
         }
         // Configure DAO
+        SessionUser reSess = new SessionUser();
+        reSess.setSsn(transHelper.getSsn());
         reval.setTransactionList(transactionList);
         reval.setTotal_hours(revalTotal);
-        reval.setUser(employeeService.findBySSN(ssn)); // Replace w/ JWT / Session User
-
-        return reval;
+        reval.setSessionUser(reSess);
+        return ResponseEntity.ok().body(reval);
     }
 }

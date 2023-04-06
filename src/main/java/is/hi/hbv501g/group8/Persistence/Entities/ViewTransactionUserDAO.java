@@ -3,16 +3,16 @@ package is.hi.hbv501g.group8.Persistence.Entities;
 import java.util.List;
 
 public class ViewTransactionUserDAO {
-    User user; // Replace with SessionUser
+    SessionUser sessionUser; // Replace with SessionUser
     Double total_hours; // Calculated from array of transactions
     List<Transaction> transactionList;
 
-    public User getUser() {
-        return user;
+    public SessionUser getSessionUser() {
+        return sessionUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSessionUser(SessionUser sessionUser) {
+        this.sessionUser = sessionUser;
     }
 
     public Double getTotal_hours() {
