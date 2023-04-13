@@ -31,12 +31,13 @@ public class AuthenticationRestController {
             User user = new User();
             user.setUsername(request.getUsername());
             user.setPassword(request.getPassword());
-            if(userService.login(user) == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            User loggedInCheck = userService.login(user);
+            if(loggedInCheck == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             String accessToken = jwtUtil.generateAccessToken(user);
             AuthResponse response = new AuthResponse(user.getUsername(), accessToken);
-            response.setSsn(user.getSSN());
-            response.setEmail(user.getEmail());
-            response.setAccountType(user.getAccountType()+"");
+            response.setSsn(loggedInCheck.getSSN());
+            response.setEmail(loggedInCheck.getEmail());
+            response.setAccountType(loggedInCheck.getEmail()+"");
 
             return ResponseEntity.ok().body(response);
 
