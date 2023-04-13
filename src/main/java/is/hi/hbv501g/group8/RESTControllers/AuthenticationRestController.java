@@ -34,7 +34,7 @@ public class AuthenticationRestController {
             if(userService.login(user) == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             String accessToken = jwtUtil.generateAccessToken(user);
             AuthResponse response = new AuthResponse(user.getUsername(), accessToken);
-            response.setSSN(user.getSSN());
+            response.setSsn(user.getSSN());
             response.setEmail(user.getEmail());
             response.setAccountType(user.getAccountType()+"");
 

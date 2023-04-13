@@ -32,14 +32,6 @@ public class AuthResponse {
         this.accessToken = accessToken;
     }
 
-    public String getSSN() {
-        return ssn;
-    }
-
-    public void setSSN(String ssn) {
-        this.ssn = ssn;
-    }
-
     public String getEmail() {
         return email;
     }
