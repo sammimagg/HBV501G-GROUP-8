@@ -36,6 +36,7 @@ public class AuthenticationRestController {
             AuthResponse response = new AuthResponse(user.getUsername(), accessToken);
             response.setSSN(user.getSSN());
             response.setEmail(user.getEmail());
+            response.setAccountType(user.getAccountType()+"");
 
             return ResponseEntity.ok().body(response);
 
