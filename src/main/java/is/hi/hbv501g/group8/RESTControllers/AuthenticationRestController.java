@@ -35,6 +35,7 @@ public class AuthenticationRestController {
             String accessToken = jwtUtil.generateAccessToken(user);
             AuthResponse response = new AuthResponse(user.getUsername(), accessToken);
             response.setSSN(user.getSSN());
+            response.setEmail(user.getEmail());
 
             return ResponseEntity.ok().body(response);
 

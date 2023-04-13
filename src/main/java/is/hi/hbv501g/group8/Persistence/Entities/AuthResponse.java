@@ -4,6 +4,7 @@ public class AuthResponse {
     private String username;
     private String accessToken;
     private String ssn;
+    private String email;
 
     public AuthResponse() {
     }
@@ -35,5 +36,13 @@ public class AuthResponse {
 
     public void setSSN(String ssn) {
         this.ssn = ssn;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

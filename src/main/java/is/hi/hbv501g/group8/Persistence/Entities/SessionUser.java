@@ -2,8 +2,9 @@ package is.hi.hbv501g.group8.Persistence.Entities;
 
 public class SessionUser {
 
-    private String ssn;
+    private String username;
     private String authToken;
+    private String ssn;
 
     public String getSsn() {
         return ssn;
@@ -19,5 +20,13 @@ public class SessionUser {
 
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
