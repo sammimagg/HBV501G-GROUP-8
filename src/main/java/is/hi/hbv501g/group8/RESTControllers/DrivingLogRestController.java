@@ -24,8 +24,11 @@ public class DrivingLogRestController {
         this.employeeService = employeeService;
     }
 
-    @RequestMapping(value = "/{ssn}", method = RequestMethod.GET)
-    public List<Driving> fetchDrivingLog(@RequestBody DateHelper dateHelper, @PathVariable String ssn){
+    @RequestMapping(value = "/{ssn}", method = RequestMethod.PUT)
+    public List<Driving> fetchDrivingLog(@PathVariable String ssn,
+                                         @RequestParam(required = false) LocalDate dateFrom,
+                                         @RequestParam(required = false) LocalDate dateTo
+                                         ){
         if (employeeService.findBySSN(ssn) == null) {
             return null;
         }
@@ -37,16 +40,8 @@ public class DrivingLogRestController {
         );
         LocalDate currentEndDate = currentDate.plusMonths(1);
 
-        LocalDate inputDateFrom = dateHelper.getDate1();
-        LocalDate inputDateTo = dateHelper.getDate2();
-
-        LocalDate inputDateFromFixed = inputDateFrom != null ? inputDateFrom : currentDate;
-        LocalDate inputDateToFixed = inputDateTo != null ? inputDateTo : currentEndDate;
-
-        // debug:
-        System.out.println(currentDate + " : " + currentEndDate + " : " +
-                            inputDateFrom + " : " + inputDateTo + " : " +
-                            inputDateFromFixed + " : " + inputDateToFixed);
+        LocalDate inputDateFromFixed = dateFrom != null ? dateFrom : currentDate;
+        LocalDate inputDateToFixed = dateTo != null ? dateTo : currentEndDate;
 
         return drivingService.findAllBySSNAndDagsBetween(ssn, inputDateFromFixed, inputDateToFixed);
     }
