@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -45,6 +46,7 @@ public class EmployeeRestController {
         employee_to_change.setLastName(emp.getLastName());
         employee_to_change.setPhoneNumber(emp.getPhoneNumber());
         employee_to_change.setJobTitle(emp.getJobTitle());
+        employee_to_change.setAccountType(emp.getAccountType());
         System.out.println("usr: " + emp.getUsername() +
                 "emil: " + emp.getEmail() +
                 "first: " + emp.getFirstName() +
