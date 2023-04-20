@@ -93,7 +93,7 @@ public class ReviewRestController {
      * @return HTTP response code and message indicating the success or failure of the request.
      */
     @RequestMapping(value = "/{requestId}", method = RequestMethod.POST)
-    public ResponseEntity<String> respondToRequest(@RequestParam long requestId, @RequestBody boolean approved) {
+    public ResponseEntity<String> respondToRequest(@PathVariable long requestId, @RequestBody boolean approved) {
         TransactionReview transactionReview = transactionReviewService.findByID(requestId);
         Transaction connectedTransaction = transactionService.findByID(requestId);
         String transactionStatus = approved ? "approved" : "rejected";
