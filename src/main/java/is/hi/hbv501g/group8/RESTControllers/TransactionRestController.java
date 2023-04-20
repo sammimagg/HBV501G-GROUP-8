@@ -64,7 +64,7 @@ public class TransactionRestController {
      *  By default, it's the current month.
      */
     @RequestMapping(value="/list", method = RequestMethod.PUT)
-    public ResponseEntity<ViewTransactionUserDAO> tempDisplayTransactions(@RequestBody TransHelper transHelper) {
+    public ResponseEntity<ViewTransactionUserDAO> tempDisplayTransactions(@RequestBody(required = false) TransHelper transHelper) {
         ViewTransactionUserDAO reval = new ViewTransactionUserDAO();
 
         // Date Configuration

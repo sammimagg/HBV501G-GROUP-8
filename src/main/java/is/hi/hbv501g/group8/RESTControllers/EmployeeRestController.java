@@ -71,7 +71,10 @@ public class EmployeeRestController {
             if (currentTransaction != null) {
                 append_to_array.setClocked_in(true);
                 append_to_array.setClock_in_time(currentTransaction.getClockIn());
+                append_to_array.setLast_transaction(null);
             } else {
+                append_to_array.setClocked_in(false);
+                append_to_array.setClock_in_time(null);
                 append_to_array.setLast_transaction(transactionService.findFirstBySSNOrderByIDDesc(empl.getSSN()));
             }
 
