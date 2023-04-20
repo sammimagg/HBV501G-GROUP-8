@@ -1,17 +1,17 @@
 package is.hi.hbv501g.group8.Persistence.Entities;
 
 public class Jesus {
-    private Boolean approved;
+    private String approved;
 
-    public Jesus(Boolean approved) {
+    public Jesus(String approved) {
         this.approved = approved;
     }
 
-    public Boolean getApproved() {
+    public String getApproved() {
         return approved;
     }
 
-    public void setApproved(Boolean approved) {
+    public void setApproved(String approved) {
         this.approved = approved;
     }
 }

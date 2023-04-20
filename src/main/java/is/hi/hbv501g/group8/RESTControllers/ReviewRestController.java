@@ -97,7 +97,7 @@ public class ReviewRestController {
     public ResponseEntity<String> respondToRequest(@PathVariable long requestId, @RequestBody Jesus jsonHlutur) {
         TransactionReview transactionReview = transactionReviewService.findByID(requestId);
         Transaction connectedTransaction = transactionService.findByID(requestId);
-        Boolean approved = jsonHlutur.getApproved();
+        Boolean approved = jsonHlutur.getApproved().equals("true");
         String transactionStatus = approved ? "approved" : "rejected";
 
         if (transactionReview == null || !transactionReview.getStatus().equals("pending")) {
