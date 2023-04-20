@@ -21,6 +21,7 @@
 
 package is.hi.hbv501g.group8.RESTControllers;
 
+import is.hi.hbv501g.group8.Persistence.Entities.Jesus;
 import is.hi.hbv501g.group8.Persistence.Entities.MappedRequestUserDAO;
 import is.hi.hbv501g.group8.Persistence.Entities.Transaction;
 import is.hi.hbv501g.group8.Persistence.Entities.TransactionReview;
@@ -93,9 +94,10 @@ public class ReviewRestController {
      * @return HTTP response code and message indicating the success or failure of the request.
      */
     @RequestMapping(value = "/{requestId}", method = RequestMethod.POST)
-    public ResponseEntity<String> respondToRequest(@PathVariable long requestId, @RequestBody boolean approved) {
+    public ResponseEntity<String> respondToRequest(@PathVariable long requestId, @RequestBody Jesus jsonHlutur) {
         TransactionReview transactionReview = transactionReviewService.findByID(requestId);
         Transaction connectedTransaction = transactionService.findByID(requestId);
+        Boolean approved = jsonHlutur.getApproved();
         String transactionStatus = approved ? "approved" : "rejected";
 
         if (transactionReview == null || !transactionReview.getStatus().equals("pending")) {
