@@ -48,7 +48,7 @@ public class AuthenticationRestController {
 
     @PostMapping("/auth/verify")
     public ResponseEntity<?> verify(@RequestBody String jwt_token) {
-        if(JwtTokenUtil.validateAccessToken(jwt_token)) return ResponseEntity.ok("Token es good");
+        if(JwtUtil.validateAccessToken(jwt_token)) return ResponseEntity.ok("Token es good");
         return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED);
     }
 }
