@@ -79,8 +79,9 @@ public class TransactionRestController {
                 + transHelper.getDateTo().toString());
 
         // Transaction Data
-        List<Transaction> transactionList = transactionService.findAllBySSNAndClockInBetween(
+        List<Transaction> transactionList = transactionService.findAllBySSNAndFinishedAndClockInBetween(
                 transHelper.getSsn(),
+                true,
                 transHelper.getDateFrom().atStartOfDay(),
                 transHelper.getDateTo().atStartOfDay()
         );

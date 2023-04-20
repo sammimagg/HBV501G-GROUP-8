@@ -17,6 +17,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findAll();
     List<Transaction> findBySSN(String ssn);
     List<Transaction> findAllBySSNAndClockInBetween(String ssn, LocalDateTime startDate, LocalDateTime endDate);
+    List<Transaction> findAllBySSNAndFinishedAndClockInBetween(String ssn, boolean finished, LocalDateTime startDate, LocalDateTime endDate);
     Transaction findByID(long id);
     Transaction findBySSNAndFinished(String ssn, boolean finished);
     Transaction findFirstBySSNOrderByIDDesc(String ssn);
